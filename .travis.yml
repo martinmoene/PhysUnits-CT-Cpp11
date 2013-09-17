@@ -1,4 +1,4 @@
 language: cpp
 compiler:
   - clang
-script: make test_quantity
+script: cd projects/gcc/Test; make test_quantity

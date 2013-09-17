@@ -93,9 +93,9 @@
 		<Unit filename="../Test/lest.hpp" />
 		<Unit filename="../Test/test_quantity.cpp" />
 		<Unit filename="../Test/test_util.hpp" />
-		<Unit filename="../gcc/Test/Makefile.win32.gcc" />
+		<Unit filename="../gcc/Test/Makefile" />
 		<Unit filename="../gcc/Test/compile.bat" />
-		<Unit filename="../gcc/Test/mk.win32.gcc.bat" />
+		<Unit filename="../gcc/Test/mk.bat" />
 		<Extensions>
 			<code_completion />
 			<envvars />

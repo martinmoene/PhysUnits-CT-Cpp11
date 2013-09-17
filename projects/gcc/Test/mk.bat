@@ -5,7 +5,7 @@
 :: Compile PhysUnits tests, GNUC
 ::
 
-mingw32-make.exe -f Makefile.win32.gcc %*
+mingw32-make.exe %*
 goto :EOF
 
 endlocal
