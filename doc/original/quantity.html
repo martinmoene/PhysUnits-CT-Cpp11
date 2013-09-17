@@ -1,0 +1,431 @@
+<html><head><title>The Quantity Library</title></head><body>
+<h1 align=center>The Quantity Library</h1>
+
+<p>
+<font size="-1">
+Copyright &copy; 2001 by Michael S. Kenniston.  For the most
+recent version check www.xnet.com/~msk/quantity.  Permission is granted
+to use this document without restriction so long as this copyright
+notice appears in it.
+</font>
+
+<h2>Introduction</h2>
+<p>
+When performing scientific or engineering calculations, one of the ways
+in which people have traditionally checked their work is to keep track of
+the dimensions of all intermediate results, and then verify that the
+answer has the proper dimensions.  For example, if you are expecting
+a velocity but your answer comes out as a density, you know you've
+made a mistake somewhere.
+Unfortunately, few if any programming languages support this concept,
+so programmers almost always use raw numeric types (e.g. "double") to
+represent all the different quantities in a program.
+
+<p>
+The Quantity Library extends the C++ language to associate dimensions
+with each quantity variable or value, and it arranges for these dimensions
+to be checked for consistency at compile-time.  There is no
+need for additional run-time space or time overhead,
+so ideally the final program should execute as
+fast as an equivalent program with no such checking.
+
+<p>
+To use the library, simply:
+<pre>
+#include "cuj/quantity/quantity.hpp"
+</pre>
+
+If you want to do output, you must also:
+<pre>
+#include "cuj/quantity/quantity_io.hpp"
+</pre>
+
+To use non-SI units and/or predefined physical constants:
+<pre>
+#include "cuj/quantity/other_units.hpp"
+#include "cuj/quantity/physical_constants.hpp"
+</pre>
+
+<h2>Dimensions</h2>
+
+<p>
+NIST SP811 describes the seven fundamental dimensions of the physical
+universe:
+<ul>
+<li>length
+<li>mass
+<li>time interval
+<li>electric current
+<li>thermodynamic temperature
+<li>quantity of substance
+<li>luminous intensity
+</ul>
+These seven dimensions provide the foundation upon which the SI system
+of measurements is built.  Every other measurement unit is derived from
+these seven, so the dimensionality of a quantity is simply a 7-tuple of
+integers in which the first integer is the exponent of length,
+the second is the exponent of mass, and so on down the list.
+For example, a simple length has dimensions (1,0,0,0,0,0,0),
+a volume has dimensions (3,0,0,0,0,0,0), and a speed has dimensions
+(1,0,-1,0,0,0,0).
+
+<p>
+The library defines a template class that is used to specify these dimensions
+in the obvious way, so for example it includes the definition:
+<pre>
+typedef dimensions&lt; -3, 1, 0, 0, 0, 0, 0 &gt; mass_density_d;
+</pre>
+(mass density is mass per volume).  There is a long list of predefined
+dimensionalities, but if you need one that isn't there you can
+define your own in any application program.
+
+<h2>Quantities</h2>
+
+<p>
+Quantities, as defined in SP811, are simply values that include dimensions.
+For example, "3" is a number but "3 meters" is a quantity.  The library allows you to declare
+variables that can hold quantities, but you must specify (at compile-time)
+the dimensions of the quantity.  For example, a user program can declare:
+<pre>
+quantity< mass_density_d > chamber_density;
+</pre>
+and then the compiler will verify that only values with compatible dimensions are
+ever assigned to that variable.  All quantities have a default
+constructor, so you can create arrays or vectors of them.  This default
+constructor leaves the value undefined, just as it would for a number.
+
+<p>
+There is a special case where all the dimensions are zero.  The meaning is that
+such a value is just a pure number, so the library handles this case by using
+the primitive numeric type (e.g. "double") to hold such a value.  (Instantiating
+the dimensions<> template class with all zeroes is prohibited.)
+
+<h2>Base Units</h2>
+
+<p>
+Once you have declared a quantity variable, you want to assign values to it.
+These values must be constructed with the seven fundamental SI units:
+<ul>
+<li>meter
+<li>kilogram
+<li>second
+<li>ampere
+<li>kelvin
+<li>mole
+<li>candela
+</ul>
+or with units derived from those seven like watt, newton, and pascal.
+For example, you can say:
+<pre>
+chamber_density = 3.458 * kilogram() / ( meter() * meter() * meter() );
+</pre>
+The units here are absolutely required; if you try to simply assign the
+number 3.458 the compiler will flag it as a fatal error.  Unfortunately it
+will often produce the sort of verbose and obscure message typical of C++
+template errors, but it will at least point you at the incorrect line.
+(The empty parentheses "()" are an artifact of C++; all predefined units and quantities
+are defined as inline functions to help the optimizer generate better
+object code.)
+There are square() and cube() functions defined on quantities, so the above can be
+stated somewhat more concisely as:
+<pre>
+chamber_density = 3.458 * kilogram() / cube( meter() );
+</pre>
+
+<p>
+Defining every SI unit with every possible decimal prefix would lead to an
+explosion of identifiers, so only the primary units are defined
+(except that both "kilogram" and "gram" are defined).
+All the SI prefixes such as milli and mega are defined as pure numbers
+which may be used as multipliers:
+<pre>
+quantity< energy_d > max_energy = 34 * mega() * joule();
+</pre>
+
+<h2>Non-Base Units</h2>
+
+<p>
+The SI system includes "derived units" such as newton and watt.  These are
+also defined by the library and can be used just like any of the base units.
+In addition, there is a separate header file called "other_units.hpp" which
+contains a long list of units which are not approved for use with SI (like
+foot, slug, and btu), but which you may need in your program to deal with
+legacy data or special requirements.
+
+<p>
+There is also a static member function zero() defined for the quantity
+of each dimensionality.  This is provided for convenience, for example so you
+can compare a quantity to zero.  Each different dimension has its own
+zero, because 0 * meter() is not the same as, and cannot be compared to,
+0 * kilogram().  In fact:
+<pre>
+if( current_power > 0 )
+</pre>
+is illegal; you must say:
+<pre>
+if( current_power > quantity< power_d >::zero() )
+</pre>
+or
+<pre>
+if( current_power > 0 * watt() )
+</pre>
+
+<h2>Operations and Expressions</h2>
+
+<p>
+The library defines the usual arithmetic operators +, -, *, and /
+on all legal combinations of quantities and numbers.  Power and
+root functions are also defined.  Specifically:
+<ul>
+<li>Adding or subtracting two quantities of equal dimensions produces a result of
+the same dimensions.  E.g. length + length = length.
+<li>Multiplying or dividing any two quantities produces a resulting quantity
+which may be of different dimensions.  E.g. length / time = speed.
+This rule allows you to mix numbers (all dimensions zero) with
+quantities, so number * mass = mass.
+<li>Raising a quantity to an integer power produces the same result as
+repeated multiplication.
+<li>Taking the integer root of a quantity is the inverse of raising to a power.
+If the dimensions of the result are not all integers, a compile-time error occurs.
+E.g. sqrt( area ) = length and nth_root&lt; 3 &gt;( volume ) = length,
+but taking sqrt( volume ) or nth_root&lt; 3 &gt;( area ) is an error.
+</ul>
+
+<p>
+The dimensions of the result of every operation are computed automatically by the
+library.  The only time the user ever has to specify dimensions is when
+declaring a variable.  The nth_power() and nth_root() functions are templated,
+because the compiler has to know which power or root you want in order to determine the
+dimensions of the result.  For example:
+<pre>
+quantity< volume_d > cube_volume;
+cube_volume = 3.456e+2 * cube( meter() );
+quantity< length_d > cube_side;
+cube_side = nth_root< 3 >( cube_volume );
+cout << "the side is " << cube_side << "\n";
+</pre>
+or, more concisely:
+<pre>
+cout << "the side is " << nth_root< 3 >( 3.456e+2 * cube( meter() ) ) << "\n";
+</pre>
+
+<p>
+Exponential and trig functions are not defined on quantities.
+
+<p>
+The following table summarizes the legal and illegal operations.
+<ul>
+<li><em>int</em> is an integer constant
+<li><em>num</em> is a number (int, long, float, double, etc.)
+<li><em>quan</em> is a quantity
+<li><em>quan1</em> and <em>quan2</em> are two quantities of different dimensions
+</ul>
+<table border=1 align=center>
+<tr><th>Operation</th><th>Operand Type(s)</th><th>Result Type</th></tr>
+
+<tr><td rowspan=2>Constructors</td>
+    <td>quan()<br>quan( quan )</td><td>quan</td></tr>
+<tr><td>quan( num )<br>num( quan )<br>quan1( quan2 )</td><td><em>illegal</em></td></tr>
+
+<tr><td rowspan=2>Assignment</td>
+    <td>quan = quan</td><td>quan &amp;</td></tr>
+<tr><td>quan = num<br>num = quan<br>quan1 = quan2</td><td><em>illegal</em></td></tr>
+
+<tr><td rowspan=4>Addition<br>Subtraction</td>
+    <td>quan += quan<br>quan -= quan</td><td>quan &amp;</td></tr>
+<tr><td>quan += num<br>quan -= num<br>num += quan<br>num -= quan<br>
+            quan1 += quan2<br>quan1 -= quan2</td><td><em>illegal</em></td></tr>
+<tr><td>+ quan<br>- quan<br>quan + quan<br>quan - quan</td><td>quan</td></tr>
+<tr><td>quan + num<br>quan - num<br>num + quan<br>num - quan<br>
+            quan1 + quan2<br>quan1 - quan2</td><td><em>illegal</em></td></tr>
+
+<tr><td rowspan=6>Multiplication</td>
+    <td>quan *= num</td><td>quan &amp;</td></tr>
+<tr><td>num *= quan<br>quan *= quan<br>quan1 *= quan2</td><td><em>illegal</em></td></tr>
+<tr><td>quan * num<br>num * quan</td><td>quan</td></tr>
+<tr><td>quan1 * quan1</td><td>quan2</td></tr>
+<tr><td rowspan=2>quan1 * quan2</td><td>If quan1 and quan2 are reciprocals: num</td></tr>
+<tr><td>Otherwise: quan3</td></tr>
+
+<tr><td rowspan=6>Division</td>
+    <td>quan /= num</td><td>quan &amp;</td></tr>
+<tr><td>num /= quan<br>quan /= quan<br>quan1 /= quan2</td><td><em>illegal</em></td></tr>
+<tr><td>quan / num</td><td>quan</td></tr>
+<tr><td>num / quan1</td><td>quan2</td></tr>
+<tr><td>quan / quan</td><td>num</td></tr>
+<tr><td>quan1 / quan2</td><td>quan3</td></tr>
+
+<tr><td rowspan=3>Powers</td>
+    <td rowspan=3>nth_power&lt; int &gt;( quan1 )<br>square( quan1 )<br>cube( quan1 )</td>
+    <td>If int == 0: num</td></tr>
+    <tr><td>If int == 1: quan1</td></tr>
+    <tr><td>Otherwise: quan2</td></tr>
+
+<tr><td rowspan=2>Roots</td>
+    <td rowspan=2>nth_root&lt; int &gt;( quan1 )<br>sqrt( quan1 )</td><td>
+        When dimensions of quan1 are all even multiples of int: quan2</td></tr>
+<tr><td>Otherwise: <em>illegal</em></td></tr>
+
+<tr><td rowspan=1>Transcendental<br>functions</td>
+    <td>log( quan ), log10( quan ), etc.<br>
+        exp( quan ), pow( quan, num ), etc.<br>
+        sin( quan), cos( quan ), tan( quan ), etc.</td><td><em>illegal</em></td></tr>
+</table>
+
+<h2>Input, Output, and Unit Conversion</h2>
+
+<p>
+All I/O functions are defined in a separate header file called "quantity_io.hpp"
+so that you don't have to pull in &lt;iostream&gt; unless you really need to.
+
+<p>
+There is currently no input operator&gt;&gt; defined.
+To read a quantity, you must read the number and then multiply by
+the units, e.g.
+<pre>
+double d;
+cin >> d;
+quantity< power_d > bulb_power = d * watt();
+</pre>
+You can't forget to multiply by the units, because if you do
+the dimensions won't match and you'll get a compile-time error.
+
+<p>
+There is an output operator&lt;&lt; defined, but it always formats quantities
+using just the seven base units.  The output format is as close as you can get
+in plain ascii to the official notation described in NIST SP811, e.g.:
+<pre>
+cout << 456789  * kilo() * watt() * hour() << "\n";
+</pre>
+produces:
+<pre>
+1.64444e+012 m+2 kg s-2
+</pre>
+(the official notation would be
+"1.644 44 &#183; 10<sup>12</sup> &#183; m<sup>2</sup> &#183; kg &#183; s<sup>-2</sup> ").
+
+<p>
+If you want to force output in particular units, simply divide by that unit
+(and print the unit yourself).
+For example,
+<pre>
+cout << "One parsec is " << parsec() / mile() << " miles long.\n";
+</pre>
+or
+<pre>
+quantity< energy_d > todays_consumption;
+//...
+const quantity< energy_d > kWhr( kilo() * watt() * hour() );
+cout << "todays energy consumption was " << todays_consumption / kWhr << " kWhr \n";
+</pre>
+
+<h2>Representation</h2>
+
+<p>
+Internally, each quantity is represented at run-time as one "double".
+If you wish to use "float" or "long double" instead, you can do so by
+defining CUJ_QUANTITY_REP_TYPE:
+<pre>
+#define CUJ_QUANTITY_REP_TYPE long double
+#include "cuj/quantity/quantity.hpp"
+</pre>
+<strong>IMPORTANT:</strong>  You must ensure that the representation is consistent
+across all compilation units of your program.  This is a simple but not very
+elegant implementation, and incorrect usage will not be detected by the compiler.
+
+<h2>Efficiency</h2>
+
+<p>
+In debug builds,
+calculations with quantities will typically run much more slowly than calculations
+with raw numbers.
+However, once you turn on the optimizer, the performance should be as good, or nearly
+as good, as that of raw numbers.
+Of course, this depends on the optimizer, and some do a measurably better
+job than others.
+
+<h2>Portability</h2>
+
+<p>
+A primary design goal of this library was to run on as many compilers as possible,
+in spite of the fact that some of those compilers are not ISO-compliant and don't
+even implement the entire C++ language.
+This led to some peculiar implementation methods hidden inside the library, and but it had
+little effect on the interface so users should not notice anything out of
+the ordinary.
+
+<h2>Gotchas</h2>
+
+<p>
+<ul>
+<li><p>
+Although the library conveniently includes definitions of many units,
+it only checks dimensions.
+In most cases this is not an issue, since getting the units wrong typically
+means getting the dimensions wrong as well.
+However, there are cases where different units have the same dimensions; the
+most common is degrees (angle) and radians.
+You can do conversions in the usual way, like:
+<pre>
+cout << "The sine of 90 degress is " << sin( 90 * degree_angle() ) << "\n";
+</pre>
+but if you forget to multiply by degree_angle() the compiler won't catch it
+and you will erroneously get the sine of 90 radians instead.
+</p>
+
+<li><p>
+Under MSVC, even if you write a using statement referring to each name that you
+use, some of them may not work, e.g. quantity<>::zero tends to cause problems.
+You can use either of two workarounds: (1) say "using namespace cuj::quantity"
+to pull everything in, or (2) fully specify each name that causes a problem,
+e.g. "cuj::quantity::quantity<>::zero".
+</p>
+</ul>
+
+<h2>Non-features</h2>
+
+<p>
+There are lots of things a units library could do that this one does not:
+<ul>
+<li>As described above, the library does not catch errors in the
+use of units that have the same dimensions.
+<li>You cannot have multiple representation types in the same program,
+i.e. you cannot have quantity< length_d, float > and
+quantity< length_d, long double >.
+<li>You cannot have variables whose dimensions are determined or change at run-time.
+This means you cannot read arbitrary input into a variable.
+<li>While you can add new units and dimensions, you can do so only by adding
+them to the source code and compiling them into your program.
+You cannot change the set of possible units at run-time.
+<li>You cannot take fractional powers or transcendental functions
+of quantities, e.g. sqrt( meter() ) or exp( kilogram() ).
+Even if you could justify this  mathematically,
+it would dramatically complicate the implementation.
+<li>Conversion factors cannot change at runtime.
+For example, creating an eighth dimension of "currency" wouldn't be
+particularly useful, because the conversion rates between currencies would
+have to be fixed at compile-time.
+</ul>
+
+Of course, any of these things may be added to the library later,
+but in the interest of getting a simple, solid, portable library working,
+all the fancy stuff was left for possible future extensions.
+
+<p>
+Furthermore, if you need a more sophisticated library than this one,
+the "SIunits" library from Fermilab may suit your needs.
+It has more features than the Quantity Library, but it is
+not as portable; in particular it does not support MSVC.
+See <a href="http://www.fnal.gov/">http://www.fnal.gov/</a> for details.
+
+<h2>References</h2>
+
+<p>
+NIST SP811 is the National Institute of Standards and Technology Special Publication 811.
+This, along with a great deal of other useful information about measurements and units,
+is available at their web site:
+<a href="http://www.nist.gov/">http://www.nist.gov/</a>.
+
+<hr>
+Last updated: 2001-07-13
+</body></html>

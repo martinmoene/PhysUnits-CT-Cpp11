@@ -1,0 +1,358 @@
+<html><head><title>Quantity Library - Rationale</title></head><body>
+<h1 align=center>Quantity Library - Rationale</h1>
+
+<p>
+<font size="-1">
+Copyright &copy; 2001 by Michael S. Kenniston.  For the most
+recent version check www.xnet.com/~msk/quantity.  Permission is granted
+to use this document without restriction so long as this copyright
+notice appears in it.
+</font>
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why does the library leave some things out that would be useful
+and could be done in ISO C++?
+Why does it use such odd techniques to implement the features it
+does provide?
+
+<p>
+<strong>A:</strong>
+Because this library gives more importance to portability than
+to power and implementation elegance.
+
+<p>
+Given that few if any current C++ compilers are fully ISO-compliant,
+any author who wants his library to see actual use has to make some
+compromises.  The more features of the language you use, and the
+harder you push them, the fewer users you will have -- yet the fewer
+features of the language you use, the less powerful your library
+can be.  As is the case with most engineering decisions, you have
+to make a compromise.
+
+<p>
+In the case of the Quantity library, I've chosen to give much more
+weight to portability and robustness than to power and elegance of
+implementation.  I want this library to be usable by as many C++
+programmers as possible, and I <em>don't</em> want to deal with code that
+gets brittle when it's ported to compilers that I don't have access
+to.  In this particular case the choice is fairly easy to make,
+because Fermilab's SIunits library already occupies the other end
+of the trade-off spectrum; it's very powerful but isn't terribly
+useful under MSVC (technically it compiles, but it loses all its
+static type-checking, which is the whole reason for having such a
+library in the first place.)
+
+<p>
+Basically I decided to maximize portability by avoiding:
+<ul>
+<li>out-of-class member definitions (I use in-class)
+<li>template friend declarations (I use a helper class)
+<li>templated numerical representation (I use a macro)
+</ul>
+
+<p>
+There is no question that this decision made some of the code ugly.
+In a similar context Ed Brey remarked that trade-offs
+like this are "a lot of ground to give to appease a few broken
+compilers."  I completely agree.  It <em>is</em> a lot of ground to give,
+it made my job more difficult, and it led to leaving out functionality
+that I wanted to include.
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why are member functions defined in-class?
+
+<p>
+<strong>A:</strong>
+Some compilers have trouble with out-of-class template member
+definitions, so for portability I had to put them in-class.
+For consistency I chose to put <em>all</em> member definitions in-class.
+This uglifies the header file, but it doesn't corrupt the actual
+user interface to the library.
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why do you use that hokey "permit" class?
+
+<p>
+<strong>A:</strong>
+If the library just declared everything that uses "permit"
+as a friend of all instantiations of quantity&lt;&gt;, then we could remove the permit
+class completely.
+
+<p>
+However, many of these functions are templated and
+template friend declarations
+seems to be a weak spot with some compilers, so I decided
+not to use them at all.  Unfortunately I <em>needed</em> all instantiations
+of the quantity&lt;&gt; class to have access to all other instantiations,
+so I used the "quantity::detail::permit" class as a work-around.
+Technically this allows any code to access the internal representation
+of a quantity&lt;&gt;, but to do so you have to reach into the detail
+namespace, and doing that in user code should raise the same red
+flag that reinterpret_cast&lt;&gt; would.  The important point is that
+<em>accidental</em> non-type-safe access is prevented.
+
+<p>
+This is an imperfect solution, but it allows a large class of programmers to use
+the library who would otherwise be unable to do so.
+
+<p>
+By the way, I also tried two other techniques to avoid the template friend problem:
+<ul>
+<li>Defining a base class that just contains the value and accessor functions for it,
+then deriving quantity<> from that base class.  It worked, but efficiency took a big
+hit even under g++ and that was not acceptable.
+<li>Defining a big struct that contains all the operator functionality, and making it
+be a friend of quantity<>.  This almost worked, but the nth_power and nth_root
+functions were sufficiently complex to confuse MSVC, forcing me to revert to the
+permit scheme or something similar.  It also led to duplicate operator code
+to access the functions inside the struct.
+</ul>
+Overall, the simplicity and uniformity of the permit class wins.
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why do you use a macro to control the numerical representation?
+
+<p>
+<strong>A:</strong>
+Ideally the type used to represent the numerical value inside a
+quantity&lt;&gt; should be a template parameter.  However, when I tried
+to implement this the operators got very confusing and I was afraid
+that even if I got things working the code would be brittle.  Therefore
+I chose to design the library so that all quantity&lt;&gt; objects use
+the same representation type.  A macro is provided to allow the
+user to change that type if needed, with clear documentation about
+the risks of violating the One Definition Rule.  Although grossly
+inelegant, this should let users do what they need to do with
+minimal complexity and maximum portability.
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why did you choose the name "quantity" for the main class
+(and the library itself, the namespace, and the main header file)?
+
+<p>
+<strong>A:</strong>
+The term "quantity" was chosen to be consistent with National
+Institute of Standards and Technology Special Publication 811
+(SP811), available at http://physics.nist.gov/Document/sp811.pdf
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why does the library predefine common dimension&lt;&gt; types
+instead of the corresponding quantity&lt;&gt; types?
+
+<p>
+<strong>A:</strong>
+The library uses
+<pre>
+	typedef dimensions< 0, 1, 0 > mass_d
+</pre>
+rather than
+<pre>
+	typedef quantity< dimensions< 0, 1, 0 > > mass_t
+</pre>
+This makes user code slightly more verbose, but it has two advantages:
+<ul>
+<li>it emphasizes which variables are in fact "quantities", and
+<li>it allows for the possible addition of representation as a template
+parameter to quantity&lt;&gt; in future extensions of the library.
+</ul>
+Note
+that if this extension is ever implemented, then something like
+"mass" truly will be a dimension, and there could be different
+actual types (float, double, long double) implementing it.  You
+want a single typedef for the concept of "mass" to apply to all of them.
+(This may be speculative generality, but I thought it looked more
+elegant this way anyway.)
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why is dimensions< 0, 0, 0 > not used for dimensionless quantities?
+
+<p>
+<strong>A:</strong>
+I tried it both ways, and using a type-generator to make dimensionless
+results come out as primitive types was a lot easier to get working.
+If you use dimensions< 0, 0, 0 >, then you have to use a bunch of implicit
+conversion stuff to make them act like regular numbers.  Implicit
+conversions are often just trouble waiting to happen, so biting
+the bullet and forcing  dimensionless results of operations to be numbers in the
+first place ends up being simpler and more obvious.
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why are units like meter() and constants like pi() and nano()
+defined as inline functions instead of as const data?
+
+<p>
+<strong>A:</strong>
+Two reasons:
+<ul>
+<li>it gives the compiler a better shot at optimizing away multiplications
+and divisions by constants, especially by "1.0".  If the data were
+external it might be harder to do that.
+<li>more importantly, it completely avoids any "static initialization problems".
+(Non-primitive globally static data elements are notoriously difficult
+to get initialized correctly and efficiently.)
+</ul>
+
+Of course, the syntax isn't as pretty, but I decided it was worth it for
+the correctness, simplicity, and efficiency.
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why are there no dimensions for plane_angle and solid_angle?
+Things like degree_angle(), radian(), and steradian() can be confused with each other
+and with plain numbers.
+
+<p>
+<strong>A:</strong>
+According to SP811, plane angle and solid angle are dimensionless,
+and the quantity package follows that definition.
+This is not a unique case; there are at least two other pairs of units
+that can be confused:
+hertz()/becquerel() and gray()/sievert().
+
+<p>
+This does allow confusion, but to keep complexity within reasonable
+bounds, the current version of the quantity library is designed to check
+dimensions only, and
+it cannot detect conversions between different quantities which have
+the same dimensions.
+The units radian(), degree_angle() etc. are defined for convenience and
+clarity, but the library will not detect incorrect usage.
+(Future extensions that would do so are being considered, but such
+extensions will be implemented only if it can be done consistently
+with the official standard described in SP811.)
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why is there no operator% (modulo)?
+
+<p>
+<strong>A:</strong>
+The user can easily define one that would be just as efficient
+as anything the library could provide.  Since I didn't expect it to
+be very useful anyway, I left it out to reduce feature creep.
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why did you use "speed_d" instead of "velocity_d"?
+
+<p>
+<strong>A:</strong>
+In many contexts, "velocity" is used to mean a vector that includes
+both magnitude and direction.  "Speed" is less ambiguous, since it
+always represents just a magnitude.  If you really want the velocity,
+you need to use a vector&lt; quantity&lt; speed_d &gt; &gt;.
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+Why do you use the name mile_nautical instead of nautical_mile,
+ounce_troy instead of troy_ounce, etc.
+
+<p>
+<strong>A:</strong>
+It is always perilous to contradict common usage, but it is amazing how
+many groups of units there are that have similar names,
+and to avoid confusing the user I felt it was best to pick a single
+convention and be totally consistent.
+Thus this library always puts the common part of the name first:
+<ul>
+<li>mile, mile_nautical, mile_us_survey.
+<li>mil, mil_angle, mil_circular.
+<li>day, day_sidereal.
+<li>hour, hour_sidereal.
+<li>minute, minute_sidereal, minute_angle.
+<li>second, second_sidereal, second_angle.
+<li>atmosphere_std, atmosphere_tech.
+<li>btu, btu_it, btu_th, btu_39F, btu_59F, btu_60F.
+<li>calorie, calorie_it, calorie_th, calorie_15C, calorie_20C.
+<li>degree_angle, degree_celsius, degree_fahrenheit, degree_rankine
+(there is no degree_kelvin; it's just kelvin).
+<li>foot, foot_us_survey.
+<li>gallon_imperial, gallon_us.
+<li>gill_imperial, gill_us.
+<li>horsepower, horsepower_boiler, horsepower_electric, horsepower_metric,
+horsepower_uk, horsepower_water.
+<li>hundredweight_long, hundredweight_short.
+<li>ounce_avdp, ounce_fluid_imperial, ounce_fluid_us, ounce_force, ounce_troy.
+<li>pica_computer, pica_printers.
+<li>pint_dry, pint_liquid.
+<li>point_computer, point_printers.
+<li>pound_avdp, pound_force, pound_troy.
+<li>quart_dry, quart_liquid.
+<li>perm_0C, perm_23C.
+<li>therm_ec, therm_us.
+<li>year_sidereal, year_std, year_tropical.
+</ul>
+and my personal favorite, the eight different tons:
+<ul>
+<li>ton_assay, ton_force, ton_long, ton_metric, ton_refrigeration, ton_register, ton_short, ton_tnt, tonne.
+</ul>
+(I know that's actually nine, but one is just a spelling difference.)
+
+<p>
+If it makes it any easier, just pretend you're in the military and read the underscore
+as a comma where appropriate: "ounce, fluid, imperial".
+If a particular name really bugs you,
+it's easy enough to define your own wrapper with a different name.
+
+<hr>
+
+<p>
+<strong>Q:</strong>
+What is the funny macro definition of "pascal()" for?
+
+<p>
+<strong>A:</strong>
+Some compilers consider "pascal" to be a keyword, which really confuses things
+if you try to define an inline function called pascal().
+Therefore, on compilers that have this problem, we define a macro
+that changes pascal() to pascal_().
+This affects both the definition of the function and the invocations
+of it, so everything stays in synch.
+
+<p>
+This obviously avoids the problem, but what's not so obvious is that
+it also still allows use of the pascal keyword -- the macro
+is defined to take arguments, so only occurrences of
+the word "pascal" followed by a left paren are taken to be macro
+invocations and expanded; anywhere the word "pascal" stands on its own
+(not followed by parentheses) it will still be treated as a keyword.
+
+<p>
+Thanks to Darin Adler for devising this nifty work-around.
+
+<hr>
+Last updated 2001-07-11.
+</body></html>
+
+

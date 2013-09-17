@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Phys Units-CT for C++11" />
+		<Option pch_mode="2" />
+		<Option compiler="microsoft_visual_c_60" />
+		<Build>
+			<Target title="default">
+				<Option output="GrowSpectroscopy" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="microsoft_visual_c_60" />
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="/W3" />
+		</Compiler>
+		<Unit filename="../../.gitattributes" />
+		<Unit filename="../../.gitignore" />
+		<Unit filename="../../.travis.yml" />
+		<Unit filename="../../LICENSE_1_0.txt" />
+		<Unit filename="../../License.orig.txt" />
+		<Unit filename="../../License.txt" />
+		<Unit filename="../../README.md" />
+		<Unit filename="../../Readme.orig.txt" />
+		<Unit filename="../../Readme.txt" />
+		<Unit filename="../../ReleaseNotes.txt" />
+		<Unit filename="../../doc/original/quantity.html" />
+		<Unit filename="../../doc/original/rationale.html" />
+		<Unit filename="../../doc/original/weblinks.html" />
+		<Unit filename="../../phys/units/io.hpp" />
+		<Unit filename="../../phys/units/io_output.hpp" />
+		<Unit filename="../../phys/units/io_output_eng.hpp" />
+		<Unit filename="../../phys/units/other_units.hpp" />
+		<Unit filename="../../phys/units/physical_constants.hpp" />
+		<Unit filename="../../phys/units/quantity.hpp" />
+		<Unit filename="../../phys/units/quantity_io.hpp" />
+		<Unit filename="../../phys/units/quantity_io_ampere.hpp" />
+		<Unit filename="../../phys/units/quantity_io_becquerel.hpp" />
+		<Unit filename="../../phys/units/quantity_io_candela.hpp" />
+		<Unit filename="../../phys/units/quantity_io_celsius.hpp" />
+		<Unit filename="../../phys/units/quantity_io_coulomb.hpp" />
+		<Unit filename="../../phys/units/quantity_io_dimensionless.hpp" />
+		<Unit filename="../../phys/units/quantity_io_engineering.hpp" />
+		<Unit filename="../../phys/units/quantity_io_farad.hpp" />
+		<Unit filename="../../phys/units/quantity_io_gray.hpp" />
+		<Unit filename="../../phys/units/quantity_io_henry.hpp" />
+		<Unit filename="../../phys/units/quantity_io_hertz.hpp" />
+		<Unit filename="../../phys/units/quantity_io_joule.hpp" />
+		<Unit filename="../../phys/units/quantity_io_kelvin.hpp" />
+		<Unit filename="../../phys/units/quantity_io_kilogram.hpp" />
+		<Unit filename="../../phys/units/quantity_io_lumen.hpp" />
+		<Unit filename="../../phys/units/quantity_io_lux.hpp" />
+		<Unit filename="../../phys/units/quantity_io_meter.hpp" />
+		<Unit filename="../../phys/units/quantity_io_newton.hpp" />
+		<Unit filename="../../phys/units/quantity_io_ohm.hpp" />
+		<Unit filename="../../phys/units/quantity_io_pascal.hpp" />
+		<Unit filename="../../phys/units/quantity_io_radian.hpp" />
+		<Unit filename="../../phys/units/quantity_io_second.hpp" />
+		<Unit filename="../../phys/units/quantity_io_siemens.hpp" />
+		<Unit filename="../../phys/units/quantity_io_sievert.hpp" />
+		<Unit filename="../../phys/units/quantity_io_speed.hpp" />
+		<Unit filename="../../phys/units/quantity_io_steradian.hpp" />
+		<Unit filename="../../phys/units/quantity_io_symbols.hpp" />
+		<Unit filename="../../phys/units/quantity_io_tesla.hpp" />
+		<Unit filename="../../phys/units/quantity_io_volt.hpp" />
+		<Unit filename="../../phys/units/quantity_io_watt.hpp" />
+		<Unit filename="../../phys/units/quantity_io_weber.hpp" />
+		<Unit filename="../Doxygen/Doxyfile" />
+		<Unit filename="../Doxygen/Quantity-CT.chm" />
+		<Unit filename="../Doxygen/Quantity-Footer.html" />
+		<Unit filename="../Doxygen/Quantity-Style.css" />
+		<Unit filename="../Doxygen/Quantity.txt" />
+		<Unit filename="../Doxygen/examples/Makefile" />
+		<Unit filename="../Doxygen/examples/base.cpp" />
+		<Unit filename="../Doxygen/examples/base.txt" />
+		<Unit filename="../Doxygen/examples/engineering.cpp" />
+		<Unit filename="../Doxygen/examples/engineering.txt" />
+		<Unit filename="../Doxygen/examples/hello.cpp" />
+		<Unit filename="../Doxygen/examples/work.cpp" />
+		<Unit filename="../Doxygen/examples/work.txt" />
+		<Unit filename="../Test/C++03-Tests/Test.cpp" />
+		<Unit filename="../Test/C++03-Tests/TestArithmetic.cpp" />
+		<Unit filename="../Test/C++03-Tests/TestComparison.cpp" />
+		<Unit filename="../Test/C++03-Tests/TestCompile.cpp" />
+		<Unit filename="../Test/C++03-Tests/TestFunction.cpp" />
+		<Unit filename="../Test/C++03-Tests/TestOutput.cpp" />
+		<Unit filename="../Test/C++03-Tests/TestPrefix.cpp" />
+		<Unit filename="../Test/C++03-Tests/TestUnit.cpp" />
+		<Unit filename="../Test/C++03-Tests/TestUtil.hpp" />
+		<Unit filename="../Test/grow.cpp" />
+		<Unit filename="../Test/hamlest.hpp" />
+		<Unit filename="../Test/lest.hpp" />
+		<Unit filename="../Test/test_quantity.cpp" />
+		<Unit filename="../Test/test_util.hpp" />
+		<Unit filename="../gcc/Test/Makefile.win32.gcc" />
+		<Unit filename="../gcc/Test/compile.bat" />
+		<Unit filename="../gcc/Test/mk.win32.gcc.bat" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

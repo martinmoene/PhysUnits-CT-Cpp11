@@ -1,0 +1,41 @@
+/**
+ *
+\mainpage C++11 Quantity Library
+
+Zero-overhead dimensional analysis and unit/quantity manipulation and conversion.
+<br>
+<br>
+Based on quantity.hpp, rev 0.4 as of 2001-07-16 by Michael S. Kenniston.
+
+Copyright (c) 2001 by Michael S. Kenniston.  For the most
+recent version check http://www.xnet.com/~msk/quantity .
+Permission is granted to use this code without restriction
+so long as this copyright notice appears in all source files.
+
+This code is provided as-is, with no warrantee of correctness.
+
+Unless otherwise specified, the definitions of all units in this
+file are from NIST Special Publication 811[1].
+
+[1] Ambler Thompson and Barry N. Taylor.
+Guide for the Use of the International System of Units (SI).
+NIST Special Publication 811 2008 Edition.
+URL: http://physics.nist.gov/cuu/pdf/sp811.pdf
+
+Adapted by Martin Moene
+
+Changes with respect to version 0.4:
+
+- Adapted for C++11 from C++98 version at https://github.com/martinmoene/PhysUnits-CT.
+- Quantity is templatized on representation type, and quantities with diffeent representation types
+  can be mixed, e.g.: quantity< length_d, float > and quantity< length_d, long double >.
+- Formatting of non-base units is supported via specializing class unit_info<>.
+  Versions for SI approved derived units are provided, e.g. via quantity_io_tesla.hpp (single unit)
+  and quantity_io_symbols.hpp (all units).
+- [Performance: check] In an optimized build with g++ 4.8.1 (-O2), quantity<Dim, double> is now as efficient as using plain double.
+
+Code is available from: https://github.com/martinmoene/PhysUnits-CT-Cpp11/
+
+Last updated, 7 September 2013. Martin Moene, http://www.eld.leidenuniv.nl/~moene/
+ *
+ */

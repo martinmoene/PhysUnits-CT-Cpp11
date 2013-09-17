@@ -1,0 +1,7 @@
+
+Copyright (c) 2001 by Michael S. Kenniston.  For the most
+recent version check www.xnet.com/~msk/quantity.  Permission is granted
+to use this code without restriction so long as this copyright
+notice appears in all source files.
+
+This code is provided as-is, with no warrantee of correctness.
