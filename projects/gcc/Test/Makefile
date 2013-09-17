@@ -62,7 +62,7 @@ vpath %.hpp $(HDRDIR)
 vpath %.cpp $(SRCDIR)
 
 CC = g++
-CXXFLAGS = -Wall -Wextra -Weffc++ -std=c++11 -I$(INCDIR)
+CXXFLAGS = -Wall -Wextra -Weffc++ -Wno-missing-braces -std=c++11 -I$(INCDIR)
 
 %.o: %.cpp $(HEADERS)
 
