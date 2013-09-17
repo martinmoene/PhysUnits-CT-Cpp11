@@ -304,11 +304,11 @@ public:
     /**
      * convert to given unit, for example: (3._dm).to(meter) gives 0.3;
      */
-	template <typename DX, typename X>
+    template <typename DX, typename X>
     constexpr auto to( quantity<DX,X> const & x ) -> detail::Quotient<Dims,DX,T,X>
     {
-		return *this / x;
-	}
+        return *this / x;
+    }
 
     /**
      * the quantity's magnitude.
