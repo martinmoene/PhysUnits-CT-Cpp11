@@ -1,7 +1,7 @@
 #
 # ./projects/gcc/Test/Makefile.win32.gcc
 #
-:: Created by Martin on 17 September 2013.
+# Created by Martin on 17 September 2013.
 # Copyright 2012 Universiteit Leiden. All rights reserved.
 #
 # Distributed under the Boost Software License, Version 1.0. (See accompanying
