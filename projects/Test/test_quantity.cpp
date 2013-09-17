@@ -656,7 +656,7 @@ const lest::test units[] =
         EXPECT( s( 1e-2 * furlong ) == "2.011680 m" );
         EXPECT( s( 1e+3 * gallon_imperial ) == "4.546090 m+3" );
         EXPECT( s( 1e+3 * gallon_us ) == "3.785412 m+3" );
-        EXPECT( s( 1e+9 * gamma ) == "1.000000 kg s-2 A-1" );
+        EXPECT( s( 1e+9 * phys::units::gamma ) == "1.000000 kg s-2 A-1" );	// gamma clashes in clang
         EXPECT( s( 1e+9 * gamma_mass ) == "1.000000 kg" );
         EXPECT( s( 1e+4 * gauss ) == "1.000000 kg s-2 A-1" );
         EXPECT( s( 1e+1 * gilbert ) == "7.957747 A" );
