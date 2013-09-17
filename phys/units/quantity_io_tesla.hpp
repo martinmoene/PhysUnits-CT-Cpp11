@@ -31,7 +31,7 @@ struct unit_info< magnetic_flux_density_d >
     static std::string symbol() { return "T"; }
 };
 
-NTS QUANTITY_DEFINE_LITERALS(T, magnetic_flux_density_d )
+QUANTITY_DEFINE_LITERALS(T, magnetic_flux_density_d )
 
 }} // namespace phys::units
 
