@@ -211,18 +211,20 @@ Convenience functions
 The following convenience functions are provided.
 
 In namespace `phys::units`:
-- `std::string to_magnitude( quantity<...> const & q )` - the quantity's magnitude represented as string
-- `std::string to_unit_name( quantity<...> const & q )` - the quantity's unit name, e.g. 'hertz'
-- `std::string to_unit_symbol( quantity<...> const & q )` - the quantity's unit symbol, e.g. 'Hz'
-- `std::string to_string( long double const value )` - the value of a long double represented as string
+- `DX dimension( quantity<DX, ...> const & q )` - the quantity's dimension.
+- `X magnitude( quantity<..., X> const & q )` - the quantity's magnitude.
+- `std::string to_magnitude( quantity<...> const & q )` - the quantity's magnitude represented as string.
+- `std::string to_unit_name( quantity<...> const & q )` - the quantity's unit name, e.g. 'hertz'.
+- `std::string to_unit_symbol( quantity<...> const & q )` - the quantity's unit symbol, e.g. 'Hz'.
+- `std::string to_string( long double const value )` - the value of a long double represented as string.
 
 In namespace `phys::units::io`:
-- `std::string to_string( quantity<...> const & q )` - the quantity represented as string in scientific notation
-- `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in scientific notation
+- `std::string to_string( quantity<...> const & q )` - the quantity represented as string in scientific notation.
+- `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in scientific notation.
 
 In namespace `phys::units::io::eng`:
-- `std::string to_string( quantity<...> const & q )` - the quantity represented as string in engineering notation
-- `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in engineering notation
+- `std::string to_string( quantity<...> const & q )` - the quantity represented as string in engineering notation.
+- `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in engineering notation.
 
 Include files
 -------------
