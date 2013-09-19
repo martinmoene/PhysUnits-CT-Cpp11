@@ -754,20 +754,6 @@ const lest::test units[] =
     },
 };
 
-// #include "phys/units/io_symbols.hpp"
-
-const lest::test output[] =
-{
-    "quantity output conversions", []
-    {
-    },
-
-    "quantity output exceptions", []
-    {
-        EXPECT_THROWS_AS( prefix( "x" ), prefix_error );
-    },
-};
-
 int main()
 {
     const int total = 0
@@ -778,7 +764,6 @@ int main()
     + lest::run( prefixes )
     + lest::run( literals )
     + lest::run( units )
-    + lest::run( output )
     ;
 
     if ( total )

@@ -40,6 +40,7 @@ HEADERS = \
 	quantity_io_lumen.hpp \
 	quantity_io_lux.hpp \
 	quantity_io_meter.hpp \
+	quantity_io_mole.hpp \
 	quantity_io_newton.hpp \
 	quantity_io_ohm.hpp \
 	quantity_io_pascal.hpp \
@@ -56,24 +57,26 @@ HEADERS = \
 	quantity_io_weber.hpp \
 	test_util.hpp
 
-OBJS = \
-	test_quantity.o
+OBJS =
 
 vpath %.hpp $(HDRDIR)
 vpath %.cpp $(SRCDIR)
 
 CC = g++
-CXXFLAGS = -Wall -Wextra -Weffc++ -Wno-missing-braces -std=c++11 -I$(INCDIR)
+CXXFLAGS = -Wall -Wextra -Weffc++ -Wno-missing-braces -std=c++11 -DQUANTITY_USE_KELVIN -I$(INCDIR)
 
 %.o: %.cpp $(HEADERS)
 
 %.exe: %.o
 	$(CC) -o $*.exe $^
 
-all : test_quantity.exe
+all : test_quantity.exe test_quantity_io.exe
 	./test_quantity.exe
+	./test_quantity_io.exe
 
-test_quantity.exe : $(OBJS)
+test_quantity.exe : test_quantity.o $(OBJS)
+
+test_quantity_io.exe : test_quantity_io.o $(OBJS)
 
 clean:
 	-$(RM) *.bak *.o
