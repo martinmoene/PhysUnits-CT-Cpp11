@@ -151,7 +151,7 @@ To get the presentation in base dimensions, you should not include `quantity_io_
 
 Dimensions and literals
 -----------------------
-The base *dimensions* are length, mass, time etc. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
+The seven fundamental SI *dimensions* are length, mass, time interval, electric current, thermodynamic temperature, quantity of substance and luminous intensity. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
 
 For these units [literals](https://en.wikipedia.org/wiki/C%2B%2B11#User-defined_literals) are defined with prefixes ranging from yocto (1e-24L) through yotta (1e+24). For example `1_ns`, `42_km`.
 
@@ -177,34 +177,34 @@ Operations and expressions
 - `quantity1` and `quantity2` have different dimensions
 - quantities with different magnitude types can be mixed
 
-|Operation     |Operand Type(s)          |Result Type |
-|--------------|-------------------------|------------|
-|Construction  |`quantity()`             |`quantity`  |
-|              |`quantity( quantity )`   |`quantity`  |
-|Assignment    |`quantity = quantity`    |`quantity &`|
-|Addition &    |`quantity += quantity`   |`quantity &`|
-| Subtraction  |`quantity -= quantity`   |`quantity &`|
-|              |`+quantity`              |`quantity`  |
-|              |`-quantity`              |`quantity`  |
-|              |`quantity + quantity`    |`quantity`  |
-|              |`quantity - quantity`    |`quantity`  |
-|Multiplication|`quantity *= num`        |`quantity &`|
-|              |`quantity * num`         |`quantity`  |
-|              |`num * quantity`         |`quantity`  |
-|              |`quantity1 * quantity1`  |`quantity2` |
-|              |`quantity1 * quantity2`  |`num` or `quantity3` |
-|Division      |`quantity /= num`        |`quantity &`|
-|              |`quantity / num`         |`quantity`  |
-|              |`num / quantity1`        |`quantity2` |
-|              |`quantity / quantity`    |`num`       |
-|              |`quantity1 / quantity2`  |`quantity3` |
-|Powers        |`nth_power<N>(quantity1)`|`num` if N=0, `quantity1` if  N=1|
-|              |`square(quantity1)`      |`quantity2` |
-|              |`cube(quantity1)`        |`quantity2` |
-|Roots         |`nth_root<N>(quantity1)` |`quantity2`, iff dimensions of quantity1 are all even multiples of N|
-|              |`sqrt(quantity1)`        |`quantity2`, iff dimensions of quantity1 are all even multiples of 2|
-|Conversion    |`quantity1.to(quantity2)`|`num` or `quantity3` (quantity1/quantity2)|
-|Zero          |`quantity.zero()`        |`quantity` with magnitude 0|
+|Operation     |Operand Type(s)            |Result Type |
+|--------------|---------------------------|------------|
+|Construction  |`quantity()`               |`quantity`  |
+|              |`quantity( quantity )`     |`quantity`  |
+|Assignment    |`quantity = quantity`      |`quantity &`|
+|Addition &    |`quantity += quantity`     |`quantity &`|
+| Subtraction  |`quantity -= quantity`     |`quantity &`|
+|              |`+quantity`                |`quantity`  |
+|              |`-quantity`                |`quantity`  |
+|              |`quantity + quantity`      |`quantity`  |
+|              |`quantity - quantity`      |`quantity`  |
+|Multiplication|`quantity *= num`          |`quantity &`|
+|              |`quantity * num`           |`quantity`  |
+|              |`num * quantity`           |`quantity`  |
+|              |`quantity1 * quantity1`    |`quantity2` |
+|              |`quantity1 * quantity2`    |`num` or `quantity3` |
+|Division      |`quantity /= num`          |`quantity &`|
+|              |`quantity / num`           |`quantity`  |
+|              |`num / quantity1`          |`quantity2` |
+|              |`quantity / quantity`      |`num`       |
+|              |`quantity1 / quantity2`    |`quantity3` |
+|Powers        |`nth_power<N>( quantity1 )`|`num` if N=0, `quantity1` if  N=1|
+|              |`square( quantity1 )`      |`quantity2` |
+|              |`cube( quantity1 )`        |`quantity2` |
+|Roots         |`nth_root<N>( quantity1 )` |`quantity2`, iff dimensions of quantity1 are all even multiples of N|
+|              |`sqrt( quantity1 )`        |`quantity2`, iff dimensions of quantity1 are all even multiples of 2|
+|Conversion    |`quantity1.to( quantity2 )`|`num` or `quantity3` (quantity1/quantity2)|
+|Zero          |`quantity.zero()`          |`quantity` with magnitude 0|
 
 Convenience functions
 ---------------------
