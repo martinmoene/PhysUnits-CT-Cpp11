@@ -147,15 +147,15 @@ The output produced is:
 ```
 J = m+2 kg s-2
 ```
-To get the presentation in base dimensions, you should not include `quantity_io_joule`, `quantity_io_symbols.hpp` or `io.hpp`.
+To get the presentation in base dimensions, you should not include `quantity_io_joule`, io_symbols.hpp` or `io.hpp`.
 
 Dimensions, units and literals
 ------------------------------
-The seven fundamental SI *dimensions* are length, mass, time interval, electric current, thermodynamic temperature, quantity of substance and luminous intensity. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
+The seven fundamental SI[2] *dimensions* are length, mass, time interval, electric current, thermodynamic temperature, quantity of substance and luminous intensity. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
 
 The library defines dimensions such as `length_d` and `mass_d` and it defines quantities that represent their units as `meter` and `kilogram`. The library also defines [user-defined literal suffixes](https://en.wikipedia.org/wiki/C%2B%2B11#User-defined_literals) with prefixes ranging from yocto (1e-24L) through yotta (1e+24). Thus you can write quantity literals such as `1_ns` and ` 42.195_km`.
 
-To use literals of non-base units, include the file `io.hpp` or `quantity_io_symbols.hpp`, or one or more of the following files named quantity_io_ *unit* .hpp where *unit* is becquerel, celsius, coulomb, farad, gray, henry, hertz, joule, lumen, lux, newton, ohm, pascal, radian, siemens, sievert, speed, steradian, tesla, volt, watt, weber.
+To use literals of non-base units, include the file `io.hpp` or io_symbols.hpp`, or one or more of the following files named quantity_io_ *unit* .hpp where *unit* is becquerel, celsius, coulomb, farad, gray, henry, hertz, joule, lumen, lux, newton, ohm, pascal, radian, siemens, sievert, speed, steradian, tesla, volt, watt, weber.
 
 Types and declarations
 ----------------------
@@ -231,11 +231,11 @@ Include files
 - io.hpp - include all io-related include files.
 - io_output.hpp - provide basic stream output in base dimensions.
 - io_output_eng.hpp - provide stream output in engineering notation, using metric prefixes.
+- io_symbols.hpp - include all files quantity_io_ *unit* .hpp
 - other_units.hpp - units that are *not* approved for use with SI.
 - physical_constants.hpp - Planck constant, speed of light etc.
 - quantity.hpp - quantity, SI dimensions and units, base unit literals.
 - quantity_io_ *unit* .hpp - name, symbol and literals for *unit*.
-- quantity_io_symbols.hpp - include all files quantity_io_ *unit* .hpp
 
 Error handling
 --------------

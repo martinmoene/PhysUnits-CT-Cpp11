@@ -30,6 +30,7 @@
 		<Unit filename="../../phys/units/io.hpp" />
 		<Unit filename="../../phys/units/io_output.hpp" />
 		<Unit filename="../../phys/units/io_output_eng.hpp" />
+		<Unit filename="../../phys/units/io_symbols.hpp" />
 		<Unit filename="../../phys/units/other_units.hpp" />
 		<Unit filename="../../phys/units/physical_constants.hpp" />
 		<Unit filename="../../phys/units/quantity.hpp" />

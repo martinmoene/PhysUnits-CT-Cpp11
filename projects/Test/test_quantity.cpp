@@ -754,7 +754,7 @@ const lest::test units[] =
     },
 };
 
-// #include "phys/units/quantity_io_symbols.hpp"
+// #include "phys/units/io_symbols.hpp"
 
 const lest::test output[] =
 {

@@ -18,6 +18,7 @@ HEADERS = \
 	io.hpp \
 	io_output.hpp \
 	io_output_eng.hpp \
+	io_symbols.hpp \
 	other_units.hpp \
 	physical_constants.hpp \
 	quantity.hpp \
