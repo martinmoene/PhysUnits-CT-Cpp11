@@ -721,12 +721,12 @@ operator>=( quantity<D, X> const & x, quantity<D, Y> const & y )
 /// quantity's dimension.
 
 template <typename DX, typename X>
-inline DX dimension( quantity<DX,X> const & q ) { return q.dimension(); }
+inline constexpr DX dimension( quantity<DX,X> const & q ) { return q.dimension(); }
 
 /// quantity's magnitude.
 
 template <typename DX, typename X>
-inline X magnitude( quantity<DX,X> const & q ) { return q.magnitude(); }
+inline constexpr X magnitude( quantity<DX,X> const & q ) { return q.magnitude(); }
 
 // The seven SI base units.  These tie our numbers to the real world.
 
