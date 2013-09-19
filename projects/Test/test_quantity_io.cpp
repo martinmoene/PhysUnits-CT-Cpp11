@@ -17,8 +17,8 @@
 //#define TEST_COMPILE_TIME
 
 #include "phys/units/quantity.hpp"
-#include "phys/units/io_output_eng.hpp"
 #include "phys/units/io_symbols.hpp"
+#include "phys/units/io_output_eng.hpp"
 
 #include "test_util.hpp"  // include before lest.hpp
 
