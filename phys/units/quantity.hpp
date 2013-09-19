@@ -42,7 +42,7 @@ namespace phys {
 namespace units {
 
 #ifdef PHYS_UNITS_REP_TYPE
-   using Rep = PHYS_UNITS_REP_TYPE Rep;
+   using Rep = PHYS_UNITS_REP_TYPE;
 #else
    using Rep = double;
 #endif
