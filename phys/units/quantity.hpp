@@ -721,7 +721,7 @@ operator>=( quantity<D, X> const & x, quantity<D, Y> const & y )
 /// quantity's dimension.
 
 template <typename DX, typename X>
-inline DX dimension( quantity<DX,X> const & ) { return q.dimension(); }
+inline DX dimension( quantity<DX,X> const & q ) { return q.dimension(); }
 
 /// quantity's magnitude.
 
