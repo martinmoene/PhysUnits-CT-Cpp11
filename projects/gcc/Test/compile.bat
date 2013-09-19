@@ -40,6 +40,7 @@ setlocal
 set OPT=%*
 :: ../../Test/TestInput.cpp
 g++ -Wall -Wextra -Weffc++ -std=c++11 %G_OPT% %OPT% -I../../../ -o test_quantity.exe ../../Test/test_quantity.cpp && test_quantity
+g++ -Wall -Wextra -Weffc++ -std=c++11 %G_OPT% %OPT% -I../../../ -o test_quantity_io.exe ../../Test/test_quantity_io.cpp && test_quantity_io
 ::clang++ -Wall %G_OPT% %OPT% -I../../../ -o test_quantity.exe ../../Test/test_quantity.cpp && test_quantity
 endlocal & goto :EOF
 

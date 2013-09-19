@@ -13,18 +13,26 @@
  * file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
  */
 
-#ifndef PHYS_UNITS_QUANTITY_IO_METER_HPP_INCLUDED
-#define PHYS_UNITS_QUANTITY_IO_METER_HPP_INCLUDED
+#ifndef PHYS_UNITS_QUANTITY_IO_CANDELA_HPP_INCLUDED
+#define PHYS_UNITS_QUANTITY_IO_CANDELA_HPP_INCLUDED
 
 #include "phys/units/quantity_io.hpp"
 
 namespace phys { namespace units {
 
-// candela is a fundamental dimension.
+/// luminous_intensity_d
+
+template<>
+struct unit_info< luminous_intensity_d >
+{
+   static bool        single() { return true; }
+   static std::string name()   { return "candela"; }
+   static std::string symbol() { return "cd"; }
+};
 
 }} // namespace phys::units
 
-#endif // PHYS_UNITS_QUANTITY_IO_AMPERE_HPP_INCLUDED
+#endif // PHYS_UNITS_QUANTITY_IO_CANDELA_HPP_INCLUDED
 
 /*
  * end of file

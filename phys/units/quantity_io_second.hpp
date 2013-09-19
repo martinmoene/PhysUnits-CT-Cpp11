@@ -20,7 +20,15 @@
 
 namespace phys { namespace units {
 
-// second is a fundamental dimension.
+/// time_interval_d
+
+template<>
+struct unit_info< time_interval_d >
+{
+   static bool        single() { return true; }
+   static std::string name()   { return "second"; }
+   static std::string symbol() { return "s"; }
+};
 
 }} // namespace phys::units
 

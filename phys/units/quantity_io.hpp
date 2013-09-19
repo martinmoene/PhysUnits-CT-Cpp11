@@ -39,27 +39,24 @@ namespace phys {
 
 namespace units {
 
-/**
- * quantity error base class (not used by quantity itself).
- */
+/// quantity error base class (not used by quantity itself).
+
 struct quantity_error : public std::runtime_error
 {
     quantity_error( std::string const text )
         : std::runtime_error( text )  { }
 };
 
-/**
- * prefix error, e.g. when prefix is unrecognized.
- */
+/// prefix error, e.g. when prefix is unrecognized.
+
 struct prefix_error : public quantity_error
 {
     prefix_error( std::string const text )
         : quantity_error( text ) { }
 };
 
-/**
- * return factor for given prefix.
- */
+/// return factor for given prefix.
+
 inline Rep prefix( std::string const prefix_ )
 {
     std::map<std::string, Rep> table
@@ -105,25 +102,22 @@ inline Rep prefix( std::string const prefix_ )
 template <typename Dims>
 struct unit_info
 {
-    /**
-     * true if base dimension.
-     */
+    /// true if base dimension.
+
     static bool single()
     {
         return Dims::is_base;
     }
 
-    /**
-     * provide unit's name.
-     */
+    /// provide unit's name.
+
     static std::string name()
     {
         return symbol();
     }
 
-    /**
-     * provide unit's symbol.
-     */
+    /// provide unit's symbol.
+
     static std::string symbol()
     {
         std::ostringstream os;
@@ -140,6 +134,8 @@ struct unit_info
 
         return os.str();
     }
+
+    /// emit a single dimension.
 
     static void emit_dim( std::ostream & os, const char * label, int exp, bool & first )
     {
@@ -161,6 +157,34 @@ struct unit_info
     }
 };
 
+}} // namespace phys::units
+
+#include "quantity_io_meter.hpp"
+#include "quantity_io_kilogram.hpp"
+#include "quantity_io_second.hpp"
+#include "quantity_io_ampere.hpp"
+#include "quantity_io_mole.hpp"
+#include "quantity_io_candela.hpp"
+
+/*
+ * User must choose celsius or kelvin, either by defining
+ * QUANTITY_USE_CELSIUS or QUANTITY_USE_KELVIN, or by
+ * including the desired include file.
+ */
+#if defined(QUANTITY_USE_CELSIUS) && defined(QUANTITY_USE_KELVIN)
+# error At most define one of QUANTITY_USE_CELSIUS, QUANTITY_USE_KELVIN
+#endif
+#ifdef QUANTITY_USE_CELSIUS
+# include "quantity_io_celsius.hpp"
+#endif
+#ifdef QUANTITY_USE_KELVIN
+# include "quantity_io_kelvin.hpp"
+#endif
+
+namespace phys { namespace units {
+
+/// magnitude as string.
+
 template< typename  Dims, typename T >
 std::string to_magnitude( quantity<Dims, T> const & q )
 {
@@ -169,17 +193,23 @@ std::string to_magnitude( quantity<Dims, T> const & q )
     return os.str();
 }
 
+/// unit name.
+
 template< typename Dims, typename T >
 std::string to_unit_name( quantity<Dims, T> const & /* q  */)
 {
     return unit_info<Dims>::name();
 }
 
+/// unit symbol.
+
 template< typename Dims, typename T >
 std::string to_unit_symbol( quantity<Dims, T> const & /* q */)
 {
     return unit_info<Dims>::symbol();
 }
+
+/// string representation of value.
 
 inline std::string to_string( long double const value )
 {
@@ -192,6 +222,8 @@ inline std::string to_string( long double const value )
 
 namespace io {
 
+/// quantity string representation.
+
 template< typename Dims, typename T >
 std::string to_string( quantity<Dims, T> const & q )
 {
@@ -199,6 +231,8 @@ std::string to_string( quantity<Dims, T> const & q )
     os << q;
     return os.str();
 }
+
+/// stream quantity.
 
 template< typename Dims, typename T >
 std::ostream & operator<<( std::ostream & os, quantity<Dims, T> const & q )
@@ -208,8 +242,7 @@ std::ostream & operator<<( std::ostream & os, quantity<Dims, T> const & q )
 
 } // namespace io
 
-}
-} // namespace phys { namespace units {
+}} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_HPP_INCLUDED
 

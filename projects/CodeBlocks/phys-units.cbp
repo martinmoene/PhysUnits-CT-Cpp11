@@ -52,6 +52,7 @@
 		<Unit filename="../../phys/units/quantity_io_lumen.hpp" />
 		<Unit filename="../../phys/units/quantity_io_lux.hpp" />
 		<Unit filename="../../phys/units/quantity_io_meter.hpp" />
+		<Unit filename="../../phys/units/quantity_io_mole.hpp" />
 		<Unit filename="../../phys/units/quantity_io_newton.hpp" />
 		<Unit filename="../../phys/units/quantity_io_ohm.hpp" />
 		<Unit filename="../../phys/units/quantity_io_pascal.hpp" />
@@ -92,6 +93,7 @@
 		<Unit filename="../Test/hamlest.hpp" />
 		<Unit filename="../Test/lest.hpp" />
 		<Unit filename="../Test/test_quantity.cpp" />
+		<Unit filename="../Test/test_quantity_io.cpp" />
 		<Unit filename="../Test/test_util.hpp" />
 		<Unit filename="../gcc/Test/Makefile" />
 		<Unit filename="../gcc/Test/compile.bat" />

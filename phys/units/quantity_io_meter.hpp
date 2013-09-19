@@ -20,7 +20,15 @@
 
 namespace phys { namespace units {
 
-// meter is a fundamental dimension.
+/// meter_d
+
+template<>
+struct unit_info< length_d >
+{
+   static bool        single() { return true; }
+   static std::string name()   { return "meter"; }
+   static std::string symbol() { return "m"; }
+};
 
 }} // namespace phys::units
 

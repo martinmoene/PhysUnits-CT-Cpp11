@@ -20,7 +20,15 @@
 
 namespace phys { namespace units {
 
-// ampere is a fundamental dimension.
+/// electric_current_d
+
+template<>
+struct unit_info< electric_current_d >
+{
+   static bool        single() { return true; }
+   static std::string name()   { return "ampere"; }
+   static std::string symbol() { return "A"; }
+};
 
 }} // namespace phys::units
 

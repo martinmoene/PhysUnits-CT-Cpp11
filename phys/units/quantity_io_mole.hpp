@@ -1,7 +1,7 @@
 /**
- * \file quantity_io_kelvin.hpp
+ * \file quantity_io_meter.hpp
  *
- * \brief   kelvin, fundamental dimension.
+ * \brief   meter, fundamental dimension.
  * \author  Martin Moene
  * \date    7 September 2013
  * \since   1.0
@@ -13,26 +13,26 @@
  * file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
  */
 
-#ifndef PHYS_UNITS_QUANTITY_IO_KELVIN_HPP_INCLUDED
-#define PHYS_UNITS_QUANTITY_IO_KELVIN_HPP_INCLUDED
+#ifndef PHYS_UNITS_QUANTITY_IO_MOLE_HPP_INCLUDED
+#define PHYS_UNITS_QUANTITY_IO_MOLE_HPP_INCLUDED
 
 #include "phys/units/quantity_io.hpp"
 
 namespace phys { namespace units {
 
-/// kelvin, [K].
+/// amount_of_substance_d
 
 template<>
-struct unit_info< thermodynamic_temperature_d >
+struct unit_info< amount_of_substance_d >
 {
-    static bool        single() { return true; }
-    static std::string name()   { return "kelvin"; }
-    static std::string symbol() { return "K"; }
+   static bool        single() { return true; }
+   static std::string name()   { return "mole"; }
+   static std::string symbol() { return "mol"; }
 };
 
 }} // namespace phys::units
 
-#endif // PHYS_UNITS_QUANTITY_IO_KELVIN_HPP_INCLUDED
+#endif // PHYS_UNITS_QUANTITY_IO_MOLE_HPP_INCLUDED
 
 /*
  * end of file
