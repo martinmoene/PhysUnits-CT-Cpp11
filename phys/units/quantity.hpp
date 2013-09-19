@@ -718,6 +718,11 @@ operator>=( quantity<D, X> const & x, quantity<D, Y> const & y )
    return x.m_value >= y.m_value;
 }
 
+/// quantity's dimension.
+
+template <typename DX, typename X>
+inline DX dimension( quantity<DX,X> const & ) { return q.dimension(); }
+
 /// quantity's magnitude.
 
 template <typename DX, typename X>
