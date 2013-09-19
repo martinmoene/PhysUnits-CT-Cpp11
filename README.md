@@ -14,10 +14,9 @@ using namespace phys::units;
 
 int main()
 {
-    quantity<speed_d> speed = 45._km / hour;
+    quantity<speed_d> speed = 45_km / hour;
 }
 ```
-Note: GCC requires that a floating point literal precedes the unit literal.
 
 <h2>Other libraries</h2>
 - [PhysUnits-CT](https://github.com/martinmoene/PhysUnits-CT) - C++98 companion of this library.

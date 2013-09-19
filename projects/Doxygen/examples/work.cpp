@@ -15,8 +15,8 @@ work( const quantity<force_d> & F, const quantity<length_d> & dx )
 int main()
 {
     // Test calculation of work.
-    quantity<force_d>       F { 2.0_N         };  // Define a quantity of force.
-    quantity<length_d>      dx{ 2.0_m         };  // and a distance,
+    quantity<force_d>       F { 2_N           };  // Define a quantity of force.
+    quantity<length_d>      dx{ 2_m           };  // and a distance,
     quantity<energy_d>      E { work( F, dx ) };  // and calculate the work done.
 
     std::cout << "F  = " << F  << std::endl
