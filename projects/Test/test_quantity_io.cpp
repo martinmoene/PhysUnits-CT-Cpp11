@@ -1,9 +1,9 @@
 /**
- * \file test_quantity_io_io.cpp
+ * \file test_quantity_io.cpp
  *
  * \brief   lest tests for quantity library.
  * \author  Martin Moene
- * \date    16 September 2013
+ * \date    19 September 2013
  * \since   1.0
  *
  * Copyright 2013 Universiteit Leiden. All rights reserved.
@@ -69,7 +69,7 @@ const lest::test output[] =
         EXPECT_THROWS_AS( prefix( "x" ), prefix_error );
     },
 
-    "quantity base unit literal names", []
+    "quantity base unit names", []
     {
         EXPECT( to_unit_name( meter    ) == "meter" );
         EXPECT( to_unit_name( kilogram ) == "kilogram" );
@@ -80,7 +80,7 @@ const lest::test output[] =
         EXPECT( to_unit_name( candela  ) == "candela" );
     },
 
-    "quantity base unit literal symbols", []
+    "quantity base unit symbols", []
     {
         EXPECT( to_unit_symbol( meter    ) == "m" );
         EXPECT( to_unit_symbol( kilogram ) == "kg" );
@@ -90,6 +90,76 @@ const lest::test output[] =
         EXPECT( to_unit_symbol( mole     ) == "mol" );
         EXPECT( to_unit_symbol( candela  ) == "cd" );
     },
+
+    "quantity other unit names", []
+    {
+// Hz   EXPECT( to_unit_name( becquerel ) == "becquerel" );
+        EXPECT( to_unit_name( coulomb   ) == "coulomb" );
+        EXPECT( to_unit_name( farad     ) == "farad" );
+// Sv   EXPECT( to_unit_name( gray      ) == "gray" );
+        EXPECT( to_unit_name( henry     ) == "henry" );
+        EXPECT( to_unit_name( hertz     ) == "hertz" );
+        EXPECT( to_unit_name( joule     ) == "joule" );
+// Cd   EXPECT( to_unit_name( lumen     ) == "lumen" );
+        EXPECT( to_unit_name( lux       ) == "lux" );
+        EXPECT( to_unit_name( newton    ) == "newton" );
+        EXPECT( to_unit_name( ohm       ) == "ohm" );
+        EXPECT( to_unit_name( pascal    ) == "pascal" );
+// []   EXPECT( to_unit_name( radian    ) == "radian" );
+        EXPECT( to_unit_name( siemens   ) == "siemens" );
+        EXPECT( to_unit_name( sievert   ) == "sievert" );
+// []   EXPECT( to_unit_name( steradian ) == "steradian" );
+        EXPECT( to_unit_name( tesla     ) == "tesla" );
+        EXPECT( to_unit_name( volt      ) == "volt" );
+        EXPECT( to_unit_name( watt      ) == "watt" );
+    },
+
+    "quantity other unit symbols", []
+    {
+// Hz   EXPECT( to_unit_symbol( becquerel ) == "Bq" );
+        EXPECT( to_unit_symbol( coulomb   ) == "C" );
+        EXPECT( to_unit_symbol( farad     ) == "F" );
+// Sv   EXPECT( to_unit_symbol( gray      ) == "Gy" );
+        EXPECT( to_unit_symbol( henry     ) == "H" );
+        EXPECT( to_unit_symbol( hertz     ) == "Hz" );
+        EXPECT( to_unit_symbol( joule     ) == "J" );
+// Cd   EXPECT( to_unit_symbol( lumen     ) == "lm" );
+        EXPECT( to_unit_symbol( lux       ) == "lx" );
+        EXPECT( to_unit_symbol( newton    ) == "N" );
+        EXPECT( to_unit_symbol( ohm       ) == "Ohm" );
+        EXPECT( to_unit_symbol( pascal    ) == "Pa" );
+// []   EXPECT( to_unit_symbol( radian    ) == "rad" );
+        EXPECT( to_unit_symbol( siemens   ) == "S" );
+        EXPECT( to_unit_symbol( sievert   ) == "Sv" );
+// []   EXPECT( to_unit_symbol( steradian ) == "sr" );
+        EXPECT( to_unit_symbol( tesla     ) == "T" );
+        EXPECT( to_unit_symbol( volt      ) == "V" );
+        EXPECT( to_unit_symbol( watt      ) == "W" );
+    },
+
+    "quantity other unit literals", []
+    {
+//      EXPECT( to_unit_symbol( 1_Bq ) == "Bq" );
+        EXPECT( to_unit_symbol( 1_C  ) == "C" );
+        EXPECT( to_unit_symbol( 1_F  ) == "F" );
+//      EXPECT( to_unit_symbol( 1_Gy ) == "Gy" );
+        EXPECT( to_unit_symbol( 1_H  ) == "H" );
+        EXPECT( to_unit_symbol( 1_Hz ) == "Hz" );
+        EXPECT( to_unit_symbol( 1_J  ) == "J" );
+// Cd   EXPECT( to_unit_symbol( 1_lm ) == "lm" );
+        EXPECT( to_unit_symbol( 1_lx ) == "lx" );
+        EXPECT( to_unit_symbol( 1_N  ) == "N" );
+        EXPECT( to_unit_symbol( 1_Ohm) == "Ohm" );
+        EXPECT( to_unit_symbol( 1_Pa ) == "Pa" );
+// []   EXPECT( to_unit_symbol( 1_rad) == "rad" );
+        EXPECT( to_unit_symbol( 1_S  ) == "S" );
+        EXPECT( to_unit_symbol( 1_Sv ) == "Sv" );
+// []   EXPECT( to_unit_symbol( 1_sr ) == "sr" );
+        EXPECT( to_unit_symbol( 1_T  ) == "T" );
+        EXPECT( to_unit_symbol( 1_V  ) == "V" );
+        EXPECT( to_unit_symbol( 1_W  ) == "W" );
+    },
+
 };
 
 int main()
