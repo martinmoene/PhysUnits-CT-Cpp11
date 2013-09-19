@@ -31,7 +31,7 @@
 
 using namespace phys::units;
 
-const double mag = 123;
+const int mag = 123;
 
 #ifdef TEST_COMPILE_TIME
 
@@ -65,7 +65,7 @@ const lest::test construction[] =
 {
     "quantity can be magnitude-constructed", []
     {
-        quantity<mass_d> mass( detail::magnitude_tag, mag );
+        quantity<mass_d, int> mass( detail::magnitude_tag, mag );
 
         EXPECT( mass.magnitude() == mag );
         EXPECT( mass.dimension() == mass_d{} );
@@ -73,8 +73,8 @@ const lest::test construction[] =
 
     "quantity can be copy-constructed", []
     {
-        quantity<mass_d> mass1( detail::magnitude_tag, mag );
-        quantity<mass_d> mass2( mass1 );
+        quantity<mass_d, int> mass1( detail::magnitude_tag, mag );
+        quantity<mass_d, int> mass2( mass1 );
 
         EXPECT( mass2.magnitude() == mag );
         EXPECT( mass2.magnitude() == mass1.magnitude() );
@@ -83,8 +83,8 @@ const lest::test construction[] =
 
     "quantity can be copy-assigned", []
     {
-        quantity<mass_d> mass1( detail::magnitude_tag, mag + 1 );
-        quantity<mass_d> mass2( detail::magnitude_tag, mag + 2 );
+        quantity<mass_d, int> mass1( detail::magnitude_tag, mag + 1 );
+        quantity<mass_d, int> mass2( detail::magnitude_tag, mag + 2 );
 
         mass2 = mass1;
 
@@ -94,8 +94,8 @@ const lest::test construction[] =
 
     "quantity can be conversion copy-constructed", []
     {
-        quantity<mass_d,float > mass1( detail::magnitude_tag, mag );
-        quantity<mass_d,double> mass2( mass1 );
+        quantity<mass_d,int > mass1( detail::magnitude_tag, mag );
+        quantity<mass_d,long> mass2( mass1 );
 
         EXPECT( mass2.magnitude() == mag );
         EXPECT( mass2.magnitude() == mass1.magnitude() );
@@ -105,7 +105,7 @@ const lest::test construction[] =
     "quantity can be conversion copy-assigned", []
     {
         quantity<mass_d,int > mass1( detail::magnitude_tag, mag + 1 );
-        quantity<mass_d,double> mass2( detail::magnitude_tag, mag + 2 );
+        quantity<mass_d,long> mass2( detail::magnitude_tag, mag + 2 );
 
         mass2 = mass1;
 
@@ -318,69 +318,6 @@ const lest::test comparison[] =
     },
 };
 
-const lest::test prefixes[] =
-{
-    "prefixes yocto..yotta", []
-    {
-        EXPECT( e( yocto ) == "1.0e-024" );
-        EXPECT( e( zepto ) == "1.0e-021" );
-        EXPECT( e( atto  ) == "1.0e-018" );
-        EXPECT( e( femto ) == "1.0e-015" );
-        EXPECT( e( pico  ) == "1.0e-012" );
-        EXPECT( e( nano  ) == "1.0e-009" );
-        EXPECT( e( micro ) == "1.0e-006" );
-        EXPECT( e( milli ) == "1.0e-003" );
-        EXPECT( e( kilo  ) == "1.0e+003" );
-        EXPECT( e( mega  ) == "1.0e+006" );
-        EXPECT( e( giga  ) == "1.0e+009" );
-        EXPECT( e( tera  ) == "1.0e+012" );
-        EXPECT( e( peta  ) == "1.0e+015" );
-        EXPECT( e( exa   ) == "1.0e+018" );
-        EXPECT( e( zetta ) == "1.0e+021" );
-        EXPECT( e( yotta ) == "1.0e+024" );
-    },
-};
-
-const lest::test literals[] =
-{
-    "cooked literals of base units", []
-    {
-        EXPECT( s( 1._kg ) == "1.000000 kg" );
-        EXPECT( s( 1._m  ) == "1.000000 m"  );
-        EXPECT( s( 1._s  ) == "1.000000 s"  );
-        EXPECT( s( 1._A  ) == "1.000000 A"  );
-        EXPECT( s( 1._K  ) == "1.000000 K"  );
-        EXPECT( s( 1._cd ) == "1.000000 cd" );
-    },
-
-    "cooked literals prefix variations", []
-    {
-        using namespace phys::units::io::eng;
-
-        EXPECT( to_string( 1._Ys ) == "1.00 Ys" );
-        EXPECT( to_string( 1._Zs ) == "1.00 Zs" );
-        EXPECT( to_string( 1._Es ) == "1.00 Es" );
-        EXPECT( to_string( 1._Ps ) == "1.00 Ps" );
-        EXPECT( to_string( 1._Ts ) == "1.00 Ts" );
-        EXPECT( to_string( 1._Gs ) == "1.00 Gs" );
-        EXPECT( to_string( 1._Ms ) == "1.00 Ms" );
-        EXPECT( to_string( 1._ks ) == "1.00 ks" );
-        EXPECT( to_string( 1._hs ) ==  "100 s"  );
-        EXPECT( to_string( 1._das) == "10.0 s"  );
-        EXPECT( to_string( 1._s  ) == "1.00 s"  );
-        EXPECT( to_string( 1._ds ) ==  "100 ms" );
-        EXPECT( to_string( 1._cs ) == "10.0 ms" );
-        EXPECT( to_string( 1._ms ) == "1.00 ms" );
-        EXPECT( to_string( 1._us ) == "1.00 us" );
-        EXPECT( to_string( 1._ns ) == "1.00 ns" );
-        EXPECT( to_string( 1._ps ) == "1.00 ps" );
-        EXPECT( to_string( 1._fs ) == "1.00 fs" );
-        EXPECT( to_string( 1._as ) == "1.00 as" );
-        EXPECT( to_string( 1._zs ) == "1.00 zs" );
-        EXPECT( to_string( 1._ys ) == "1.00 ys" );
-    },
-};
-
 const lest::test functions[] =
 {
     "quantity power functions", []
@@ -453,15 +390,66 @@ const lest::test functions[] =
     },
 };
 
-const lest::test output[] =
+const lest::test prefixes[] =
 {
-    "quantity output conversions", []
+    "prefixes yocto..yotta", []
     {
+        EXPECT( e( yocto ) == "1.0e-024" );
+        EXPECT( e( zepto ) == "1.0e-021" );
+        EXPECT( e( atto  ) == "1.0e-018" );
+        EXPECT( e( femto ) == "1.0e-015" );
+        EXPECT( e( pico  ) == "1.0e-012" );
+        EXPECT( e( nano  ) == "1.0e-009" );
+        EXPECT( e( micro ) == "1.0e-006" );
+        EXPECT( e( milli ) == "1.0e-003" );
+        EXPECT( e( kilo  ) == "1.0e+003" );
+        EXPECT( e( mega  ) == "1.0e+006" );
+        EXPECT( e( giga  ) == "1.0e+009" );
+        EXPECT( e( tera  ) == "1.0e+012" );
+        EXPECT( e( peta  ) == "1.0e+015" );
+        EXPECT( e( exa   ) == "1.0e+018" );
+        EXPECT( e( zetta ) == "1.0e+021" );
+        EXPECT( e( yotta ) == "1.0e+024" );
+    },
+};
+
+const lest::test literals[] =
+{
+    "cooked literals of base units", []
+    {
+        EXPECT( s( 1._kg ) == "1.000000 kg" );
+        EXPECT( s( 1._m  ) == "1.000000 m"  );
+        EXPECT( s( 1._s  ) == "1.000000 s"  );
+        EXPECT( s( 1._A  ) == "1.000000 A"  );
+        EXPECT( s( 1._K  ) == "1.000000 K"  );
+        EXPECT( s( 1._cd ) == "1.000000 cd" );
     },
 
-    "quantity output exceptions", []
+    "cooked literals prefix variations", []
     {
-        EXPECT_THROWS_AS( prefix( "x" ), prefix_error );
+        using namespace phys::units::io::eng;
+
+        EXPECT( to_string( 1._Ys ) == "1.00 Ys" );
+        EXPECT( to_string( 1._Zs ) == "1.00 Zs" );
+        EXPECT( to_string( 1._Es ) == "1.00 Es" );
+        EXPECT( to_string( 1._Ps ) == "1.00 Ps" );
+        EXPECT( to_string( 1._Ts ) == "1.00 Ts" );
+        EXPECT( to_string( 1._Gs ) == "1.00 Gs" );
+        EXPECT( to_string( 1._Ms ) == "1.00 Ms" );
+        EXPECT( to_string( 1._ks ) == "1.00 ks" );
+        EXPECT( to_string( 1._hs ) ==  "100 s"  );
+        EXPECT( to_string( 1._das) == "10.0 s"  );
+        EXPECT( to_string( 1._s  ) == "1.00 s"  );
+        EXPECT( to_string( 1._ds ) ==  "100 ms" );
+        EXPECT( to_string( 1._cs ) == "10.0 ms" );
+        EXPECT( to_string( 1._ms ) == "1.00 ms" );
+        EXPECT( to_string( 1._us ) == "1.00 us" );
+        EXPECT( to_string( 1._ns ) == "1.00 ns" );
+        EXPECT( to_string( 1._ps ) == "1.00 ps" );
+        EXPECT( to_string( 1._fs ) == "1.00 fs" );
+        EXPECT( to_string( 1._as ) == "1.00 as" );
+        EXPECT( to_string( 1._zs ) == "1.00 zs" );
+        EXPECT( to_string( 1._ys ) == "1.00 ys" );
     },
 };
 
@@ -758,17 +746,31 @@ const lest::test units[] =
     },
 };
 
+// #include "phys/units/quantity_io_symbols.hpp"
+
+const lest::test output[] =
+{
+    "quantity output conversions", []
+    {
+    },
+
+    "quantity output exceptions", []
+    {
+        EXPECT_THROWS_AS( prefix( "x" ), prefix_error );
+    },
+};
+
 int main()
 {
     const int total = 0
     + lest::run( construction )
     + lest::run( arithmetic )
     + lest::run( comparison )
+    + lest::run( functions )
     + lest::run( prefixes )
     + lest::run( literals )
-    + lest::run( functions )
-    + lest::run( output )
     + lest::run( units )
+    + lest::run( output )
     ;
 
     if ( total )
