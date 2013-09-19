@@ -11,7 +11,7 @@ This library is based on the quantity compile-time library by Michael S. Kennist
 - [Definition of terms](#definition-of-terms)
 - [Limitations](#limitations)
 - [Output variations](#output-variations)
-- [Dimensions and literals](#dimensions-and-literals)
+- [Dimensions, units and literals](#dimensions-units-and-literals)
 - [Types and declarations](#types-and-declarations)
 - [Operations and expressions](#operations-and-expressions)
 - [Convenience functions](#convenience-functions)
@@ -149,13 +149,13 @@ J = m+2 kg s-2
 ```
 To get the presentation in base dimensions, you should not include `quantity_io_joule`, `quantity_io_symbols.hpp` or `io.hpp`.
 
-Dimensions and literals
------------------------
+Dimensions, units and literals
+------------------------------
 The seven fundamental SI *dimensions* are length, mass, time interval, electric current, thermodynamic temperature, quantity of substance and luminous intensity. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
 
-For these units [literals](https://en.wikipedia.org/wiki/C%2B%2B11#User-defined_literals) are defined with prefixes ranging from yocto (1e-24L) through yotta (1e+24). For example `1_ns`, `42_km`.
+The library defines dimensions such as `length_d` and `mass_d` and it defines quantities that represent their units as `meter` and `kilogram`. The library also defines [user-defined literal suffixes](https://en.wikipedia.org/wiki/C%2B%2B11#User-defined_literals) with prefixes ranging from yocto (1e-24L) through yotta (1e+24). Thus you can write quantity literals such as `1_ns` and ` 42.195_km`.
 
-To use literals of other units, include the file `quantity_io_symbols.hpp`, or one or more of the following files named quantity_io_ *unit* .hpp where *unit* is becquerel, celsius, coulomb, farad, gray, henry, hertz, joule, lumen, lux, newton, ohm, pascal, radian, siemens, sievert, speed, steradian, tesla, volt, watt, weber.
+To use literals of non-base units, include the file `io.hpp` or `quantity_io_symbols.hpp`, or one or more of the following files named quantity_io_ *unit* .hpp where *unit* is becquerel, celsius, coulomb, farad, gray, henry, hertz, joule, lumen, lux, newton, ohm, pascal, radian, siemens, sievert, speed, steradian, tesla, volt, watt, weber.
 
 Types and declarations
 ----------------------
