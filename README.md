@@ -15,7 +15,7 @@ This library is based on the quantity compile-time library by Michael S. Kennist
 - [Types and declarations](#types-and-declarations)
 - [Operations and expressions](#operations-and-expressions)
 - [Convenience functions](#convenience-functions)
-- [Files](#files)
+- [Include files](#include-files)
 - [Error handling](#error-handling)
 - [Dependencies](#dependencies)
 - [Performance](#performance)
@@ -224,8 +224,8 @@ In namespace `phys::units::io::eng`:
 - `std::string to_string( quantity<...> const & q )` - the quantity represented as string in engineering notation
 - `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in engineering notation
 
-Files
------
+Include files
+-------------
 - io.hpp - include all io-related include files.
 - io_output.hpp - provide basic stream output in base dimensions.
 - io_output_eng.hpp - provide stream output in engineering notation, using metric prefixes.
