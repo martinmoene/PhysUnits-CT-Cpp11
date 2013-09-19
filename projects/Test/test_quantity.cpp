@@ -320,6 +320,14 @@ const lest::test comparison[] =
 
 const lest::test functions[] =
 {
+    "convenience functions", []
+    {
+        constexpr quantity<length_d, int> length = 2 * meter;
+
+        EXPECT( dimension( length ) == length_d{} );
+        EXPECT( magnitude( length ) == 2          );
+    },
+
     "quantity power functions", []
     {
         // general powers
