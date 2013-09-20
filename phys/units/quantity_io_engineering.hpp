@@ -82,12 +82,12 @@ inline bool iszero( double const value )
 
 inline long degree_of( double const value )
 {
-    return iszero( value ) ? 0 : std::lrint( std::floor( std::log10( std::fabs( value ) ) / 3) );
+    return iszero( value ) ? 0 : std::lrint( std::floor( std::log10( std::abs( value ) ) / 3) );
 }
 
 inline int precision( double const scaled, int const digits )
 {
-    return iszero( scaled ) ? digits - 1 : digits - std::log10( std::fabs( scaled ) ) - std::numeric_limits<double>::epsilon();
+    return iszero( scaled ) ? digits - 1 : digits - std::log10( std::abs( scaled ) ) - 2 * std::numeric_limits<double>::epsilon();
 }
 
 inline std::string prefix_or_exponent( bool const exponential, int const degree )
