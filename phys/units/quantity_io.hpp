@@ -222,6 +222,14 @@ inline std::string to_string( long double const value )
 
 namespace io {
 
+/// stream quantity.
+
+template< typename Dims, typename T >
+std::ostream & operator<<( std::ostream & os, quantity<Dims, T> const & q )
+{
+    return os << q.magnitude() << " " << to_unit_symbol( q );
+}
+
 /// quantity string representation.
 
 template< typename Dims, typename T >
@@ -230,14 +238,6 @@ std::string to_string( quantity<Dims, T> const & q )
     std::ostringstream os;
     os << q;
     return os.str();
-}
-
-/// stream quantity.
-
-template< typename Dims, typename T >
-std::ostream & operator<<( std::ostream & os, quantity<Dims, T> const & q )
-{
-    return os << q.magnitude() << " " << to_unit_symbol( q );
 }
 
 } // namespace io
