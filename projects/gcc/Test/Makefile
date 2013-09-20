@@ -70,13 +70,15 @@ CXXFLAGS = -Wall -Wextra -Weffc++ -Wno-missing-braces -std=c++11 -DQUANTITY_USE_
 %.exe: %.o
 	$(CC) -o $*.exe $^
 
-all : test_quantity.exe test_quantity_io.exe
+all: test_quantity.exe test_quantity_io.exe run_tests
+
+test_quantity.exe: test_quantity.o $(OBJS)
+
+test_quantity_io.exe: test_quantity_io.o $(OBJS)
+
+run_tests:
 	./test_quantity.exe
 	./test_quantity_io.exe
-
-test_quantity.exe : test_quantity.o $(OBJS)
-
-test_quantity_io.exe : test_quantity_io.o $(OBJS)
 
 clean:
 	-$(RM) *.bak *.o
