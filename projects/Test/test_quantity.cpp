@@ -13,7 +13,7 @@
  * file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
  */
 
-//#define USE_HAMLEST
+#define USE_HAMLEST
 //#define TEST_COMPILE_TIME
 
 #include "phys/units/quantity.hpp"
@@ -400,24 +400,28 @@ const lest::test functions[] =
 
 const lest::test prefixes[] =
 {
-    "prefixes yocto..yotta", []
+    "prefixes EXPECT_THAT..yotta", []
     {
-        EXPECT( e( yocto ) == "1.0e-024" );
-        EXPECT( e( zepto ) == "1.0e-021" );
-        EXPECT( e( atto  ) == "1.0e-018" );
-        EXPECT( e( femto ) == "1.0e-015" );
-        EXPECT( e( pico  ) == "1.0e-012" );
-        EXPECT( e( nano  ) == "1.0e-009" );
-        EXPECT( e( micro ) == "1.0e-006" );
-        EXPECT( e( milli ) == "1.0e-003" );
-        EXPECT( e( kilo  ) == "1.0e+003" );
-        EXPECT( e( mega  ) == "1.0e+006" );
-        EXPECT( e( giga  ) == "1.0e+009" );
-        EXPECT( e( tera  ) == "1.0e+012" );
-        EXPECT( e( peta  ) == "1.0e+015" );
-        EXPECT( e( exa   ) == "1.0e+018" );
-        EXPECT( e( zetta ) == "1.0e+021" );
-        EXPECT( e( yotta ) == "1.0e+024" );
+        // exponent is two or three digits:
+
+        EXPECT_THAT( e( yocto ), matches_regexp("1\\.0e-0*24" ) );
+        EXPECT_THAT( e( zepto ), matches_regexp("1\\.0e-0*21" ) );
+        EXPECT_THAT( e( atto  ), matches_regexp("1\\.0e-0*18" ) );
+        EXPECT_THAT( e( femto ), matches_regexp("1\\.0e-0*15" ) );
+        EXPECT_THAT( e( pico  ), matches_regexp("1\\.0e-0*12" ) );
+        EXPECT_THAT( e( nano  ), matches_regexp("1\\.0e-0*09" ) );
+        EXPECT_THAT( e( micro ), matches_regexp("1\\.0e-0*06" ) );
+        EXPECT_THAT( e( milli ), matches_regexp("1\\.0e-0*03" ) );
+
+        // "\\+", [+] in regexp fails
+        EXPECT_THAT( e( kilo  ), any_of( { "1.0e+03"_str, "1.0e+003"_str } ) );
+        EXPECT_THAT( e( mega  ), any_of( { "1.0e+06"_str, "1.0e+006"_str } ) );
+        EXPECT_THAT( e( giga  ), any_of( { "1.0e+09"_str, "1.0e+009"_str } ) );
+        EXPECT_THAT( e( tera  ), any_of( { "1.0e+12"_str, "1.0e+012"_str } ) );
+        EXPECT_THAT( e( peta  ), any_of( { "1.0e+15"_str, "1.0e+015"_str } ) );
+        EXPECT_THAT( e( exa   ), any_of( { "1.0e+18"_str, "1.0e+018"_str } ) );
+        EXPECT_THAT( e( zetta ), any_of( { "1.0e+21"_str, "1.0e+021"_str } ) );
+        EXPECT_THAT( e( yotta ), any_of( { "1.0e+24"_str, "1.0e+024"_str } ) );
     },
 };
 

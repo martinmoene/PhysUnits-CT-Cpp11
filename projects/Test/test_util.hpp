@@ -43,6 +43,10 @@ std::string to_string( ::phys::units::quantity<D,T> const & q )
 
 } // namespace lest
 
+std::string operator "" _str( char const * text, std::size_t /*num_chars*/ )
+{
+    return text;
+}
 
 inline std::string
 s( phys::units::Rep v )
