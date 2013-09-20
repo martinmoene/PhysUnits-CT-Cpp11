@@ -41,6 +41,8 @@ Other libraries
 - [PhysUnits-CT](https://github.com/martinmoene/PhysUnits-CT) - C++98 companion of this library.
 - [PhysUnits-RT](https://github.com/martinmoene/PhysUnits-RT) - C++98 Run-time companion of this library.
 - [Boost.Units](http://www.boost.org/doc/libs/1_51_0/libs/units/) - Zero-overhead dimensional analysis and unit/quantity manipulation and conversion in C++.
+- [units_literals
+](https://github.com/acecil/units_literals) - User defined literals for Boost.Units.
 - [unitscpp](http://code.google.com/p/unitscpp/) - A lightweight C++ library for physical calculation with units.
 - Python packages [Numericalunits](http://pypi.python.org/pypi/numericalunits), [Pint](http://pypi.python.org/pypi/Pint) and [Units](http://pypi.python.org/pypi/units), mentioned in [3].
 
