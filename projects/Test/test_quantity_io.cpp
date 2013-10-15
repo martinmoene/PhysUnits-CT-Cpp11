@@ -30,6 +30,7 @@
 #endif
 
 using namespace phys::units;
+using namespace phys::units::literals;
 
 const lest::test output[] =
 {
