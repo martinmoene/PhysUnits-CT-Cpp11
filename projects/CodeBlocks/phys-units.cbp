@@ -80,16 +80,6 @@
 		<Unit filename="../Doxygen/examples/hello.cpp" />
 		<Unit filename="../Doxygen/examples/work.cpp" />
 		<Unit filename="../Doxygen/examples/work.txt" />
-		<Unit filename="../Test/C++03-Tests/Test.cpp" />
-		<Unit filename="../Test/C++03-Tests/TestArithmetic.cpp" />
-		<Unit filename="../Test/C++03-Tests/TestComparison.cpp" />
-		<Unit filename="../Test/C++03-Tests/TestCompile.cpp" />
-		<Unit filename="../Test/C++03-Tests/TestFunction.cpp" />
-		<Unit filename="../Test/C++03-Tests/TestOutput.cpp" />
-		<Unit filename="../Test/C++03-Tests/TestPrefix.cpp" />
-		<Unit filename="../Test/C++03-Tests/TestUnit.cpp" />
-		<Unit filename="../Test/C++03-Tests/TestUtil.hpp" />
-		<Unit filename="../Test/grow.cpp" />
 		<Unit filename="../Test/hamlest.hpp" />
 		<Unit filename="../Test/lest.hpp" />
 		<Unit filename="../Test/test_quantity.cpp" />
