@@ -1,7 +1,7 @@
 PhysUnits-CT-C++11
 ==================
 
-A C++11 header-only library for compile-time dimensional analysis and unit/quantity manipulation and conversion.
+A small C++11 header-only library for compile-time dimensional analysis and unit/quantity manipulation and conversion.
 
 This library is based on the quantity compile-time library by Michael S. Kenniston[1] and expanded and adapted for C++11 by Martin Moene.
 
