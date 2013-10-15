@@ -31,8 +31,11 @@ struct unit_info< electric_conductance_d >
     static std::string symbol() { return "S"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( S, electric_conductance_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_SIEMENS_HPP_INCLUDED

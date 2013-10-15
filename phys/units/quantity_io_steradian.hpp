@@ -28,8 +28,11 @@ struct unit_info< steradian_d >
     static std::string symbol() { return "sr"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( sr, steradian_d )
 
+}
 #endif
 
 }} // namespace phys::units

@@ -31,8 +31,11 @@ struct unit_info< electric_potential_d >
     static std::string symbol() { return "V"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( V, electric_potential_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_VOLT_HPP_INCLUDED

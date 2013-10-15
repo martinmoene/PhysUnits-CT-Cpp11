@@ -31,8 +31,11 @@ struct unit_info< force_d >
     static std::string symbol() { return "N"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( N, force_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_NEWTON_HPP_INCLUDED

@@ -28,8 +28,11 @@ struct unit_info< radian_d >
     static std::string symbol() { return "rad"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( rad, radian_d )
 
+}
 #endif
 
 }} // namespace phys::units

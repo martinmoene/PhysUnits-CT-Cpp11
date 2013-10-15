@@ -31,8 +31,11 @@ struct unit_info< speed_d >
     static std::string symbol() { return "m/s"; }
 };
 
+namespace literals {
+
 //QUANTITY_DEFINE_LITERALS( m/s, speed_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_SPEED_HPP_INCLUDED

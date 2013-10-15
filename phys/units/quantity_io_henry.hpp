@@ -31,8 +31,11 @@ struct unit_info< inductance_d >
     static std::string symbol() { return "H"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( H, inductance_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_HENRY_HPP_INCLUDED

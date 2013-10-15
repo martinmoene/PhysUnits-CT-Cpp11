@@ -31,8 +31,11 @@ struct unit_info< illuminance_d >
     static std::string symbol() { return "lx"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( lx, illuminance_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_LUX_HPP_INCLUDED

@@ -32,8 +32,11 @@ struct unit_info< thermodynamic_temperature_d >
     static std::string symbol() { return "°C"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( oC, thermodynamic_temperature_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_CELSIUS_HPP_INCLUDED

@@ -31,8 +31,11 @@ struct unit_info< pressure_d >
     static std::string symbol() { return "Pa"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( Pa, pressure_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_PASCAL_HPP_INCLUDED

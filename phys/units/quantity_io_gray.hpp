@@ -31,8 +31,11 @@ struct unit_info< absorbed_dose_d >
     static std::string symbol() { return "Gy"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( Gy, absorbed_dose_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_GRAY_HPP_INCLUDED

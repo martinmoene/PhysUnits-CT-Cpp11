@@ -31,8 +31,11 @@ struct unit_info< magnetic_flux_d >
     static std::string symbol() { return "Wb"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( Wb, magnetic_flux_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_WEBER_HPP_INCLUDED

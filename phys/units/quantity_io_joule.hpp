@@ -31,8 +31,11 @@ struct unit_info< energy_d >
     static std::string symbol() { return "J"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( J, energy_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_JOULE_HPP_INCLUDED

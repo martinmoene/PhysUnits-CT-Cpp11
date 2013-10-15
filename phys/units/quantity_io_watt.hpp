@@ -31,8 +31,11 @@ struct unit_info< power_d >
    static std::string symbol() { return "W"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( W, power_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_WATT_HPP_INCLUDED

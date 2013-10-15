@@ -31,8 +31,11 @@ struct unit_info< electric_charge_d >
     static std::string symbol() { return "C"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( C, electric_charge_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_COULOMB_HPP_INCLUDED

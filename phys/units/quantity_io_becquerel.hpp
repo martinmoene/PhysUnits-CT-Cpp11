@@ -31,8 +31,11 @@ struct unit_info< activity_of_a_nuclide_d >
     static std::string symbol() { return "Bq"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( Bq, activity_of_a_nuclide_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_BECQUEREL_HPP_INCLUDED

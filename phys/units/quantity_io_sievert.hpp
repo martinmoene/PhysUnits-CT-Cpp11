@@ -31,8 +31,11 @@ struct unit_info< dose_equivalent_d >
     static std::string symbol() { return "Sv"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( Sv, dose_equivalent_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_SIEVERT_HPP_INCLUDED

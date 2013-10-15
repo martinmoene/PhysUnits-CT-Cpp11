@@ -31,8 +31,11 @@ struct unit_info< frequency_d >
    static std::string symbol() { return "Hz"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( Hz, frequency_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_HERTZ_HPP_INCLUDED

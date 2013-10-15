@@ -31,8 +31,11 @@ struct unit_info< electric_resistance_d >
     static std::string symbol() { return "Ohm"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( Ohm, electric_resistance_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_OHM_HPP_INCLUDED

@@ -31,8 +31,11 @@ struct unit_info< luminous_flux_d >
     static std::string symbol() { return "lm"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( lm, luminous_flux_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_LUMEN_HPP_INCLUDED

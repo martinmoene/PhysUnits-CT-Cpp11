@@ -31,8 +31,11 @@ struct unit_info< capacitance_d >
     static std::string symbol() { return "F"; }
 };
 
+namespace literals {
+
 QUANTITY_DEFINE_LITERALS( F, capacitance_d )
 
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_FARAD_HPP_INCLUDED
