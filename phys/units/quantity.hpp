@@ -943,6 +943,10 @@ constexpr quantity< mass_d                  > tonne        { ton_metric };
 #define QUANTITY_DEFINE_LITERALS( pfx, dim ) \
     QUANTITY_DEFINE_SCALING_LITERALS( pfx, dim, 1 )
 
+/// literals
+
+namespace literals {
+
 QUANTITY_DEFINE_SCALING_LITERALS( g, mass_d, 1e-3 )
 
 QUANTITY_DEFINE_LITERALS( m  , length_d )
@@ -951,6 +955,8 @@ QUANTITY_DEFINE_LITERALS( A  , electric_current_d )
 QUANTITY_DEFINE_LITERALS( K  , thermodynamic_temperature_d )
 QUANTITY_DEFINE_LITERALS( mol, amount_of_substance_d )
 QUANTITY_DEFINE_LITERALS( cd , luminous_intensity_d )
+
+} // namespace literals
 
 }} // namespace phys::units
 

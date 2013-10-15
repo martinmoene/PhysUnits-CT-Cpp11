@@ -30,6 +30,7 @@
 #endif
 
 using namespace phys::units;
+using namespace phys::units::literals;
 
 const int mag = 123;
 
@@ -425,7 +426,7 @@ const lest::test prefixes[] =
     },
 };
 
-const lest::test literals[] =
+const lest::test ud_literals[] =
 {
     "cooked literals of base units", []
     {
@@ -766,7 +767,7 @@ int main()
     + lest::run( comparison )
     + lest::run( functions )
     + lest::run( prefixes )
-    + lest::run( literals )
+    + lest::run( ud_literals )
     + lest::run( units )
     ;
 
