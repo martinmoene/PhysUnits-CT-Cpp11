@@ -5,6 +5,7 @@
 
 using namespace phys::units;
 using namespace phys::units::io;
+using namespace phys::units::literals;
 
 quantity<energy_d>
 work( const quantity<force_d> & F, const quantity<length_d> & dx )

@@ -29,6 +29,7 @@ Hello quantity
 #include "phys/units/quantity.hpp"
 
 using namespace phys::units;
+using namespace phys::units::literals;
 
 int main()
 {
@@ -73,6 +74,7 @@ The following example shows the quantity type in the computation of work from fo
 
 using namespace phys::units;
 using namespace phys::units::io;
+using namespace phys::units::literals;
 
 quantity<energy_d>
 work( const quantity<force_d> & F, const quantity<length_d> & dx )
