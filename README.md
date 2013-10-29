@@ -83,7 +83,7 @@ Include files
 -------------
 - io.hpp - include all io-related include files.
 - io_output.hpp - provide basic stream output in base dimensions.
-- io_output_eng.hpp - provide stream output in engineering notation, using metric prefixes.
+- io_output_eng.hpp - provide stream output in [engineering notation](http://en.wikipedia.org/wiki/Engineering_notation), using [metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix).
 - io_symbols.hpp - include all files quantity_io_ *unit* .hpp
 - other_units.hpp - units that are *not* approved for use with SI.
 - physical_constants.hpp - Planck constant, speed of light etc.
