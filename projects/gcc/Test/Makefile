@@ -1,5 +1,5 @@
 #
-# ./projects/gcc/Test/Makefile.win32.gcc
+# ./projects/gcc/Test/Makefile
 #
 # Created by Martin on 17 September 2013.
 # Copyright 2012 Universiteit Leiden. All rights reserved.
