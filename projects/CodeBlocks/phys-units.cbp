@@ -85,9 +85,11 @@
 		<Unit filename="../Test/test_quantity.cpp" />
 		<Unit filename="../Test/test_quantity_io.cpp" />
 		<Unit filename="../Test/test_util.hpp" />
+		<Unit filename="../Time/time_performance.cpp" />
 		<Unit filename="../gcc/Test/Makefile" />
 		<Unit filename="../gcc/Test/compile.bat" />
 		<Unit filename="../gcc/Test/mk.bat" />
+		<Unit filename="../gcc/Time/compile.bat" />
 		<Extensions>
 			<code_completion />
 			<envvars />
