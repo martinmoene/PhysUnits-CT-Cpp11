@@ -1,5 +1,5 @@
-PhysUnits-CT-C++11
-==================
+PhysUnits C++11 (compile-time)
+==============================
 
 A small C++11 header-only library for compile-time dimensional analysis and unit/quantity manipulation and conversion.
 
