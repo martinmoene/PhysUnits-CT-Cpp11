@@ -8,18 +8,18 @@ This library is based on the quantity compile-time library by Michael S. Kennist
 **Contents**
 - [Hello quantity](#hello-quantity)
 - [Other libraries](#other-libraries)
-- [Definition of terms](#definition-of-terms)
+- [Dependencies](#dependencies)
 - [Limitations](#limitations)
-- [Output variations](#output-variations)
+- [Error handling](#error-handling)
+- [Definition of terms](#definition-of-terms)
 - [Dimensions, units and literals](#dimensions-units-and-literals)
+- [Include files](#include-files)
 - [Types and declarations](#types-and-declarations)
 - [Operations and expressions](#operations-and-expressions)
 - [Convenience functions](#convenience-functions)
-- [Include files](#include-files)
-- [Error handling](#error-handling)
-- [Dependencies](#dependencies)
-- [Performance](#performance)
+- [Output variations](#output-variations)
 - [Reported to work with](#reported-to-work-with)
+- [Performance](#performance)
 - [Ideas for improvement](#ideas-for-improvement)
 - [References](#references)
 
@@ -47,6 +47,20 @@ Other libraries
 - [unitscpp](http://code.google.com/p/unitscpp/) - A lightweight C++ library for physical calculation with units.
 - Python packages [Numericalunits](http://pypi.python.org/pypi/numericalunits), [Pint](http://pypi.python.org/pypi/Pint) and [Units](http://pypi.python.org/pypi/units), mentioned in [3].
 
+Dependencies
+--------------
+This library has no dependencies other than the standard C++ libraries.
+
+Limitations
+-----------
+This library only supports the use of the <em>SI unit system</em>.
+
+This library only supports <em>integral powers</em> of the dimensions.
+
+Error handling
+--------------
+Error handling with respect to mixing incompatible dimensions occurs at compile-time.
+
 Definition of terms
 -------------------
 Adapted from Boost.Units:
@@ -57,11 +71,93 @@ Adapted from Boost.Units:
 - <b>System</b>: A unit system is a collection of base units representing all the measurable entities of interest for a specific problem. For example, the SI unit system defines seven base units : length ([L]) in meters, mass ([M]) in kilograms, time ([T]) in seconds, current ([I]) in amperes, temperature ([theta]) in kelvin, amount ([N]) in moles, and luminous intensity ([J]) in candelas. All measurable entities within the SI system can be represented as products of various integer or rational powers of these seven base units.
 - <b>Quantity</b>: A quantity represents a concrete amount of a unit. Thus, while the meter is the base unit of length in the SI system, 5.5 meters is a quantity of length in that system.
 
-Limitations
------------
-This library only supports the use of the <em>SI unit system</em>.
+Dimensions, units and literals
+------------------------------
+The seven fundamental SI[2] *dimensions* are length, mass, time interval, electric current, thermodynamic temperature, quantity of substance and luminous intensity. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
 
-This library only supports <em>integral powers</em> of the dimensions.
+The library defines dimensions such as `length_d` and `mass_d` and it defines quantities that represent their units as `meter` and `kilogram`. The library also defines [user-defined literal suffixes](https://en.wikipedia.org/wiki/C%2B%2B11#User-defined_literals) with prefixes ranging from yocto (1e-24L) through yotta (1e+24). Thus you can write quantity literals such as `1_ns` and ` 42.195_km`.
+
+To use literals of non-base units, include the file `io.hpp` or io_symbols.hpp`, or one or more of the following files named quantity_io_ *unit* .hpp where *unit* is becquerel, celsius, coulomb, farad, gray, henry, hertz, joule, lumen, lux, newton, ohm, pascal, radian, siemens, sievert, speed, steradian, tesla, volt, watt, weber.
+
+Include files
+-------------
+- io.hpp - include all io-related include files.
+- io_output.hpp - provide basic stream output in base dimensions.
+- io_output_eng.hpp - provide stream output in engineering notation, using metric prefixes.
+- io_symbols.hpp - include all files quantity_io_ *unit* .hpp
+- other_units.hpp - units that are *not* approved for use with SI.
+- physical_constants.hpp - Planck constant, speed of light etc.
+- quantity.hpp - quantity, SI dimensions and units, base unit literals.
+- quantity_io_ *unit* .hpp - name, symbol and literals for *unit*.
+
+Types and declarations
+----------------------
+```C++
+#include "phys/units/quantity.hpp"
+
+using namespace phys::units;
+
+quantity<mass_d> q_rep;           // magnitude has type Rep (PHYS_UNITS_REP_TYPE)
+quantity<mass_d, float> q_float;  // magnitude has type float
+```
+The default <em>representation or value type</em> `Rep` for the magnitude of quantity is `double`. You can change the type for all uses within a translation unit by defining `PHYS_UNITS_REP_TYPE` before inclusion of header quantity.hpp.
+
+Operations and expressions
+--------------------------
+
+- `N` is an integer constant
+- `num` is an int, long, float, double, etc.
+- `quantity1` and `quantity2` have different dimensions
+- quantities with different magnitude types can be mixed
+
+|Operation     |Operand Type(s)            |Result Type |
+|--------------|---------------------------|------------|
+|Construction  |`quantity()`               |`quantity`  |
+|              |`quantity( quantity )`     |`quantity`  |
+|Assignment    |`quantity = quantity`      |`quantity &`|
+|Addition &    |`quantity += quantity`     |`quantity &`|
+| Subtraction  |`quantity -= quantity`     |`quantity &`|
+|              |`+quantity`                |`quantity`  |
+|              |`-quantity`                |`quantity`  |
+|              |`quantity + quantity`      |`quantity`  |
+|              |`quantity - quantity`      |`quantity`  |
+|Multiplication|`quantity *= num`          |`quantity &`|
+|              |`quantity * num`           |`quantity`  |
+|              |`num * quantity`           |`quantity`  |
+|              |`quantity1 * quantity1`    |`quantity2` |
+|              |`quantity1 * quantity2`    |`num` or `quantity3` |
+|Division      |`quantity /= num`          |`quantity &`|
+|              |`quantity / num`           |`quantity`  |
+|              |`num / quantity1`          |`quantity2` |
+|              |`quantity / quantity`      |`num`       |
+|              |`quantity1 / quantity2`    |`quantity3` |
+|Powers        |`nth_power<N>( quantity1 )`|`num` if N=0, `quantity1` if  N=1|
+|              |`square( quantity1 )`      |`quantity2` |
+|              |`cube( quantity1 )`        |`quantity2` |
+|Roots         |`nth_root<N>( quantity1 )` |`quantity2`, iff dimensions of quantity1 are all even multiples of N|
+|              |`sqrt( quantity1 )`        |`quantity2`, iff dimensions of quantity1 are all even multiples of 2|
+|Conversion    |`quantity1.to( quantity2 )`|`num` or `quantity3` (quantity1/quantity2)|
+|Zero          |`quantity.zero()`          |`quantity` with magnitude 0|
+
+Convenience functions
+---------------------
+The following convenience functions are provided.
+
+In namespace `phys::units`:
+- `DX dimension( quantity<DX, ...> const & q )` - the quantity's dimension.
+- `X magnitude( quantity<..., X> const & q )` - the quantity's magnitude.
+- `std::string to_magnitude( quantity<...> const & q )` - the quantity's magnitude represented as string.
+- `std::string to_unit_name( quantity<...> const & q )` - the quantity's unit name, e.g. 'hertz'.
+- `std::string to_unit_symbol( quantity<...> const & q )` - the quantity's unit symbol, e.g. 'Hz'.
+- `std::string to_string( long double const value )` - the value of a long double represented as string.
+
+In namespace `phys::units::io`:
+- `std::string to_string( quantity<...> const & q )` - the quantity represented as string in scientific notation.
+- `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in scientific notation.
+
+In namespace `phys::units::io::eng`:
+- `std::string to_string( quantity<...> const & q )` - the quantity represented as string in engineering notation.
+- `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in engineering notation.
 
 Output variations
 -----------------
@@ -154,101 +250,10 @@ J = m+2 kg s-2
 ```
 To get the presentation in base dimensions, you should not include `quantity_io_joule`, io_symbols.hpp` or `io.hpp`.
 
-Dimensions, units and literals
-------------------------------
-The seven fundamental SI[2] *dimensions* are length, mass, time interval, electric current, thermodynamic temperature, quantity of substance and luminous intensity. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
-
-The library defines dimensions such as `length_d` and `mass_d` and it defines quantities that represent their units as `meter` and `kilogram`. The library also defines [user-defined literal suffixes](https://en.wikipedia.org/wiki/C%2B%2B11#User-defined_literals) with prefixes ranging from yocto (1e-24L) through yotta (1e+24). Thus you can write quantity literals such as `1_ns` and ` 42.195_km`.
-
-To use literals of non-base units, include the file `io.hpp` or io_symbols.hpp`, or one or more of the following files named quantity_io_ *unit* .hpp where *unit* is becquerel, celsius, coulomb, farad, gray, henry, hertz, joule, lumen, lux, newton, ohm, pascal, radian, siemens, sievert, speed, steradian, tesla, volt, watt, weber.
-
-Types and declarations
-----------------------
-```C++
-#include "phys/units/quantity.hpp"
-
-using namespace phys::units;
-
-quantity<mass_d> q_rep;           // magnitude has type Rep (PHYS_UNITS_REP_TYPE)
-quantity<mass_d, float> q_float;  // magnitude has type float
-```
-The default <em>representation or value type</em> `Rep` for the magnitude of quantity is `double`. You can change the type for all uses within a translation unit by defining `PHYS_UNITS_REP_TYPE` before inclusion of header quantity.hpp.
-
-Operations and expressions
---------------------------
-
-- `N` is an integer constant
-- `num` is an int, long, float, double, etc.
-- `quantity1` and `quantity2` have different dimensions
-- quantities with different magnitude types can be mixed
-
-|Operation     |Operand Type(s)            |Result Type |
-|--------------|---------------------------|------------|
-|Construction  |`quantity()`               |`quantity`  |
-|              |`quantity( quantity )`     |`quantity`  |
-|Assignment    |`quantity = quantity`      |`quantity &`|
-|Addition &    |`quantity += quantity`     |`quantity &`|
-| Subtraction  |`quantity -= quantity`     |`quantity &`|
-|              |`+quantity`                |`quantity`  |
-|              |`-quantity`                |`quantity`  |
-|              |`quantity + quantity`      |`quantity`  |
-|              |`quantity - quantity`      |`quantity`  |
-|Multiplication|`quantity *= num`          |`quantity &`|
-|              |`quantity * num`           |`quantity`  |
-|              |`num * quantity`           |`quantity`  |
-|              |`quantity1 * quantity1`    |`quantity2` |
-|              |`quantity1 * quantity2`    |`num` or `quantity3` |
-|Division      |`quantity /= num`          |`quantity &`|
-|              |`quantity / num`           |`quantity`  |
-|              |`num / quantity1`          |`quantity2` |
-|              |`quantity / quantity`      |`num`       |
-|              |`quantity1 / quantity2`    |`quantity3` |
-|Powers        |`nth_power<N>( quantity1 )`|`num` if N=0, `quantity1` if  N=1|
-|              |`square( quantity1 )`      |`quantity2` |
-|              |`cube( quantity1 )`        |`quantity2` |
-|Roots         |`nth_root<N>( quantity1 )` |`quantity2`, iff dimensions of quantity1 are all even multiples of N|
-|              |`sqrt( quantity1 )`        |`quantity2`, iff dimensions of quantity1 are all even multiples of 2|
-|Conversion    |`quantity1.to( quantity2 )`|`num` or `quantity3` (quantity1/quantity2)|
-|Zero          |`quantity.zero()`          |`quantity` with magnitude 0|
-
-Convenience functions
+Reported to work with
 ---------------------
-The following convenience functions are provided.
-
-In namespace `phys::units`:
-- `DX dimension( quantity<DX, ...> const & q )` - the quantity's dimension.
-- `X magnitude( quantity<..., X> const & q )` - the quantity's magnitude.
-- `std::string to_magnitude( quantity<...> const & q )` - the quantity's magnitude represented as string.
-- `std::string to_unit_name( quantity<...> const & q )` - the quantity's unit name, e.g. 'hertz'.
-- `std::string to_unit_symbol( quantity<...> const & q )` - the quantity's unit symbol, e.g. 'Hz'.
-- `std::string to_string( long double const value )` - the value of a long double represented as string.
-
-In namespace `phys::units::io`:
-- `std::string to_string( quantity<...> const & q )` - the quantity represented as string in scientific notation.
-- `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in scientific notation.
-
-In namespace `phys::units::io::eng`:
-- `std::string to_string( quantity<...> const & q )` - the quantity represented as string in engineering notation.
-- `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in engineering notation.
-
-Include files
--------------
-- io.hpp - include all io-related include files.
-- io_output.hpp - provide basic stream output in base dimensions.
-- io_output_eng.hpp - provide stream output in engineering notation, using metric prefixes.
-- io_symbols.hpp - include all files quantity_io_ *unit* .hpp
-- other_units.hpp - units that are *not* approved for use with SI.
-- physical_constants.hpp - Planck constant, speed of light etc.
-- quantity.hpp - quantity, SI dimensions and units, base unit literals.
-- quantity_io_ *unit* .hpp - name, symbol and literals for *unit*.
-
-Error handling
---------------
-Error handling with respect to mixing incompatible dimensions occurs at compile-time.
-
-Dependencies
---------------
-This library has no dependencies other than the standard C++ libraries.
+- GCC 4.8.1
+- Clang 3.2
 
 Performance
 -------------
@@ -263,11 +268,6 @@ Clang 3.2         -O2  :  .     :  . (1.x)
 
 Measured on a AMD Athlon 64 X2 Dual Core Processor 5600+, 64kB L1 Data, 64kB L1 Instruction, 512kB L2, 3.2 GB RAM
 ```
-
-Reported to work with
----------------------
-- GCC 4.8.1
-- Clang 3.2
 
 Ideas for improvement
 -----------------------
