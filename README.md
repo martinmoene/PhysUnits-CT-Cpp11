@@ -257,16 +257,16 @@ Reported to work with
 
 Performance
 -------------
-TBD
+
 ```
 Relative running time (lower is better)
 
 Compiler        Option : double : quantity
 -----------------------+--------+-------------
 GCC 4.8.1         -O2  :  1     :  1
-GCC 4.8.1              :  1     :  7
+GCC 4.8.1         -O0  :  1     :  7
 Clang 3.2         -O2  :  .     :  .
-Clang 3.2              :  .     :  .
+Clang 3.2         -O0  :  .     :  .
 
 Measured on a AMD Athlon 64 X2 Dual Core Processor 5600+, 64kB L1 Data, 64kB L1 Instruction, 512kB L2, 3.2 GB RAM
 ```

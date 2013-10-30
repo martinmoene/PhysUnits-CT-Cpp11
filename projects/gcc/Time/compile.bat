@@ -24,7 +24,7 @@ goto :EOF
 
 :DEFAULT
 call :MSGNONOPT
-call :COMPILE
+call :COMPILE -O0
 goto :EOF
 
 :OPTIMIZE
