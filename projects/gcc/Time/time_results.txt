@@ -1,0 +1,25 @@
+30 October 2013
+
+ELDPC14: AMD Athlon 64 X2 Dual Core Processor 5600+, 64kB L1 Data, 64kB L1 Instruction, 512kB L2, 3.2 GB RAM
+
+prompt>compile.bat
+
+Non-optimized build...
+
+Performance test of quantity library.
+one double work loop =     0.00936667 usec
+one quantity work loop =   0.0638 usec
+one quantity++ work loop = 0.081 usec
+d = -16667.1
+s = -16667.1 m s-1
+
+prompt>compile.bat optimize
+
+Optimized build: This is going to take a while...
+
+Performance test of quantity library.
+one double work loop =     0.0091 usec
+one quantity work loop =   0.00911667 usec
+one quantity++ work loop = 0 usec
+d = -16667.1
+s = -16667.1 m s-1
