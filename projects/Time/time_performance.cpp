@@ -15,6 +15,7 @@
 #include "phys/units/quantity.hpp"
 #include "phys/units/quantity_io.hpp"
 
+#include <iomanip>
 #include <iostream>
 #include <time.h>
 
@@ -78,9 +79,10 @@ quantity< speed_d > do_more_work(
 template< typename T >
 T use( T const & x ) { return x; }
 
-int main()
+int main( int argc, char * argv[] )
 {
-    cout << "Performance test of quantity library." << endl;
+    use( argc );
+    cout << argv[0] << ": Performance test of quantity library." << endl;
 
     clock_t t0 = clock();
 
@@ -101,12 +103,18 @@ int main()
     use( s2 );
 
     const double cps = CLOCKS_PER_SEC;
-    cout << "one double work loop =     " << (t1-t0)/cps/k << " usec" << endl;
-    cout << "one quantity work loop =   " << (t2-t1)/cps/k << " usec " << endl;
-    cout << "one quantity++ work loop = " << (t3-t2)/cps/k << " usec " << endl;
+    const double tdb = (t1-t0)/cps/k;
+    const double tq1 = (t2-t1)/cps/k;
+    const double tq2 = (t3-t2)/cps/k;
 
+    cout << std::setprecision( 3 );
+    cout << "one double work loop     = " << tdb << " usec  (1)" << endl;
+    cout << "one quantity work loop   = " << tq1 << " usec  ("   << tq1/tdb << ")" <<  endl;
+    cout << "one quantity++ work loop = " << tq2 << " usec  ("   << tq2/tdb << ")" << endl;
+
+    cout << std::setprecision( 5 );
     cout << "d = " << d << endl;
-    cout << "s = " << s << endl;
+    cout << "s = " << s << endl << std::endl;
 
     return 0;
 }

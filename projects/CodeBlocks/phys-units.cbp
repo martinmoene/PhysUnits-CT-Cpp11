@@ -89,7 +89,10 @@
 		<Unit filename="../gcc/Test/Makefile" />
 		<Unit filename="../gcc/Test/compile.bat" />
 		<Unit filename="../gcc/Test/mk.bat" />
+		<Unit filename="../gcc/Time/Makefile" />
 		<Unit filename="../gcc/Time/compile.bat" />
+		<Unit filename="../gcc/Time/mk.bat" />
+		<Unit filename="../gcc/Time/time_results.txt" />
 		<Extensions>
 			<code_completion />
 			<envvars />
