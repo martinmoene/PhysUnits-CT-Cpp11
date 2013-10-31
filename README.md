@@ -131,7 +131,7 @@ Operations and expressions
 |              |`num / quantity1`          |`quantity2` |
 |              |`quantity / quantity`      |`num`       |
 |              |`quantity1 / quantity2`    |`quantity3` |
-|Powers        |`nth_power<N>( quantity1 )`|`num` if N=0, `quantity1` if  N=1, quantity2 otherwise|
+|Powers        |`nth_power<N>( quantity1 )`|`num` if N=0, `quantity1` if  N=1, `quantity2` otherwise|
 |              |`square( quantity1 )`      |`quantity2` |
 |              |`cube( quantity1 )`        |`quantity2` |
 |Roots         |`nth_root<N>( quantity1 )` |`quantity2`, iff dimensions of quantity1 are all even multiples of N|
