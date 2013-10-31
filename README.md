@@ -49,7 +49,7 @@ Other libraries
 
 Dependencies
 --------------
-This library has no dependencies other than the standard C++ libraries.
+This library has no dependencies other than the standard C++ library.
 
 Limitations
 -----------
@@ -73,7 +73,7 @@ Adapted from Boost.Units:
 
 Dimensions, units and literals
 ------------------------------
-The seven fundamental SI[2] *dimensions* are length, mass, time interval, electric current, thermodynamic temperature, quantity of substance and luminous intensity. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
+The seven fundamental SI [2] *dimensions* are length, mass, time interval, electric current, thermodynamic temperature, quantity of substance and luminous intensity. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
 
 The library defines dimensions such as `length_d` and `mass_d` and it defines quantities that represent their units as `meter` and `kilogram`. The library also defines [user-defined literal suffixes](https://en.wikipedia.org/wiki/C%2B%2B11#User-defined_literals) with prefixes ranging from yocto (1e-24L) through yotta (1e+24). Thus you can write quantity literals such as `1_ns` and ` 42.195_km`.
 
@@ -131,7 +131,7 @@ Operations and expressions
 |              |`num / quantity1`          |`quantity2` |
 |              |`quantity / quantity`      |`num`       |
 |              |`quantity1 / quantity2`    |`quantity3` |
-|Powers        |`nth_power<N>( quantity1 )`|`num` if N=0, `quantity1` if  N=1|
+|Powers        |`nth_power<N>( quantity1 )`|`num` if N=0, `quantity1` if  N=1, quantity2 otherwise|
 |              |`square( quantity1 )`      |`quantity2` |
 |              |`cube( quantity1 )`        |`quantity2` |
 |Roots         |`nth_root<N>( quantity1 )` |`quantity2`, iff dimensions of quantity1 are all even multiples of N|
