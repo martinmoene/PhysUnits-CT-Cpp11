@@ -299,13 +299,13 @@ public:
 //    /**
 //     * convert to compatible unit, for example: (3._dm).to(meter) gives 0.3;
 //     */
-//    constexpr value_type to( quantity const & x ) {  return *this / x; }
+//    constexpr value_type to( quantity const & x ) const {  return *this / x; }
 
     /**
      * convert to given unit, for example: (3._dm).to(meter) gives 0.3;
      */
     template <typename DX, typename X>
-    constexpr auto to( quantity<DX,X> const & x ) -> detail::Quotient<Dims,DX,T,X>
+    constexpr auto to( quantity<DX,X> const & x ) const -> detail::Quotient<Dims,DX,T,X>
     {
         return *this / x;
     }
@@ -313,12 +313,12 @@ public:
     /**
      * the quantity's magnitude.
      */
-    constexpr value_type magnitude() { return m_value; }
+    constexpr value_type magnitude() const { return m_value; }
 
     /**
      * the quantity's dimensions.
      */
-    constexpr dimension_type dimension() { return dimension_type{}; }
+    constexpr dimension_type dimension() const { return dimension_type{}; }
 
     /**
      * We need a "zero" of each type -- for comparisons, to initialize running
