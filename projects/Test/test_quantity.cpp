@@ -464,6 +464,12 @@ const lest::test ud_literals[] =
         EXPECT( to_string( 1._zs ) == "1.00 zs" );
         EXPECT( to_string( 1._ys ) == "1.00 ys" );
     },
+
+    "cooked literals defects", []
+    {
+        // prefix smaller than 1 with integral type
+        EXPECT( s( 20_mA ) == "0.020000 A" );
+    },
 };
 
 const lest::test units[] =

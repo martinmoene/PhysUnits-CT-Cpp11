@@ -907,11 +907,11 @@ constexpr quantity< mass_d                  > tonne        { ton_metric };
 // these could also have been created with a script.
 
 #define QUANTITY_DEFINE_SCALING_LITERAL( sfx, dim, factor ) \
-    constexpr quantity<dim, unsigned long long> operator"" _ ## sfx(unsigned long long x) \
+    constexpr quantity<dim, long double> operator "" _ ## sfx(unsigned long long x) \
     { \
-        return quantity<dim, unsigned long long>( detail::magnitude_tag, factor * x ); \
+        return quantity<dim, long double>( detail::magnitude_tag, factor * x ); \
     } \
-    constexpr quantity<dim, long double> operator"" _ ## sfx(long double x) \
+    constexpr quantity<dim, long double> operator "" _ ## sfx(long double x) \
     { \
         return quantity<dim, long double>( detail::magnitude_tag, factor * x ); \
     }
