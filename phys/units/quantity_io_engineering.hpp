@@ -102,6 +102,11 @@ inline std::string exponent( int const degree )
     return os.str();
 }
 
+inline std::string bracket( std::string const unit )
+{
+	return std::string::npos != unit.find_first_of( "+- " ) ? "(" + unit + ")" : unit;
+}
+
 } // anonymous namespace
 
 /**
@@ -135,7 +140,7 @@ to_engineering_string( double const value, int const digits = 3, bool exponentia
 
     const std::string space = ( 0 == degree || exponential ) && unit.length() ? " ":"";
 
-    os << std::fixed << (showpos ? std::showpos : std::noshowpos) << std::setprecision( precision(scaled, digits) ) << scaled << factor << space << unit;
+    os << std::fixed << (showpos ? std::showpos : std::noshowpos) << std::setprecision( precision(scaled, digits) ) << scaled << factor << space << bracket( unit );
 
     return os.str();
 }
