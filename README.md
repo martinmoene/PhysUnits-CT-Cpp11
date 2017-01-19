@@ -80,7 +80,7 @@ The seven fundamental SI [2] *dimensions* are length, mass, time interval, elect
 
 The library defines dimensions such as `length_d` and `mass_d` and it defines quantities that represent their units as `meter` and `kilogram`. The library also defines [user-defined literal suffixes](https://en.wikipedia.org/wiki/C%2B%2B11#User-defined_literals) with prefixes ranging from yocto (1e-24L) through yotta (1e+24). Thus you can write quantity literals such as `1_ns` and ` 42.195_km`.
 
-To use literals of non-base units, include the file `io.hpp` or io_symbols.hpp`, or one or more of the following files named quantity_io_ *unit* .hpp where *unit* is becquerel, celsius, coulomb, farad, gray, henry, hertz, joule, lumen, lux, newton, ohm, pascal, radian, siemens, sievert, speed, steradian, tesla, volt, watt, weber.
+To use literals of non-base units, include the file `io.hpp` or `io_symbols.hpp`, or one or more of the following files named quantity_io_ *unit* .hpp where *unit* is becquerel, celsius, coulomb, farad, gray, henry, hertz, joule, lumen, lux, newton, ohm, pascal, radian, siemens, sievert, speed, steradian, tesla, volt, watt, weber.
 
 Include files
 -------------
@@ -251,7 +251,7 @@ The output produced is:
 ```
 J = m+2 kg s-2
 ```
-To get the presentation in base dimensions, you should not include `quantity_io_joule`, io_symbols.hpp` or `io.hpp`.
+To get the presentation in base dimensions, you should not include `quantity_io_joule`, `io_symbols.hpp` or `io.hpp`.
 
 Reported to work with
 ---------------------
