@@ -1,6 +1,8 @@
 PhysUnits C++11 (compile-time)
 ==============================
 
+[![Build Status master](https://img.shields.io/travis/martinmoene/PhysUnits-CT-Cpp11/master.svg?label=master)](https://travis-ci.org/martinmoene/PhysUnits-CT-Cpp11/branches)
+
 A small C++11 header-only library for compile-time dimensional analysis and unit/quantity manipulation and conversion.
 
 This library is based on the quantity compile-time library by Michael S. Kenniston[1] and expanded and adapted for C++11 by Martin Moene.
