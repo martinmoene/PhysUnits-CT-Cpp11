@@ -21,3 +21,6 @@
 
 # Compiled help files
 *.chm
+
+# Compiled executables
+*.exe

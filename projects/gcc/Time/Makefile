@@ -29,10 +29,10 @@ CXXFLAGS = -Wall -Wextra -Weffc++ -std=c++11 -I$(INCDIR)
 all: time_performance_opt.exe time_performance_nonopt.exe run_tests
 
 time_performance_opt.exe: time_performance.cpp $(HEADERS)
-	$(CC) $(CXXFLAGS) -O2 -o time_performance_opt.exe $^
+	$(CC) $(CXXFLAGS) -O2 $< -o $@
 
 time_performance_nonopt.exe: time_performance.cpp $(HEADERS)
-	$(CC) $(CXXFLAGS) -o time_performance_nonopt.exe $^
+	$(CC) $(CXXFLAGS) $< -o $@
 
 run_tests:
 	./time_performance_opt.exe
