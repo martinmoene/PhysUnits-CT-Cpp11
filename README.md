@@ -41,10 +41,15 @@ int main()
 
 Other libraries
 ---------------
+- Search GitHub for [unit dimension language:C++](https://github.com/search?utf8=%E2%9C%93&q=unit+dimension+language%3AC%2B%2B&type=Repositories).
 - [PhysUnits-CT](https://github.com/martinmoene/PhysUnits-CT) - C++98 companion of this library.
 - [PhysUnits-RT](https://github.com/martinmoene/PhysUnits-RT) - C++98 Run-time companion of this library.
-- [units](https://github.com/nholthaus/units) - A compile-time, header-only, dimensional analysis and unit conversion library built on c++14 with no dependencies.
 - [Boost.Units](http://www.boost.org/doc/libs/1_51_0/libs/units/) - Zero-overhead dimensional analysis and unit/quantity manipulation and conversion in C++.
+- [units](https://github.com/nholthaus/units) - A compile-time, header-only, dimensional analysis and unit conversion library built on c++14 with no dependencies. Nic Holthaus.
+- [units](https://github.com/legento/units) - C++ compile time dimensional analysis. Oliver Esser.  
+- [Units](https://github.com/VincentDucharme/Units) - C++ Library for managing values with units. Vincent Ducharme.
+- [DimensionalAnalysis
+](https://github.com/njoy/DimensionalAnalysis) - A compact C++ header-only library providing compile-time dimensional analysis and unit awareness. Austin McCartney.
 - [units_literals
 ](https://github.com/acecil/units_literals) - User defined literals for Boost.Units.
 - [unitscpp](http://code.google.com/p/unitscpp/) - A lightweight C++ library for physical calculation with units.
