@@ -54,6 +54,7 @@ Other libraries
 ](https://github.com/acecil/units_literals) - User defined literals for Boost.Units.
 - [unitscpp](http://code.google.com/p/unitscpp/) - A lightweight C++ library for physical calculation with units.
 - Python packages [Numericalunits](http://pypi.python.org/pypi/numericalunits), [Pint](http://pypi.python.org/pypi/Pint) and [Units](http://pypi.python.org/pypi/units), mentioned in [3].
+- [units](https://github.com/tonypilz/units) - A lightweight compile-time, header-only, dimensional analysis and unit conversion library built on c++11 with no dependencies. Tony Pilz
 
 Dependencies
 --------------
