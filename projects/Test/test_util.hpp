@@ -77,7 +77,7 @@ s( phys::units::quantity<Dims, T> const & q /*, name_symbol const use = name_sym
 
 //    if ( q.dimension() != dimensionless_d )
     {
-        os << " " << to_unit_symbol( q /*, use */ );
+        os << (Dims::is_all_zero ? "":" ") << to_unit_symbol( q /*, use */ );
     }
     return os.str();
 }

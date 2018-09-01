@@ -33,6 +33,12 @@
 #include <cstdlib>
 #include <utility>  // std::declval
 
+// Configuration
+
+#ifndef  PHYS_UNITS_COLLAPSE_TO_REP
+# define PHYS_UNITS_COLLAPSE_TO_REP  1
+#endif
+
 /// namespace phys.
 
 namespace phys {
@@ -108,11 +114,15 @@ struct collapse
     typedef quantity< D, T > type;
 };
 
+#if defined( PHYS_UNITS_COLLAPSE_TO_REP )
+
 template< typename T >
 struct collapse< dimensionless_d, T >
 {
     typedef T type;
 };
+
+#endif
 
 template< typename D, typename T >
 using Collapse = typename collapse<D,T>::type;
@@ -340,7 +350,9 @@ private:
 
     enum { has_dimension = ! Dims::is_all_zero };
 
+#if defined( PHYS_UNITS_COLLAPSE_TO_REP )
     static_assert( has_dimension, "quantity dimensions must not all be zero" );
+#endif
 
 private:
     // friends:

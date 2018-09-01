@@ -16,6 +16,7 @@ This library is based on the quantity compile-time library by Michael S. Kennist
 - [Definition of terms](#definition-of-terms)
 - [Dimensions, units and literals](#dimensions-units-and-literals)
 - [Include files](#include-files)
+- [Configuration](#configuration)  
 - [Types and declarations](#types-and-declarations)
 - [Operations and expressions](#operations-and-expressions)
 - [Convenience functions](#convenience-functions)
@@ -98,6 +99,15 @@ Include files
 - physical_constants.hpp - Planck constant, speed of light etc.
 - quantity.hpp - quantity, SI dimensions and units, base unit literals.
 - quantity_io_ *unit* .hpp - name, symbol and literals for *unit*.
+
+Configuration
+-------------
+-D<b>PHYS_UNITS_REP_TYPE</b>=double  
+Define this to the <em>representation or value type</em> for the magnitude of quantity. Default is `double`.
+You can change the type for all uses within a translation unit by defining `PHYS_UNITS_REP_TYPE` before inclusion of header quantity.hpp.
+
+-D<b>PHYS_UNITS_COLLAPSE_TO_REP</b>=1  
+The library can collapse dimensionless results to the representation type or continue with type `quantity<dimensionless_d>`. Define `PHYS_UNITS_COLLAPSE_TO_REP` to 0 to allow dimensionless quantities. Default is 1.
 
 Types and declarations
 ----------------------

@@ -227,7 +227,7 @@ namespace io {
 template< typename Dims, typename T >
 std::ostream & operator<<( std::ostream & os, quantity<Dims, T> const & q )
 {
-    return os << q.magnitude() << " " << to_unit_symbol( q );
+    return os << q.magnitude() << (Dims::is_all_zero ? "":" ") << to_unit_symbol( q );
 }
 
 /// quantity string representation.
