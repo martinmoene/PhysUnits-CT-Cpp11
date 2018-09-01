@@ -18,6 +18,7 @@
 		<Unit filename="../../.gitattributes" />
 		<Unit filename="../../.gitignore" />
 		<Unit filename="../../.travis.yml" />
+		<Unit filename="../../CMakeLists.txt" />
 		<Unit filename="../../LICENSE_1_0.txt" />
 		<Unit filename="../../License.orig.txt" />
 		<Unit filename="../../README.md" />
