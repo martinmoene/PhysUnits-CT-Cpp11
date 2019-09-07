@@ -752,37 +752,37 @@ constexpr quantity<luminous_intensity_d       > candela { detail::magnitude_tag,
 
 // The standard SI prefixes.
 
-constexpr long double yotta = 1e+24L;
-constexpr long double zetta = 1e+21L;
-constexpr long double   exa = 1e+18L;
-constexpr long double  peta = 1e+15L;
-constexpr long double  tera = 1e+12L;
-constexpr long double  giga = 1e+9L;
-constexpr long double  mega = 1e+6L;
-constexpr long double  kilo = 1e+3L;
-constexpr long double hecto = 1e+2L;
-constexpr long double  deka = 1e+1L;
-constexpr long double  deci = 1e-1L;
-constexpr long double centi = 1e-2L;
-constexpr long double milli = 1e-3L;
-constexpr long double micro = 1e-6L;
-constexpr long double  nano = 1e-9L;
-constexpr long double  pico = 1e-12L;
-constexpr long double femto = 1e-15L;
-constexpr long double  atto = 1e-18L;
-constexpr long double zepto = 1e-21L;
-constexpr long double yocto = 1e-24L;
+constexpr Rep yotta = static_cast<Rep>( 1e+24L );
+constexpr Rep zetta = static_cast<Rep>( 1e+21L );
+constexpr Rep   exa = static_cast<Rep>( 1e+18L );
+constexpr Rep  peta = static_cast<Rep>( 1e+15L );
+constexpr Rep  tera = static_cast<Rep>( 1e+12L );
+constexpr Rep  giga = static_cast<Rep>( 1e+9L );
+constexpr Rep  mega = static_cast<Rep>( 1e+6L );
+constexpr Rep  kilo = static_cast<Rep>( 1e+3L );
+constexpr Rep hecto = static_cast<Rep>( 1e+2L );
+constexpr Rep  deka = static_cast<Rep>( 1e+1L );
+constexpr Rep  deci = static_cast<Rep>( 1e-1L );
+constexpr Rep centi = static_cast<Rep>( 1e-2L );
+constexpr Rep milli = static_cast<Rep>( 1e-3L );
+constexpr Rep micro = static_cast<Rep>( 1e-6L );
+constexpr Rep  nano = static_cast<Rep>( 1e-9L );
+constexpr Rep  pico = static_cast<Rep>( 1e-12L );
+constexpr Rep femto = static_cast<Rep>( 1e-15L );
+constexpr Rep  atto = static_cast<Rep>( 1e-18L );
+constexpr Rep zepto = static_cast<Rep>( 1e-21L );
+constexpr Rep yocto = static_cast<Rep>( 1e-24L );
 
 // Binary prefixes, pending adoption.
 
-constexpr long double kibi = 1024;
-constexpr long double mebi = 1024 * kibi;
-constexpr long double gibi = 1024 * mebi;
-constexpr long double tebi = 1024 * gibi;
-constexpr long double pebi = 1024 * tebi;
-constexpr long double exbi = 1024 * pebi;
-constexpr long double zebi = 1024 * exbi;
-constexpr long double yobi = 1024 * zebi;
+constexpr Rep kibi = static_cast<Rep>( 1024 );
+constexpr Rep mebi = static_cast<Rep>( 1024 * kibi );
+constexpr Rep gibi = static_cast<Rep>( 1024 * mebi );
+constexpr Rep tebi = static_cast<Rep>( 1024 * gibi );
+constexpr Rep pebi = static_cast<Rep>( 1024 * tebi );
+constexpr Rep exbi = static_cast<Rep>( 1024 * pebi );
+constexpr Rep zebi = static_cast<Rep>( 1024 * exbi );
+constexpr Rep yobi = static_cast<Rep>( 1024 * zebi );
 
 // The rest of the standard dimensional types, as specified in SP811.
 
