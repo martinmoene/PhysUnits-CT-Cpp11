@@ -46,6 +46,7 @@ Other libraries
 - [PhysUnits-CT](https://github.com/martinmoene/PhysUnits-CT) - C++98 companion of this library.
 - [PhysUnits-RT](https://github.com/martinmoene/PhysUnits-RT) - C++98 Run-time companion of this library.
 - [Boost.Units](http://www.boost.org/doc/libs/1_51_0/libs/units/) - Zero-overhead dimensional analysis and unit/quantity manipulation and conversion in C++.
+- [SI](https://github.com/bernedom/SI) - A header only C++ library that provides type safety and user defined literal. Dominik Berner.
 - [units](https://github.com/mpusz/units) - A Physical Units Library for C++ providing compile-time dimensional analysis and unit/quantity manipulation. Mateusz Pusz.
 - [units](https://github.com/nholthaus/units) - A compile-time, header-only, dimensional analysis and unit conversion library built on C++14 with no dependencies. Nic Holthaus.
 - [units](https://github.com/tonypilz/units) - A lightweight compile-time, header-only, dimensional analysis and unit conversion library built on C++11 with no dependencies. Tony Pilz.
