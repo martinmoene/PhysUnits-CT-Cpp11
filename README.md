@@ -8,6 +8,7 @@ A small C++11 header-only library for compile-time dimensional analysis and unit
 This library is based on the quantity compile-time library by Michael S. Kenniston[1] and expanded and adapted for C++11 by Martin Moene.
 
 **Contents**
+
 - [Hello quantity](#hello-quantity)
 - [Other libraries](#other-libraries)
 - [Dependencies](#dependencies)
@@ -28,6 +29,7 @@ This library is based on the quantity compile-time library by Michael S. Kennist
 
 Hello quantity
 --------------
+
 ```C++
 #include "phys/units/quantity.hpp"
 
@@ -42,6 +44,7 @@ int main()
 
 Other libraries
 ---------------
+
 - Search GitHub for [unit dimension language:C++](https://github.com/search?utf8=%E2%9C%93&q=unit+dimension+language%3AC%2B%2B&type=Repositories).
 - [PhysUnits-CT](https://github.com/martinmoene/PhysUnits-CT) - C++98 companion of this library.
 - [PhysUnits-RT](https://github.com/martinmoene/PhysUnits-RT) - C++98 Run-time companion of this library.
@@ -62,21 +65,26 @@ Other libraries
 
 Dependencies
 --------------
+
 This library has no dependencies other than the standard C++ library.
 
 Limitations
 -----------
+
 This library only supports the use of the <em>SI unit system</em>.
 
 This library only supports <em>integral powers</em> of the dimensions.
 
 Error handling
 --------------
+
 Error handling with respect to mixing incompatible dimensions occurs at compile-time.
 
 Definition of terms
 -------------------
+
 Adapted from Boost.Units:
+
 - <b>Base dimension</b>: A base dimension is loosely defined as a measurable entity of interest; in conventional dimensional analysis, base dimensions include length ([L]), mass ([M]), time ([T]), etc.. Base dimensions are essentially a tag type and provide no dimensional analysis functionality themselves.
 - <b>Dimension</b>: A collection of zero or more base dimensions, each potentially raised to a different rational power. For example, length = [L]^1, area = [L]^2, velocity = [L]^1/[T]^1, and energy = [M]^1 [L]^2/[T]^2 are all dimensions.
 - <b>Base unit</b>: A base unit represents a specific measure of a dimension. For example, while length is an abstract measure of distance, the meter is a concrete base unit of distance. Conversions are defined using base units. Much like base dimensions, base units are a tag type used solely to define units and do not support dimensional analysis algebra.
@@ -86,6 +94,7 @@ Adapted from Boost.Units:
 
 Dimensions, units and literals
 ------------------------------
+
 The seven fundamental SI [2] *dimensions* are length, mass, time interval, electric current, thermodynamic temperature, quantity of substance and luminous intensity. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
 
 The library defines dimensions such as `length_d` and `mass_d` and it defines quantities that represent their units as `meter` and `kilogram`. The library also defines [user-defined literal suffixes](https://en.wikipedia.org/wiki/C%2B%2B11#User-defined_literals) with prefixes ranging from yocto (1e-24L) through yotta (1e+24). Thus you can write quantity literals such as `1_ns` and ` 42.195_km`.
@@ -94,6 +103,7 @@ To use literals of non-base units, include the file `io.hpp` or `io_symbols.hpp`
 
 Include files
 -------------
+
 - io.hpp - include all io-related include files.
 - io_output.hpp - provide basic stream output in base dimensions.
 - io_output_eng.hpp - provide stream output in [engineering notation](http://en.wikipedia.org/wiki/Engineering_notation), using [metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix).
@@ -105,6 +115,7 @@ Include files
 
 Configuration
 -------------
+
 -D<b>PHYS_UNITS_REP_TYPE</b>=double  
 Define this to the <em>representation or value type</em> for the magnitude of quantity. Default is `double`.
 You can change the type for all uses within a translation unit by defining `PHYS_UNITS_REP_TYPE` before inclusion of header quantity.hpp.
@@ -114,6 +125,7 @@ The library can collapse dimensionless results to the representation type or con
 
 Types and declarations
 ----------------------
+
 ```C++
 #include "phys/units/quantity.hpp"
 
@@ -122,6 +134,7 @@ using namespace phys::units;
 quantity<mass_d> q_rep;           // magnitude has type Rep (PHYS_UNITS_REP_TYPE)
 quantity<mass_d, float> q_float;  // magnitude has type float
 ```
+
 The default <em>representation or value type</em> `Rep` for the magnitude of quantity is `double`. You can change the type for all uses within a translation unit by defining `PHYS_UNITS_REP_TYPE` before inclusion of header quantity.hpp.
 
 Operations and expressions
@@ -163,9 +176,11 @@ Operations and expressions
 
 Convenience functions
 ---------------------
+
 The following convenience functions are provided.
 
 In namespace `phys::units`:
+
 - `DX dimension( quantity<DX, ...> const & q )` - the quantity's dimension.
 - `X magnitude( quantity<..., X> const & q )` - the quantity's magnitude.
 - `std::string to_magnitude( quantity<...> const & q )` - the quantity's magnitude represented as string.
@@ -174,16 +189,20 @@ In namespace `phys::units`:
 - `std::string to_string( long double const value )` - the value of a long double represented as string.
 
 In namespace `phys::units::io`:
+
 - `std::string to_string( quantity<...> const & q )` - the quantity represented as string in scientific notation.
 - `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in scientific notation.
 
 In namespace `phys::units::io::eng`:
+
 - `std::string to_string( quantity<...> const & q )` - the quantity represented as string in engineering notation.
 - `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in engineering notation.
 
 Output variations
 -----------------
+
 The following example shows the quantity type in the computation of work from force and distance and the printing of the result on standard output.
+
 ```C++
 #include <iostream>
 
@@ -214,13 +233,15 @@ int main()
 ```
 
 The output produced is:
-```
+
+```Text
 F  = 2 N
 dx = 2 m
 E  = 4 J
 ```
 
 The following example demonstrates printing in default floating point notation and in [engineering notation](http://en.wikipedia.org/wiki/Engineering_notation), using [metric prefixes](http://en.wikipedia.org/wiki/Metric_prefix).
+
 ```C++
 #include <iostream>
 
@@ -244,14 +265,18 @@ int main()
     }
 }
 ```
+
 The output produced is:
-```
+
+```Text
 R = 4700 Ohm
 R = 4.70 kOhm
 ```
+
 See namespaces `io` and `io::eng` for further information.
 
 Instead of unit names such as J, you can also obtain the unit expressed in base dimensions.
+
 ```C++
 #include <iostream>
 
@@ -266,21 +291,25 @@ int main()
     std::cout << "J = " << joule << std::endl;
 }
 ```
+
 The output produced is:
-```
+
+```Text
 J = m+2 kg s-2
 ```
+
 To get the presentation in base dimensions, you should not include `quantity_io_joule`, `io_symbols.hpp` or `io.hpp`.
 
 Reported to work with
 ---------------------
+
 - GCC 4.8.1
 - Clang 3.2
 
 Performance
 -------------
 
-```
+```Text
 Relative running time (lower is better)
 
 Compiler        Option : double : quantity
@@ -295,10 +324,12 @@ Measured on a AMD Athlon 64 X2 Dual Core Processor 5600+, 64kB L1 Data, 64kB L1 
 
 Ideas for improvement
 -----------------------
+
 Allow to specify a conversion offset between two units, e.g. to make conversion between 'C and K possible (see Boost.Units).
 
 References
 ----------
+
 [1] Michael Kenniston. [The Quantity Library](http://home.xnet.com/~msk/quantity/quantity.html). ([Rationale](http://home.xnet.com/%7Emsk/quantity/quantity.html), Quantity [folder](http://www.xnet.com/%7Emsk/quantity)). 16 July 2001, rev 0.4.
 
 [2] Ambler Thompson and Barry N. Taylor. [Guide for the Use of the International System of Units (SI)](http://physics.nist.gov/cuu/pdf/sp811.pdf). NIST Special Publication 811 2008 Edition.
