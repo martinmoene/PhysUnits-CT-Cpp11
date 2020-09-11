@@ -49,8 +49,8 @@ Other libraries
 - [PhysUnits-CT](https://github.com/martinmoene/PhysUnits-CT) - C++98 companion of this library.
 - [PhysUnits-RT](https://github.com/martinmoene/PhysUnits-RT) - C++98 Run-time companion of this library.
 - [Boost.Units](http://www.boost.org/doc/libs/1_51_0/libs/units/) - Zero-overhead dimensional analysis and unit/quantity manipulation and conversion in C++.
-- [PQS](https://github.com/kwikius/pqs) - A C++ library for modelling physical quantities.
 - [SI](https://github.com/bernedom/SI) - A header only C++ library that provides type safety and user defined literal. Dominik Berner.
+- [PQS](https://github.com/kwikius/pqs) - A C++ library for modelling physical quantities. kwikius.
 - [quan](https://github.com/kwikius/quan-trunk) - C++ library for physical quantities and much more. kwikius.
 - [Quantities](http://www.echem.uni-tuebingen.de/index.shtml/Quantities/quantities.html) - C++ objects with dimensionality and units attached in a way similar to the built-in types float or double. Universität Tübingen.
 - [units](https://github.com/mpusz/units) - A Physical Units Library for C++ providing compile-time dimensional analysis and unit/quantity manipulation. Mateusz Pusz.
