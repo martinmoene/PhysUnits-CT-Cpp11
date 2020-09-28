@@ -30,6 +30,13 @@ struct unit_info< time_interval_d >
    static std::string symbol() { return "s"; }
 };
 
+namespace literals {
+
+QUANTITY_DEFINE_SCALING_LITERALS( min , time_interval_d, 60 )
+QUANTITY_DEFINE_SCALING_LITERALS( hour, time_interval_d, 60 * 60 )
+QUANTITY_DEFINE_SCALING_LITERALS( day , time_interval_d, 24 * 60 * 60 )
+
+}
 }} // namespace phys::units
 
 #endif // PHYS_UNITS_QUANTITY_IO_SECOND_HPP_INCLUDED

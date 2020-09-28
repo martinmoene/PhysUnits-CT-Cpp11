@@ -438,6 +438,13 @@ const lest::test ud_literals[] =
         EXPECT( s( 1._cd ) == "1.000000 cd" );
     },
 
+    "cooked literals duration variations", []
+    {
+        EXPECT( s( 1._min  ) ==    "60.000000 s" );
+        EXPECT( s( 1._hour ) ==  "3600.000000 s" );
+        EXPECT( s( 1._day  ) == "86400.000000 s" );
+    },
+
     "cooked literals prefix variations", []
     {
         using namespace phys::units::io::eng;

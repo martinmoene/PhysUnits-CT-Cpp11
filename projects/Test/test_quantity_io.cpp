@@ -140,6 +140,10 @@ const lest::test output[] =
 
     "quantity other unit literals", []
     {
+        EXPECT( to_unit_symbol( 1_min  ) == "s" );
+        EXPECT( to_unit_symbol( 1_hour ) == "s" );
+        EXPECT( to_unit_symbol( 1_day  ) == "s" );
+
 //      EXPECT( to_unit_symbol( 1_Bq ) == "Bq" );
         EXPECT( to_unit_symbol( 1_C  ) == "C" );
         EXPECT( to_unit_symbol( 1_F  ) == "F" );
