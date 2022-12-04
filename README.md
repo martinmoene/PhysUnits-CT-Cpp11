@@ -64,7 +64,7 @@ Other libraries
 - [units_literals
 ](https://github.com/acecil/units_literals) - User defined literals for Boost.Units.
 - [unitscpp](http://code.google.com/p/unitscpp/) - A lightweight C++ library for physical calculation with units.
-- Python packages [Numericalunits](http://pypi.python.org/pypi/numericalunits), [Pint](http://pypi.python.org/pypi/Pint) and [Units](http://pypi.python.org/pypi/units), mentioned in [3].
+- Python packages [Numericalunits](http://pypi.python.org/pypi/numericalunits), [Pint](http://pypi.python.org/pypi/Pint) and [Units](http://pypi.python.org/pypi/units), mentioned in [4].
 
 Dependencies
 --------------
@@ -337,4 +337,6 @@ References
 
 [2] Ambler Thompson and Barry N. Taylor. [Guide for the Use of the International System of Units (SI)](http://physics.nist.gov/cuu/pdf/sp811.pdf). NIST Special Publication 811 2008 Edition.
 
-[3] Gaston Hillar. [Quantities and Units in Python](http://www.drdobbs.com/jvm/quantities-and-units-in-python/240161101). Dr. Dobb's. 10 September 2013.
+[3] David B. Newell and Eite Tiesinga, Editors. [The International System of Units (SI)](https://doi.org/10.6028/NIST.SP.330-2019). NIST Special Publication 330 2019 Edition.
+
+[4] Gaston Hillar. [Quantities and Units in Python](http://www.drdobbs.com/jvm/quantities-and-units-in-python/240161101). Dr. Dobb's. 10 September 2013.
