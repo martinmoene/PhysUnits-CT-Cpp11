@@ -48,6 +48,7 @@ Other libraries
 - Search GitHub for [unit dimension language:C++](https://github.com/search?utf8=%E2%9C%93&q=unit+dimension+language%3AC%2B%2B&type=Repositories).
 - [PhysUnits-CT](https://github.com/martinmoene/PhysUnits-CT) - C++98 companion of this library.
 - [PhysUnits-RT](https://github.com/martinmoene/PhysUnits-RT) - C++98 Run-time companion of this library.
+- [Au](https://github.com/aurora-opensource/au) - A C++14-compatible physical units library with no dependencies and a single-file delivery option. Emphasis on safety, accessibility, performance, and developer experience. Aurora Open Source.
 - [Boost.Units](http://www.boost.org/doc/libs/1_51_0/libs/units/) - Zero-overhead dimensional analysis and unit/quantity manipulation and conversion in C++.
 - [SI](https://github.com/bernedom/SI) - A header only C++ library that provides type safety and user defined literal. Dominik Berner.
 - [PQS](https://github.com/kwikius/pqs) - A C++ library for modelling physical quantities. kwikius.
