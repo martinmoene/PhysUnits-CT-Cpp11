@@ -148,13 +148,13 @@ struct product
 {
     enum
     {
-        d1 = DX::dim1 + DY::dim1,
-        d2 = DX::dim2 + DY::dim2,
-        d3 = DX::dim3 + DY::dim3,
-        d4 = DX::dim4 + DY::dim4,
-        d5 = DX::dim5 + DY::dim5,
-        d6 = DX::dim6 + DY::dim6,
-        d7 = DX::dim7 + DY::dim7,
+        d1 = static_cast<int>(DX::dim1) + static_cast<int>(DY::dim1),
+        d2 = static_cast<int>(DX::dim2) + static_cast<int>(DY::dim2),
+        d3 = static_cast<int>(DX::dim3) + static_cast<int>(DY::dim3),
+        d4 = static_cast<int>(DX::dim4) + static_cast<int>(DY::dim4),
+        d5 = static_cast<int>(DX::dim5) + static_cast<int>(DY::dim5),
+        d6 = static_cast<int>(DX::dim6) + static_cast<int>(DY::dim6),
+        d7 = static_cast<int>(DX::dim7) + static_cast<int>(DY::dim7),
     };
 
     typedef Collapse< dimensions< d1, d2, d3, d4, d5, d6, d7 >, T > type;
@@ -171,13 +171,13 @@ struct quotient
 {
     enum
     {
-        d1 = DX::dim1 - DY::dim1,
-        d2 = DX::dim2 - DY::dim2,
-        d3 = DX::dim3 - DY::dim3,
-        d4 = DX::dim4 - DY::dim4,
-        d5 = DX::dim5 - DY::dim5,
-        d6 = DX::dim6 - DY::dim6,
-        d7 = DX::dim7 - DY::dim7,
+        d1 = static_cast<int>(DX::dim1) - static_cast<int>(DY::dim1),
+        d2 = static_cast<int>(DX::dim2) - static_cast<int>(DY::dim2),
+        d3 = static_cast<int>(DX::dim3) - static_cast<int>(DY::dim3),
+        d4 = static_cast<int>(DX::dim4) - static_cast<int>(DY::dim4),
+        d5 = static_cast<int>(DX::dim5) - static_cast<int>(DY::dim5),
+        d6 = static_cast<int>(DX::dim6) - static_cast<int>(DY::dim6),
+        d7 = static_cast<int>(DX::dim7) - static_cast<int>(DY::dim7),
     };
 
     typedef Collapse< dimensions< d1, d2, d3, d4, d5, d6, d7 >, T > type;
