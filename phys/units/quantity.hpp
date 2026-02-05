@@ -281,6 +281,12 @@ using Root = typename detail::root< D, N, T >::type;
  */
 constexpr struct magnitude_tag_t{} magnitude_tag{};
 
+template< typename T >
+constexpr long double to_long_double( T value )
+{
+    return static_cast<long double>( value );
+}
+
 } // namespace detail
 
 /**
@@ -930,7 +936,7 @@ constexpr quantity< mass_d                  > tonne        { ton_metric };
 #define QUANTITY_DEFINE_SCALING_LITERAL( sfx, dim, factor ) \
     constexpr quantity<dim, long double> operator""_ ## sfx(unsigned long long x) \
     { \
-        return quantity<dim, long double>( detail::magnitude_tag, factor * x ); \
+        return quantity<dim, long double>( detail::magnitude_tag, factor * detail::to_long_double(x) ); \
     } \
     constexpr quantity<dim, long double> operator""_ ## sfx(long double x) \
     { \
@@ -962,7 +968,7 @@ constexpr quantity< mass_d                  > tonne        { ton_metric };
 
 
 #define QUANTITY_DEFINE_LITERALS( pfx, dim ) \
-    QUANTITY_DEFINE_SCALING_LITERALS( pfx, dim, 1 )
+    QUANTITY_DEFINE_SCALING_LITERALS( pfx, dim, 1.0 )
 
 /// literals
 
