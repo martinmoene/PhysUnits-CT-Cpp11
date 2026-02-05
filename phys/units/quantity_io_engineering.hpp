@@ -31,7 +31,7 @@
 #include <sstream>
 
 /*
- * Note: micro, µ, may not work everywhere, so you can define a glyph yourself:
+ * Note: micro, Âµ, may not work everywhere, so you can define a glyph yourself:
  */
 #ifndef ENG_FORMAT_MICRO_GLYPH
 # define ENG_FORMAT_MICRO_GLYPH "u"
@@ -85,9 +85,14 @@ inline long degree_of( double const value )
     return iszero( value ) ? 0 : std::lrint( std::floor( std::log10( std::abs( value ) ) / 3) );
 }
 
+inline int to_int( double const value )
+{
+    return static_cast<int>( value );
+}
+
 inline int precision( double const scaled, int const digits )
 {
-    return iszero( scaled ) ? digits - 1 : digits - std::log10( std::abs( scaled ) ) - 2 * std::numeric_limits<double>::epsilon();
+    return iszero( scaled ) ? digits - 1 : to_int( digits - std::log10( std::abs( scaled ) ) - 2 * std::numeric_limits<double>::epsilon() );
 }
 
 inline std::string prefix_or_exponent( bool const exponential, int const degree )
