@@ -10,14 +10,13 @@ This library is based on the quantity compile-time library by Michael S. Kennist
 **Contents**
 
 - [Hello quantity](#hello-quantity)
-- [Other libraries](#other-libraries)
 - [Dependencies](#dependencies)
 - [Limitations](#limitations)
 - [Error handling](#error-handling)
 - [Definition of terms](#definition-of-terms)
 - [Dimensions, units and literals](#dimensions-units-and-literals)
 - [Include files](#include-files)
-- [Configuration](#configuration)  
+- [Configuration](#configuration)
 - [Types and declarations](#types-and-declarations)
 - [Operations and expressions](#operations-and-expressions)
 - [Convenience functions](#convenience-functions)
@@ -25,6 +24,8 @@ This library is based on the quantity compile-time library by Michael S. Kennist
 - [Reported to work with](#reported-to-work-with)
 - [Performance](#performance)
 - [Ideas for improvement](#ideas-for-improvement)
+- [C++ standardization](#c-standardization)
+- [Other libraries](#other-libraries)
 - [References](#references)
 
 Hello quantity
@@ -41,31 +42,6 @@ int main()
     quantity<speed_d> speed = 45_km / hour;
 }
 ```
-
-Other libraries
----------------
-
-- Search GitHub for [unit dimension language:C++](https://github.com/search?utf8=%E2%9C%93&q=unit+dimension+language%3AC%2B%2B&type=Repositories).
-- [PhysUnits-CT](https://github.com/martinmoene/PhysUnits-CT) - C++98 companion of this library.
-- [PhysUnits-RT](https://github.com/martinmoene/PhysUnits-RT) - C++98 Run-time companion of this library.
-- [Au](https://github.com/aurora-opensource/au) - A C++14-compatible physical units library with no dependencies and a single-file delivery option. Emphasis on safety, accessibility, performance, and developer experience. Aurora Open Source.
-- [Boost.Units](http://www.boost.org/doc/libs/1_51_0/libs/units/) - Zero-overhead dimensional analysis and unit/quantity manipulation and conversion in C++.
-- [SI](https://github.com/bernedom/SI) - A header only C++ library that provides type safety and user defined literal. Dominik Berner.
-- [PQS](https://github.com/kwikius/pqs) - A C++ library for modelling physical quantities. kwikius.
-- [quan](https://github.com/kwikius/quan-trunk) - C++ library for physical quantities and much more. kwikius.
-- [Quantities](http://www.echem.uni-tuebingen.de/index.shtml/Quantities/quantities.html) - C++ objects with dimensionality and units attached in a way similar to the built-in types float or double. Universität Tübingen.
-- [unlib](https://github.com/gitsbi/unlib) - A light-weight, header-only, dependency-free, C++14 library for ISO units. sbi.
-- [units](https://github.com/mpusz/units) - A Physical Units Library for C++ providing compile-time dimensional analysis and unit/quantity manipulation. Mateusz Pusz.
-- [units](https://github.com/nholthaus/units) - A compile-time, header-only, dimensional analysis and unit conversion library built on C++14 with no dependencies. Nic Holthaus.
-- [units](https://github.com/tonypilz/units) - A lightweight compile-time, header-only, dimensional analysis and unit conversion library built on C++11 with no dependencies. Tony Pilz.
-- [units](https://github.com/legento/units) - C++ compile time dimensional analysis. Oliver Esser.  
-- [Units](https://github.com/VincentDucharme/Units) - C++ Library for managing values with units. Vincent Ducharme.
-- [DimensionalAnalysis
-](https://github.com/njoy/DimensionalAnalysis) - A compact C++ header-only library providing compile-time dimensional analysis and unit awareness. Austin McCartney.
-- [units_literals
-](https://github.com/acecil/units_literals) - User defined literals for Boost.Units.
-- [unitscpp](http://code.google.com/p/unitscpp/) - A lightweight C++ library for physical calculation with units.
-- Python packages [Numericalunits](http://pypi.python.org/pypi/numericalunits), [Pint](http://pypi.python.org/pypi/Pint) and [Units](http://pypi.python.org/pypi/units), mentioned in [4].
 
 Dependencies
 --------------
@@ -330,6 +306,36 @@ Ideas for improvement
 -----------------------
 
 Allow to specify a conversion offset between two units, e.g. to make conversion between 'C and K possible (see Boost.Units).
+
+C++ standardization
+-------------------
+
+- [P3045 - Quantities and units library](http://wg21.link/p3045).
+
+Other libraries
+---------------
+
+- Search GitHub for [unit dimension language:C++](https://github.com/search?utf8=%E2%9C%93&q=unit+dimension+language%3AC%2B%2B&type=Repositories).
+- [PhysUnits-CT](https://github.com/martinmoene/PhysUnits-CT) - C++98 companion of this library.
+- [PhysUnits-RT](https://github.com/martinmoene/PhysUnits-RT) - C++98 Run-time companion of this library.
+- [Au](https://github.com/aurora-opensource/au) - A C++14-compatible physical units library with no dependencies and a single-file delivery option. Emphasis on safety, accessibility, performance, and developer experience. Aurora Open Source.
+- [Boost.Units](http://www.boost.org/doc/libs/1_51_0/libs/units/) - Zero-overhead dimensional analysis and unit/quantity manipulation and conversion in C++.
+- [SI](https://github.com/bernedom/SI) - A header only C++ library that provides type safety and user defined literal. Dominik Berner.
+- [PQS](https://github.com/kwikius/pqs) - A C++ library for modelling physical quantities. kwikius.
+- [quan](https://github.com/kwikius/quan-trunk) - C++ library for physical quantities and much more. kwikius.
+- [Quantities](http://www.echem.uni-tuebingen.de/index.shtml/Quantities/quantities.html) - C++ objects with dimensionality and units attached in a way similar to the built-in types float or double. Universität Tübingen.
+- [unlib](https://github.com/gitsbi/unlib) - A light-weight, header-only, dependency-free, C++14 library for ISO units. sbi.
+- [units](https://github.com/mpusz/units) - A Physical Units Library for C++ providing compile-time dimensional analysis and unit/quantity manipulation. Mateusz Pusz.
+- [units](https://github.com/nholthaus/units) - A compile-time, header-only, dimensional analysis and unit conversion library built on C++14 with no dependencies. Nic Holthaus.
+- [units](https://github.com/tonypilz/units) - A lightweight compile-time, header-only, dimensional analysis and unit conversion library built on C++11 with no dependencies. Tony Pilz.
+- [units](https://github.com/legento/units) - C++ compile time dimensional analysis. Oliver Esser.  
+- [Units](https://github.com/VincentDucharme/Units) - C++ Library for managing values with units. Vincent Ducharme.
+- [DimensionalAnalysis
+](https://github.com/njoy/DimensionalAnalysis) - A compact C++ header-only library providing compile-time dimensional analysis and unit awareness. Austin McCartney.
+- [units_literals
+](https://github.com/acecil/units_literals) - User defined literals for Boost.Units.
+- [unitscpp](http://code.google.com/p/unitscpp/) - A lightweight C++ library for physical calculation with units.
+- Python packages [Numericalunits](http://pypi.python.org/pypi/numericalunits), [Pint](http://pypi.python.org/pypi/Pint) and [Units](http://pypi.python.org/pypi/units), mentioned in [4].
 
 References
 ----------
