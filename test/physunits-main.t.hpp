@@ -52,7 +52,7 @@ extern lest::tests & specification() bit_ATTRIBUTE_EXT_VIS;
 
 // define to_string(dimensions<>) before inclusion of lest.hpp:
 
-namespace lest {
+namespace std {
 
 template< int D1, int D2, int D3, int D4, int D5, int D6, int D7>
 std::string to_string( ::phys::units::dimensions<D1,D2,D3,D4,D5,D6,D7> const & /*dim*/ )
@@ -84,7 +84,7 @@ std::ostream & operator<<( std::ostream & os, ::phys::units::quantity<Dims, T> c
     return os << to_string( q );
 }
 
-} // namespace lest
+} // namespace std
 
 inline std::string
 operator"" _str( char const * text, std::size_t /*num_chars*/ )
