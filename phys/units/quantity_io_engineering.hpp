@@ -62,13 +62,25 @@ char const * const prefixes[/*exp*/][2][9] =
     },
 };
 
+template< typename T >
+inline constexpr int to_int( T const value )
+{
+    return static_cast<int>( value );
+}
+
+template< typename T >
+inline constexpr double to_double( T const value )
+{
+    return static_cast<double>( value );
+}
+
 template<typename T, size_t N>
 constexpr size_t dimenson_of( T(&)[N] )
 {
     return N;
 }
 
-constexpr int prefix_count = dimenson_of( prefixes[false][false]  );
+constexpr int prefix_count = to_int( dimenson_of( prefixes[false][false] ) );
 
 inline int sign( int const value )
 {
@@ -79,18 +91,6 @@ template< typename T >
 inline bool iszero( T const value )
 {
     return FP_ZERO == std::fpclassify( value );
-}
-
-template< typename T >
-inline int to_int( T const value )
-{
-    return static_cast<int>( value );
-}
-
-template< typename T >
-inline double to_double( T const value )
-{
-    return static_cast<double>( value );
 }
 
 template< typename T >
