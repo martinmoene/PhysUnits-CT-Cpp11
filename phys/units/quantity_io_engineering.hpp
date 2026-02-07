@@ -80,14 +80,14 @@ inline bool iszero( double const value )
     return FP_ZERO == std::fpclassify( value );
 }
 
-inline long degree_of( double const value )
-{
-    return iszero( value ) ? 0 : std::lrint( std::floor( std::log10( std::abs( value ) ) / 3) );
-}
-
 inline int to_int( double const value )
 {
     return static_cast<int>( value );
+}
+
+inline int degree_of( double const value )
+{
+    return iszero( value ) ? 0 : to_int( std::lrint( std::floor( std::log10( std::abs( value ) ) / 3) ) );
 }
 
 inline int precision( double const scaled, int const digits )
