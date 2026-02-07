@@ -8,6 +8,7 @@
 
 // #define USE_HAMLEST
 // #define TEST_COMPILE_TIME
+// #define PHYS_UNITS_COLLAPSE_TO_REP  0
 
 #include "physunits-main.t.hpp"
 
@@ -26,22 +27,32 @@ const int mag = 123;
 
 #ifdef TEST_COMPILE_TIME
 
-CASE("quantity cannot be dimensionless")
+#if PHYS_UNITS_COLLAPSE_TO_REP
+
+CASE("quantity: cannot be dimensionless")
 {
     constexpr quantity<dimensionless_d> dimensionless_quantity( detail::magnitude_tag, 1.23 );
 }
 
-CASE("quantity can be default-constructed (non-initialized)")
+#else // PHYS_UNITS_COLLAPSE_TO_REP
+
+CASE("quantity: can be dimensionless")
+{
+    constexpr quantity<dimensionless_d> dimensionless_quantity( detail::magnitude_tag, 1.23 );
+}
+#endif // PHYS_UNITS_COLLAPSE_TO_REP
+
+CASE("quantity: can be default-constructed (non-initialized)")
 {
     quantity<mass_d> mass;
 }
 
-CASE("quantity cannot be constructed from scalar")
+CASE("quantity: cannot be constructed from scalar")
 {
     quantity<mass_d> mass = mag;
 }
 
-CASE("quantity cannot be copy-constructed from different dimension")
+CASE("quantity: cannot be copy-constructed from different dimension")
 {
     quantity<mass_d  > mass( detail::magnitude_tag, mag );
     quantity<length_d> length( mass );
