@@ -127,7 +127,7 @@ constexpr quantity< length_d >               light_year         { Rep( 9.46073e+
 
 constexpr quantity< magnetic_flux_d >        maxwell            { Rep( 1e-8L ) * weber };
 constexpr quantity< electric_conductance_d > mho                { siemens };
-constexpr quantity< length_d >               micron             { micro * meter };
+constexpr quantity< length_d >               micron             { Rep( micro ) * meter };
 constexpr quantity< length_d >               mil                { Rep( 2.54e-5L ) * meter };
 constexpr Rep                                mil_angle          { Rep( 5.625e-2L ) * degree_angle };
 constexpr quantity< area_d >                 mil_circular       { Rep( 5.067075e-10L ) * square( meter ) };
