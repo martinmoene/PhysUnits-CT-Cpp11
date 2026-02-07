@@ -80,7 +80,8 @@ inline bool iszero( double const value )
     return FP_ZERO == std::fpclassify( value );
 }
 
-inline int to_int( double const value )
+template< typename T >
+inline int to_int( T const value )
 {
     return static_cast<int>( value );
 }
