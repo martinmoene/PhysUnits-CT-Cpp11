@@ -75,7 +75,8 @@ inline int sign( int const value )
     return value == 0 ? +1 : value / std::abs( value );
 }
 
-inline bool iszero( double const value )
+template< typename T >
+inline bool iszero( T const value )
 {
     return FP_ZERO == std::fpclassify( value );
 }
@@ -86,14 +87,22 @@ inline int to_int( T const value )
     return static_cast<int>( value );
 }
 
-inline int degree_of( double const value )
+template< typename T >
+inline double to_double( T const value )
 {
-    return iszero( value ) ? 0 : to_int( std::lrint( std::floor( std::log10( std::abs( value ) ) / 3) ) );
+    return static_cast<double>( value );
 }
 
-inline int precision( double const scaled, int const digits )
+template< typename T >
+inline int degree_of( T const value )
 {
-    return iszero( scaled ) ? digits - 1 : to_int( digits - std::log10( std::abs( scaled ) ) - 2 * std::numeric_limits<double>::epsilon() );
+    return iszero( value ) ? 0 : to_int( std::lrint( std::floor( std::log10( std::abs( to_double(value) ) ) / 3) ) );
+}
+
+template< typename T >
+inline int precision( T const scaled, int const digits )
+{
+    return iszero( scaled ) ? digits - 1 : to_int( digits - std::log10( std::abs( to_double(scaled) ) ) - 2 * std::numeric_limits<double>::epsilon() );
 }
 
 inline std::string prefix_or_exponent( bool const exponential, int const degree )
@@ -118,8 +127,9 @@ inline std::string bracket( std::string const unit )
 /**
  * convert real number to prefixed or exponential notation, optionally followed by a unit.
  */
+template< typename T >
 inline std::string
-to_engineering_string( double const value, int const digits = 3, bool exponential = false, bool const showpos = false, std::string const unit = "" )
+to_engineering_string( T const value, int const digits = 3, bool exponential = false, bool const showpos = false, std::string const unit = "" )
 {
     using namespace detail;
 
@@ -142,7 +152,7 @@ to_engineering_string( double const value, int const digits = 3, bool exponentia
 
     std::ostringstream os;
 
-    const double scaled = value * std::pow( 1000.0, -degree );
+    const T scaled = value * std::pow( 1000.0, -degree );
 
     const std::string space = ( 0 == degree || exponential ) && unit.length() ? " ":"";
 
