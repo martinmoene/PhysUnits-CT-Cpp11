@@ -160,12 +160,13 @@ endfunction()
 if( NOT HAS_STD_FLAGS )
     make_target( ${PROGRAM}.t "" )
 else()
+    # C++98 not supported for PhysUnits-CT-Cpp11:
     # unconditionally add C++98 variant as MSVC has no option for it:
-    if( HAS_CPP98_FLAG )
-        make_target( ${PROGRAM}-cpp98.t 98 )
-    else()
-        make_target( ${PROGRAM}-cpp98.t "" )
-    endif()
+    # if( HAS_CPP98_FLAG )
+    #     make_target( ${PROGRAM}-cpp98.t 98 )
+    # else()
+    #     make_target( ${PROGRAM}-cpp98.t "" )
+    # endif()
 
     if( HAS_CPP11_FLAG )
         make_target( ${PROGRAM}-cpp11.t 11 )
@@ -194,8 +195,9 @@ else()
 endif()
 
 if( HAS_STD_FLAGS )
+    # C++98 not supported for PhysUnits-CT-Cpp11:
     # unconditionally add C++98 variant for MSVC:
-    add_test(     NAME test-cpp98     COMMAND ${PROGRAM}-cpp98.t )
+    # add_test(     NAME test-cpp98     COMMAND ${PROGRAM}-cpp98.t )
 
     if( HAS_CPP11_FLAG )
         add_test( NAME test-cpp11     COMMAND ${PROGRAM}-cpp11.t )
