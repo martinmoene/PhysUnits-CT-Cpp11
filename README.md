@@ -1,5 +1,4 @@
-PhysUnits C++11 (compile-time)
-==============================
+# PhysUnits C++11 (compile-time)
 
 [![Language](https://img.shields.io/badge/language-C++-blue.svg)](https://isocpp.org/) [![Standard](https://img.shields.io/badge/c%2B%2B-11-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization) [![License](https://img.shields.io/badge/license-BSL-blue.svg)](https://opensource.org/licenses/BSL-1.0) [![Build Status](https://github.com/martinmoene/PhysUnits-CT-Cpp11/actions/workflows/ci.yml/badge.svg)](https://github.com/martinmoene/PhysUnits-CT-Cpp11/actions/workflows/ci.yml) [![Version](https://badge.fury.io/gh/martinmoene%2FPhysUnits-CT-Cpp11.svg)](https://github.com/martinmoene/PhysUnits-CT-Cpp11/releases) [![download](https://img.shields.io/badge/latest%20version%20%20-download-blue.svg)](https://github.com/martinmoene/PhysUnits-CT-Cpp11/archive/master.zip) [![hunter](https://img.shields.io/badge/hunter-PhysUnits-blue.svg)](https://docs.hunter.sh/en/latest/packages/pkg/PhysUnits.html)
 
@@ -27,9 +26,9 @@ This library is based on the quantity compile-time library by Michael S. Kennist
 - [C++ standardization](#c-standardization)
 - [Other libraries](#other-libraries)
 - [References](#references)
+- [Appendix](#appendix)
 
-Hello quantity
---------------
+## Hello quantity
 
 ```C++
 #include "phys/units/quantity.hpp"
@@ -43,25 +42,21 @@ int main()
 }
 ```
 
-Dependencies
---------------
+## Dependencies
 
 This library has no dependencies other than the standard C++ library.
 
-Limitations
------------
+## Limitations
 
 This library only supports the use of the <em>SI unit system</em>.
 
 This library only supports <em>integral powers</em> of the dimensions.
 
-Error handling
---------------
+## Error handling
 
 Error handling with respect to mixing incompatible dimensions occurs at compile-time.
 
-Definition of terms
--------------------
+## Definition of terms
 
 Adapted from Boost.Units:
 
@@ -72,8 +67,7 @@ Adapted from Boost.Units:
 - <b>System</b>: A unit system is a collection of base units representing all the measurable entities of interest for a specific problem. For example, the SI unit system defines seven base units : length ([L]) in meters, mass ([M]) in kilograms, time ([T]) in seconds, current ([I]) in amperes, temperature ([theta]) in kelvin, amount ([N]) in moles, and luminous intensity ([J]) in candelas. All measurable entities within the SI system can be represented as products of various integer or rational powers of these seven base units.
 - <b>Quantity</b>: A quantity represents a concrete amount of a unit. Thus, while the meter is the base unit of length in the SI system, 5.5 meters is a quantity of length in that system.
 
-Dimensions, units and literals
-------------------------------
+## Dimensions, units and literals
 
 The seven fundamental SI [2] *dimensions* are length, mass, time interval, electric current, thermodynamic temperature, quantity of substance and luminous intensity. The base *units* are meter (m), kilogram (kg), second (s), ampere (A), mole (mol) and candela (cd).
 
@@ -81,8 +75,7 @@ The library defines dimensions such as `length_d` and `mass_d` and it defines qu
 
 To use literals of non-base units, include the file `io.hpp` or `io_symbols.hpp`, or one or more of the following files named quantity_io_ *unit* .hpp where *unit* is becquerel, celsius, coulomb, farad, gray, henry, hertz, joule, lumen, lux, newton, ohm, pascal, radian, siemens, sievert, speed, steradian, tesla, volt, watt, weber.
 
-Include files
--------------
+## Include files
 
 - io.hpp - include all io-related include files.
 - io_output.hpp - provide basic stream output in base dimensions.
@@ -93,8 +86,7 @@ Include files
 - quantity.hpp - quantity, SI dimensions and units, base unit literals.
 - quantity_io_ *unit* .hpp - name, symbol and literals for *unit*.
 
-Configuration
--------------
+## Configuration
 
 -D<b>PHYS_UNITS_REP_TYPE</b>=double  
 Define this to the <em>representation or value type</em> for the magnitude of quantity. Default is `double`.
@@ -103,8 +95,7 @@ You can change the type for all uses within a translation unit by defining `PHYS
 -D<b>PHYS_UNITS_COLLAPSE_TO_REP</b>=1  
 The library can collapse dimensionless results to the representation type or continue with type `quantity<dimensionless_d>`. Define `PHYS_UNITS_COLLAPSE_TO_REP` to 0 to allow dimensionless quantities. Default is 1.
 
-Types and declarations
-----------------------
+## Types and declarations
 
 ```C++
 #include "phys/units/quantity.hpp"
@@ -117,8 +108,7 @@ quantity<mass_d, float> q_float;  // magnitude has type float
 
 The default <em>representation or value type</em> `Rep` for the magnitude of quantity is `double`. You can change the type for all uses within a translation unit by defining `PHYS_UNITS_REP_TYPE` before inclusion of header quantity.hpp.
 
-Operations and expressions
---------------------------
+## Operations and expressions
 
 - `N` is an integer constant
 - `num` is an int, long, float, double, etc.
@@ -154,8 +144,7 @@ Operations and expressions
 |Conversion    |`quantity1.to( quantity2 )`|`num` or `quantity3` (quantity1/quantity2)|
 |Zero          |`quantity.zero()`          |`quantity` with magnitude 0|
 
-Convenience functions
----------------------
+## Convenience functions
 
 The following convenience functions are provided.
 
@@ -178,8 +167,7 @@ In namespace `phys::units::io::eng`:
 - `std::string to_string( quantity<...> const & q )` - the quantity represented as string in engineering notation.
 - `std::ostream & operator<<( std::ostream & os, quantity<...> const & q )` - output the quantity to a stream in engineering notation.
 
-Output variations
------------------
+## Output variations
 
 The following example shows the quantity type in the computation of work from force and distance and the printing of the result on standard output.
 
@@ -280,14 +268,12 @@ J = m+2 kg s-2
 
 To get the presentation in base dimensions, you should not include `quantity_io_joule`, `io_symbols.hpp` or `io.hpp`.
 
-Reported to work with
----------------------
+## Reported to work with
 
 - GCC 4.8.1
 - Clang 3.2
 
-Performance
--------------
+## Performance
 
 ```Text
 Relative running time (lower is better)
@@ -302,18 +288,15 @@ Clang 3.2         -O2  :  .     :  .
 Measured on a AMD Athlon 64 X2 Dual Core Processor 5600+, 64kB L1 Data, 64kB L1 Instruction, 512kB L2, 3.2 GB RAM
 ```
 
-Ideas for improvement
------------------------
+## Ideas for improvement
 
 Allow to specify a conversion offset between two units, e.g. to make conversion between 'C and K possible (see Boost.Units).
 
-C++ standardization
--------------------
+## C++ standardization
 
 - [P3045 - Quantities and units library](http://wg21.link/p3045).
 
-Other libraries
----------------
+## Other libraries
 
 - Search GitHub for [unit dimension language:C++](https://github.com/search?utf8=%E2%9C%93&q=unit+dimension+language%3AC%2B%2B&type=Repositories).
 - [PhysUnits-CT](https://github.com/martinmoene/PhysUnits-CT) - C++98 companion of this library.
@@ -337,8 +320,7 @@ Other libraries
 - [unitscpp](http://code.google.com/p/unitscpp/) - A lightweight C++ library for physical calculation with units.
 - Python packages [Numericalunits](http://pypi.python.org/pypi/numericalunits), [Pint](http://pypi.python.org/pypi/Pint) and [Units](http://pypi.python.org/pypi/units), mentioned in [4].
 
-References
-----------
+## References
 
 [1] Michael Kenniston. [The Quantity Library](http://home.xnet.com/~msk/quantity/quantity.html). ([Rationale](http://home.xnet.com/%7Emsk/quantity/quantity.html), Quantity [folder](http://www.xnet.com/%7Emsk/quantity)). 16 July 2001, rev 0.4.
 
@@ -347,3 +329,56 @@ References
 [3] David B. Newell and Eite Tiesinga, Editors. [The International System of Units (SI)](https://doi.org/10.6028/NIST.SP.330-2019). NIST Special Publication 330 2019 Edition.
 
 [4] Gaston Hillar. [Quantities and Units in Python](http://www.drdobbs.com/jvm/quantities-and-units-in-python/240161101). Dr. Dobb's. 10 September 2013.
+
+## Appendix
+
+The [test program](test/physunits.t.cpp) provides information on the compiler, the C++ language and library capabilities and the tests performed.
+
+### A.1 Compile-time information
+
+The version of *PhysUnits* is available via tag `[.version]`. The following tags are available for information on the compiler and on the C++ standard library used: `[.compiler]`, `[.stdc++]`, `[.stdlanguage]` and `[.stdlibrary]`.
+
+### A.2 PhysUnits test specification
+
+<details>
+<summary>click to expand</summary>
+<p>
+
+```Text
+quantity: Can be magnitude-constructed
+quantity: Can be copy-constructed
+quantity: Can be copy-assigned
+quantity: Can be conversion copy-constructed
+quantity: Can be conversion copy-assigned
+quantity: Arithmetic: construction
+quantity: Arithmetic: assignment
+quantity: Arithmetic: addition
+quantity: Arithmetic: subtraction
+quantity: Arithmetic: multiplication
+quantity: Arithmetic: division
+quantity: Comparison: quantities compare equal
+quantity: Comparison: quantities compare unequal
+quantity: Comparison: quantities compare less-than
+quantity: Comparison: quantities compare less-equal
+quantity: Comparison: quantities compare greater-than
+quantity: Comparison: quantities compare greater-equal
+quantity: Comparison: quantities compare correctly (extensive)
+quantity: Functions: convenience functions
+quantity: Functions: power functions
+quantity: Functions: root functions
+quantity: Functions: various functions
+quantity: Functions: function exceptions
+quantity: Prefixes: EXPECT_THAT..yotta
+quantity: cooked literals of base units
+quantity: cooked literals duration variations
+quantity: cooked literals prefix variations
+quantity: cooked literals defects
+quantity: base units
+quantity: the rest of the standard dimensional types, as specified in SP811
+quantity: the derived SI units, as specified in SP811
+quantity: the rest of the units approved for use with SI, as specified in SP811
+quantity: other units
+```
+
+</p>
+</details>
