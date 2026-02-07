@@ -23,9 +23,9 @@ table = (
         , r'\W{2,4}VERSION\W+([0-9]+\.[0-9]+\.[0-9]+)\W*$'
         , '    VERSION {major}.{minor}.{patch}' )
 
-    , ( 'CMakeLists.txt'
-        , r'set\W+phys_units_version\W+"([0-9]+\.[0-9]+\.[0-9]+)"\W+$'
-        , 'set( phys_units_version "{major}.{minor}.{patch}" )\n' )
+    # , ( 'CMakeLists.txt'
+    #     , r'set\W+PhysUnits\W+"([0-9]+\.[0-9]+\.[0-9]+)"\W+$'
+    #     , 'set( PhysUnits "{major}.{minor}.{patch}" )\n' )
 
 #    , ( 'example/cmake-pkg/CMakeLists.txt'
 #        , r'set\W+phys_units_version\W+"([0-9]+\.[0-9]+(\.[0-9]+)?)"\W+$'
