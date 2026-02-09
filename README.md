@@ -345,39 +345,36 @@ The version of *PhysUnits* is available via tag `[.version]`. The following tags
 <p>
 
 ```Text
-quantity: Can be magnitude-constructed
-quantity: Can be copy-constructed
-quantity: Can be copy-assigned
-quantity: Can be conversion copy-constructed
-quantity: Can be conversion copy-assigned
-quantity: Arithmetic: construction
-quantity: Arithmetic: assignment
-quantity: Arithmetic: addition
-quantity: Arithmetic: subtraction
-quantity: Arithmetic: multiplication
-quantity: Arithmetic: division
-quantity: Comparison: quantities compare equal
-quantity: Comparison: quantities compare unequal
-quantity: Comparison: quantities compare less-than
-quantity: Comparison: quantities compare less-equal
-quantity: Comparison: quantities compare greater-than
-quantity: Comparison: quantities compare greater-equal
-quantity: Comparison: quantities compare correctly (extensive)
-quantity: Functions: convenience functions
-quantity: Functions: power functions
-quantity: Functions: root functions
-quantity: Functions: various functions
-quantity: Functions: function exceptions
-quantity: Prefixes: EXPECT_THAT..yotta
-quantity: cooked literals of base units
-quantity: cooked literals duration variations
-quantity: cooked literals prefix variations
-quantity: cooked literals defects
-quantity: base units
-quantity: the rest of the standard dimensional types, as specified in SP811
-quantity: the derived SI units, as specified in SP811
-quantity: the rest of the units approved for use with SI, as specified in SP811
-quantity: other units
+quantity: Can be magnitude-constructed [construction]
+quantity: Can be copy-constructed [construction]
+quantity: Can be conversion copy-constructed [construction]
+quantity: Can be copy-assigned [assignment]
+quantity: Can be conversion copy-assigned [assignment]
+quantity: Can add [arithmetic]
+quantity: Can subtract [arithmetic]
+quantity: Can multiply [arithmetic]
+quantity: Can divide [arithmetic]
+quantity: Can compare equal [comparison]
+quantity: Can compare unequal [comparison]
+quantity: Can compare less-than [comparison]
+quantity: Can compare less-equal [comparison]
+quantity: Can compare greater-than [comparison]
+quantity: Can compare greater-equal [comparison]
+quantity: Can compare correctly (extensive) [comparison]
+quantity: Provides convenience functions: dimension(), magnitude() [function]
+quantity: Provides power functions: nth_power<N>() [function]
+quantity: Provides root functions: nth_root<N>() [function]
+quantity: Provides various functions: abs() [function]
+quantity: Provides prefixes: yotto..yotta [prefix]
+quantity: Provides cooked literals of base units: _kg, _m, _s, _A, _K, _cd [literal]
+quantity: Provides cooked literals for duration variations: _min, _hour, _day [literal]
+quantity: Provides cooked literals prefix variations: _y.._Y [literal]
+quantity: Provides cooked literals: defects: _mA [literal]
+quantity: Provides base units: meter..candela [units]
+quantity: Provides the rest of the standard dimensional types as specified in SP811: absorbed_dose_d..wave_number_d [units]
+quantity: Provides the derived SI units as specified in SP811: radian..sievert [units]
+quantity: Provides the rest of the units approved for use with SI as specified in SP811: angstrom..tonne [units]
+quantity: Provides yet other units: abampere..year_tropical [units]
 ```
 
 </p>

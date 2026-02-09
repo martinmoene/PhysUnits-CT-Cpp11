@@ -29,33 +29,43 @@ const int mag = 123;
 
 #if PHYS_UNITS_COLLAPSE_TO_REP
 
-CASE("quantity: cannot be dimensionless")
+CASE("quantity: Cannot be dimensionless" " [compile-time][quantity]")
 {
     constexpr quantity<dimensionless_d> dimensionless_quantity( detail::magnitude_tag, 1.23 );
 }
 
 #else // PHYS_UNITS_COLLAPSE_TO_REP
 
-CASE("quantity: can be dimensionless")
+CASE("quantity: Can be dimensionless" " [compile-time][quantity]")
 {
     constexpr quantity<dimensionless_d> dimensionless_quantity( detail::magnitude_tag, 1.23 );
 }
 #endif // PHYS_UNITS_COLLAPSE_TO_REP
 
-CASE("quantity: can be default-constructed (non-initialized)")
+CASE("quantity: Can be default-constructed (non-initialized)" " [compile-time][quantity]")
 {
     quantity<mass_d> mass;
 }
 
-CASE("quantity: cannot be constructed from scalar")
+CASE("quantity: Cannot be constructed from scalar" " [compile-time][quantity]")
 {
     quantity<mass_d> mass = mag;
 }
 
-CASE("quantity: cannot be copy-constructed from different dimension")
+CASE("quantity: Cannot be copy-constructed from different dimension" " [compile-time][dimension]")
 {
     quantity<mass_d  > mass( detail::magnitude_tag, mag );
     quantity<length_d> length( mass );
+}
+
+CASE("quantity: quantity must be dimensionless when used in cast (regardless destination)" " [compile-time][dimension]")
+{
+    double d = meter;
+}
+
+CASE("quantity: dimension powers must be even multiples" " [compile-time][function]")
+{
+    nth_root<2>( meter * meter / second );
 }
 
 #else // TEST_COMPILE_TIME
@@ -64,7 +74,7 @@ CASE("quantity: cannot be copy-constructed from different dimension")
 // Construction:
 //
 
-CASE("quantity: Can be magnitude-constructed")
+CASE("quantity: Can be magnitude-constructed" " [construction]")
 {
     quantity<mass_d, int> mass( detail::magnitude_tag, mag );
 
@@ -72,7 +82,7 @@ CASE("quantity: Can be magnitude-constructed")
     EXPECT( mass.dimension() == mass_d{} );
 }
 
-CASE("quantity: Can be copy-constructed")
+CASE("quantity: Can be copy-constructed" " [construction]")
 {
     quantity<mass_d, int> mass1( detail::magnitude_tag, mag );
     quantity<mass_d, int> mass2( mass1 );
@@ -82,7 +92,17 @@ CASE("quantity: Can be copy-constructed")
     EXPECT( mass2.dimension() == mass1.dimension() );
 }
 
-CASE("quantity: Can be copy-assigned")
+CASE("quantity: Can be conversion copy-constructed" " [construction]")
+{
+    quantity<mass_d,int > mass1( detail::magnitude_tag, mag );
+    quantity<mass_d,long> mass2( mass1 );
+
+    EXPECT( mass2.magnitude() == mag );
+    EXPECT( mass2.magnitude() == mass1.magnitude() );
+    EXPECT( mass2.dimension() == mass1.dimension() );
+}
+
+CASE("quantity: Can be copy-assigned" " [assignment]")
 {
     quantity<mass_d, int> mass1( detail::magnitude_tag, mag + 1 );
     quantity<mass_d, int> mass2( detail::magnitude_tag, mag + 2 );
@@ -93,17 +113,7 @@ CASE("quantity: Can be copy-assigned")
     EXPECT( mass2.dimension() == mass1.dimension() );
 }
 
-CASE("quantity: Can be conversion copy-constructed")
-{
-    quantity<mass_d,int > mass1( detail::magnitude_tag, mag );
-    quantity<mass_d,long> mass2( mass1 );
-
-    EXPECT( mass2.magnitude() == mag );
-    EXPECT( mass2.magnitude() == mass1.magnitude() );
-    EXPECT( mass2.dimension() == mass1.dimension() );
-}
-
-CASE("quantity: Can be conversion copy-assigned")
+CASE("quantity: Can be conversion copy-assigned" " [assignment]")
 {
     quantity<mass_d,int > mass1( detail::magnitude_tag, mag + 1 );
     quantity<mass_d,long> mass2( detail::magnitude_tag, mag + 2 );
@@ -121,20 +131,22 @@ CASE("quantity: Can be conversion copy-assigned")
 quantity<area_d> a1;
 quantity<area_d> a2( meter * meter );
 
-CASE("quantity: Arithmetic: construction")
+#if 0
+CASE("quantity: Can be copy-constructed" " [construction]")
 {
     EXPECT( s( a2 ) == "1.000000 m+2" );
 }
 
-CASE("quantity: Arithmetic: assignment")
+CASE("quantity: assignment" " [assignment]")
 {
     a1 = 3 * meter * meter;
     a2 = 4 * meter * meter;
     EXPECT( s( a1 ) == "3.000000 m+2" );
     EXPECT( s( a2 ) == "4.000000 m+2" );
 }
+#endif
 
-CASE("quantity: Arithmetic: addition")
+CASE("quantity: Can add" " [arithmetic]")
 {
     a1 = 5 * meter * meter;
     a2 = 6 * meter * meter;
@@ -143,7 +155,7 @@ CASE("quantity: Arithmetic: addition")
     EXPECT( s( a1 + a2 ) == "17.000000 m+2" );
 }
 
-CASE("quantity: Arithmetic: subtraction")
+CASE("quantity: Can subtract" " [arithmetic]")
 {
     a1 = 9 * meter * meter;
     a2 = 7 * meter * meter;
@@ -154,7 +166,7 @@ CASE("quantity: Arithmetic: subtraction")
     EXPECT( s( a2 - a1 ) ==  "5.000000 m+2" );
 }
 
-CASE("quantity: Arithmetic: multiplication")
+CASE("quantity: Can multiply" " [arithmetic]")
 {
     quantity<speed_d >  s1( 8 * meter / second );
     quantity<speed_d >  s2( 20 * meter / second );
@@ -168,7 +180,7 @@ CASE("quantity: Arithmetic: multiplication")
     EXPECT( s(  5 * s1  ) ==  "80.000000 m s-1"   );
 }
 
-CASE("quantity: Arithmetic: division")
+CASE("quantity: Can divide" " [arithmetic]")
 {
     quantity<speed_d        > s2( 20 * meter / second );
     quantity<time_interval_d>  t(  5 * second );
@@ -187,40 +199,40 @@ CASE("quantity: Arithmetic: division")
 
 constexpr quantity<length_d> meter2 = 2 * meter;
 
-CASE("quantity: Comparison: quantities compare equal")
+CASE("quantity: Can compare equal" " [comparison]")
 {
     EXPECT( meter == meter );
 }
 
-CASE("quantity: Comparison: quantities compare unequal")
+CASE("quantity: Can compare unequal" " [comparison]")
 {
     EXPECT( meter  != meter2 );
     EXPECT( meter2 != meter  );
 }
 
-CASE("quantity: Comparison: quantities compare less-than")
+CASE("quantity: Can compare less-than" " [comparison]")
 {
     EXPECT( meter < meter2 );
 }
 
-CASE("quantity: Comparison: quantities compare less-equal")
+CASE("quantity: Can compare less-equal" " [comparison]")
 {
     EXPECT( meter <= meter  );
     EXPECT( meter <= meter2 );
 }
 
-CASE("quantity: Comparison: quantities compare greater-than")
+CASE("quantity: Can compare greater-than" " [comparison]")
 {
     EXPECT( meter2 > meter );
 }
 
-CASE("quantity: Comparison: quantities compare greater-equal")
+CASE("quantity: Can compare greater-equal" " [comparison]")
 {
     EXPECT( meter  >= meter );
     EXPECT( meter2 >= meter );
 }
 
-CASE("quantity: Comparison: quantities compare correctly (extensive)")
+CASE("quantity: Can compare correctly (extensive)" " [comparison]")
 {
     constexpr quantity<power_d> neg2( -2 * watt );
     constexpr quantity<power_d> neg1( -1 * watt );
@@ -330,7 +342,7 @@ int to_int( T value )
     return static_cast<int>(value);
 }
 
-CASE("quantity: Functions: convenience functions")
+CASE("quantity: Provides convenience functions: dimension(), magnitude()" " [function]")
 {
     constexpr quantity<length_d> length = 2 * meter;
 
@@ -338,7 +350,7 @@ CASE("quantity: Functions: convenience functions")
     EXPECT( to_int(magnitude( length )) == 2          );
 }
 
-CASE("quantity: Functions: power functions")
+CASE("quantity: Provides power functions: nth_power<N>()" " [function]")
 {
     // general powers
 
@@ -359,7 +371,7 @@ CASE("quantity: Functions: power functions")
     EXPECT( s( cube(   f1 ) ) == "8.000000 m+3 kg+3 s-6" );
 }
 
-CASE("quantity: Functions: root functions")
+CASE("quantity: Provides root functions: nth_root<N>()" " [function]")
 {
     // general roots
 
@@ -387,7 +399,7 @@ CASE("quantity: Functions: root functions")
     EXPECT( s( sqrt( freq * thing ) ) == "15.000000 s-1 A" );
 }
 
-CASE("quantity: Functions: various functions")
+CASE("quantity: Provides various functions: abs()" " [function]")
 {
     quantity<length_d> m( meter );
     // abs
@@ -396,22 +408,11 @@ CASE("quantity: Functions: various functions")
     EXPECT( s( abs( -m ) ) == "1.000000 m" );
 }
 
-CASE("quantity: Functions: function exceptions")
-{
-// dimension powers must be even mutiples:
-// uncomment next line for compile-time error:
-//    nth_root<2>( meter * meter / second );
-
-// quantity must be dimensionless when used in cast (regardless destination):
-// uncomment next line for compile-time error:
-//    double d = meter;
-}
-
 //
 // Prefixes, yocto..yotta:
 //
 
-CASE("quantity: Prefixes: EXPECT_THAT..yotta")
+CASE("quantity: Provides prefixes: yotto..yotta" " [prefix]")
 {
 #if 0 // Requires matcher
 
@@ -444,7 +445,7 @@ CASE("quantity: Prefixes: EXPECT_THAT..yotta")
 // User-defined literals:
 //
 
-CASE("quantity: cooked literals of base units")
+CASE("quantity: Provides cooked literals of base units: _kg, _m, _s, _A, _K, _cd" " [literal]")
 {
     EXPECT( s( 1._kg ) == "1.000000 kg" );
     EXPECT( s( 1._m  ) == "1.000000 m"  );
@@ -454,14 +455,14 @@ CASE("quantity: cooked literals of base units")
     EXPECT( s( 1._cd ) == "1.000000 cd" );
 }
 
-CASE("quantity: cooked literals duration variations")
+CASE("quantity: Provides cooked literals for duration variations: _min, _hour, _day" " [literal]")
 {
     EXPECT( s( 1._min  ) ==    "60.000000 s" );
     EXPECT( s( 1._hour ) ==  "3600.000000 s" );
     EXPECT( s( 1._day  ) == "86400.000000 s" );
 }
 
-CASE("quantity: cooked literals prefix variations")
+CASE("quantity: Provides cooked literals prefix variations: _y.._Y" " [literal]")
 {
     using namespace phys::units::io::eng;
 
@@ -488,7 +489,7 @@ CASE("quantity: cooked literals prefix variations")
     EXPECT( to_string( 1._ys ) == "1.00 ys" );
 }
 
-CASE("quantity: cooked literals defects")
+CASE("quantity: Provides cooked literals: defects: _mA" " [literal]")
 {
     // prefix smaller than 1 with integral type
     EXPECT( s( 20_mA ) == "0.020000 A" );
@@ -498,7 +499,7 @@ CASE("quantity: cooked literals defects")
 // Base units:
 //
 
-CASE("quantity: base units")
+CASE("quantity: Provides base units: meter..candela" " [units]")
 {
     EXPECT( s( meter    ) == "1.000000 m" );
     EXPECT( s( metre    ) == "1.000000 m" );
@@ -514,7 +515,7 @@ CASE("quantity: base units")
 // Rest of units as specified in SP811:
 //
 
-CASE("quantity: the rest of the standard dimensional types, as specified in SP811")
+CASE("quantity: Provides the rest of the standard dimensional types as specified in SP811: absorbed_dose_d..wave_number_d" " [units]")
 {
     EXPECT( s( quantity< absorbed_dose_d >::zero() ) == "0.000000 m+2 s-2" );
     EXPECT( s( quantity< absorbed_dose_rate_d >::zero() ) == "0.000000 m+2 s-3" );
@@ -588,7 +589,7 @@ CASE("quantity: the rest of the standard dimensional types, as specified in SP81
 // Derived SI units as specified in SP811:
 //
 
-CASE("quantity: the derived SI units, as specified in SP811")
+CASE("quantity: Provides the derived SI units as specified in SP811: radian..sievert" " [units]")
 {
     EXPECT( s( radian ) == "1.000000" );
     EXPECT( s( steradian ) == "1.000000" );
@@ -619,7 +620,7 @@ CASE("quantity: the derived SI units, as specified in SP811")
 // Rest of units approved with SI as specified in SP811:
 //
 
-CASE("quantity: the rest of the units approved for use with SI, as specified in SP811")
+CASE("quantity: Provides the rest of the units approved for use with SI as specified in SP811: angstrom..tonne" " [units]")
 {
     EXPECT( s( 1e+10 * angstrom ) == "1.000000 m" );
     EXPECT( s( are ) == "100.000000 m+2" );
@@ -649,7 +650,7 @@ CASE("quantity: the rest of the units approved for use with SI, as specified in 
 // Other units:
 //
 
-CASE("quantity: other units")
+CASE("quantity: Provides yet other units: abampere..year_tropical" " [units]")
 {
     EXPECT( s( abampere ) == "10.000000 A" );
     EXPECT( s( abcoulomb ) == "10.000000 s A" );
