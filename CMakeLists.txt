@@ -8,7 +8,7 @@
 cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 
 project(
-  PhysUnits    VERSION 1.3.0
+  PhysUnits    VERSION 1.4.0
   LANGUAGES    C CXX
 )
 

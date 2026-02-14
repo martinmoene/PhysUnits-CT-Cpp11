@@ -30,7 +30,7 @@
 #define PHYS_UNITS_QUANTITY_HPP_INCLUDED
 
 #define phys_units_MAJOR  1
-#define phys_units_MINOR  3
+#define phys_units_MINOR  4
 #define phys_units_PATCH  0
 
 #define phys_units_VERSION  physunits_STRINGIFY(phys_units_MAJOR) "." physunits_STRINGIFY(phys_units_MINOR) "." physunits_STRINGIFY(phys_units_PATCH)
