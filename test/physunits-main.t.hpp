@@ -101,8 +101,9 @@ s( phys::units::Rep v )
     return os.str();
 }
 
+template< typename T >
 inline std::string
-e( phys::units::Rep v )
+e( T v )
 {
     std::ostringstream os;
     os.setf( std::ios::scientific, std::ios::floatfield );

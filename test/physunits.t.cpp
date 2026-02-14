@@ -13,6 +13,7 @@
 #include "physunits-main.t.hpp"
 
 #include <iostream>
+#include <regex>
 
 #ifndef  physunits_COMPILE_TIME_TEST
 # define physunits_COMPILE_TIME_TEST  0
@@ -414,31 +415,23 @@ CASE("quantity: Provides various functions: abs()" " [function]")
 
 CASE("quantity: Provides prefixes: yotto..yotta" " [prefix]")
 {
-#if 0 // Requires matcher
-
-    // exponent is two or three digits:
-
-    EXPECT_THAT( e( yocto ), matches_regexp("1\\.0e-0*24" ) );
-    EXPECT_THAT( e( zepto ), matches_regexp("1\\.0e-0*21" ) );
-    EXPECT_THAT( e( atto  ), matches_regexp("1\\.0e-0*18" ) );
-    EXPECT_THAT( e( femto ), matches_regexp("1\\.0e-0*15" ) );
-    EXPECT_THAT( e( pico  ), matches_regexp("1\\.0e-0*12" ) );
-    EXPECT_THAT( e( nano  ), matches_regexp("1\\.0e-0*09" ) );
-    EXPECT_THAT( e( micro ), matches_regexp("1\\.0e-0*06" ) );
-    EXPECT_THAT( e( milli ), matches_regexp("1\\.0e-0*03" ) );
-
-    // "\\+", [+] in regexp fails
-    EXPECT_THAT( e( kilo  ), any_of( { "1.0e+03"_str, "1.0e+003"_str } ) );
-    EXPECT_THAT( e( mega  ), any_of( { "1.0e+06"_str, "1.0e+006"_str } ) );
-    EXPECT_THAT( e( giga  ), any_of( { "1.0e+09"_str, "1.0e+009"_str } ) );
-    EXPECT_THAT( e( tera  ), any_of( { "1.0e+12"_str, "1.0e+012"_str } ) );
-    EXPECT_THAT( e( peta  ), any_of( { "1.0e+15"_str, "1.0e+015"_str } ) );
-    EXPECT_THAT( e( exa   ), any_of( { "1.0e+18"_str, "1.0e+018"_str } ) );
-    EXPECT_THAT( e( zetta ), any_of( { "1.0e+21"_str, "1.0e+021"_str } ) );
-    EXPECT_THAT( e( yotta ), any_of( { "1.0e+24"_str, "1.0e+024"_str } ) );
-#else
-    EXPECT( !!"EXPECT_THAT() with matcher not available (no hamlest/hamcrest matchers)." "TODO" );
-#endif
+    EXPECT( std::regex_match( e( yocto ), std::regex("1\\.0e-0*24") ) );
+    EXPECT( std::regex_match( e( zepto ), std::regex("1\\.0e-0*21" ) ) );
+    EXPECT( std::regex_match( e( atto  ), std::regex("1\\.0e-0*18" ) ) );
+    EXPECT( std::regex_match( e( femto ), std::regex("1\\.0e-0*15" ) ) );
+    EXPECT( std::regex_match( e( pico  ), std::regex("1\\.0e-0*12" ) ) );
+    EXPECT( std::regex_match( e( nano  ), std::regex("1\\.0e-0*09" ) ) );
+    EXPECT( std::regex_match( e( micro ), std::regex("1\\.0e-0*06" ) ) );
+    EXPECT( std::regex_match( e( milli ), std::regex("1\\.0e-0*03" ) ) );
+    
+    EXPECT( std::regex_match( e( kilo  ), std::regex( "1\\.0e\\+00?3" ) ) );
+    EXPECT( std::regex_match( e( mega  ), std::regex( "1\\.0e\\+00?6" ) ) );
+    EXPECT( std::regex_match( e( giga  ), std::regex( "1\\.0e\\+00?9" ) ) );
+    EXPECT( std::regex_match( e( tera  ), std::regex( "1\\.0e\\+0?12" ) ) );
+    EXPECT( std::regex_match( e( peta  ), std::regex( "1\\.0e\\+0?15" ) ) );
+    EXPECT( std::regex_match( e( exa   ), std::regex( "1\\.0e\\+0?18" ) ) );
+    EXPECT( std::regex_match( e( zetta ), std::regex( "1\\.0e\\+0?21" ) ) );
+    EXPECT( std::regex_match( e( yotta ), std::regex( "1\\.0e\\+0?24" ) ) );
 }
 
 //
