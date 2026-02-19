@@ -147,7 +147,7 @@ CASE("quantity: assignment" " [assignment]")
 }
 #endif
 
-CASE("quantity: Can add" " [arithmetic]")
+CASE("quantity: Adds" " [arithmetic]")
 {
     a1 = 5 * meter * meter;
     a2 = 6 * meter * meter;
@@ -156,7 +156,7 @@ CASE("quantity: Can add" " [arithmetic]")
     EXPECT( s( a1 + a2 ) == "17.000000 m+2" );
 }
 
-CASE("quantity: Can subtract" " [arithmetic]")
+CASE("quantity: Subtracts" " [arithmetic]")
 {
     a1 = 9 * meter * meter;
     a2 = 7 * meter * meter;
@@ -167,7 +167,7 @@ CASE("quantity: Can subtract" " [arithmetic]")
     EXPECT( s( a2 - a1 ) ==  "5.000000 m+2" );
 }
 
-CASE("quantity: Can multiply" " [arithmetic]")
+CASE("quantity: Multiplies" " [arithmetic]")
 {
     quantity<speed_d >  s1( 8 * meter / second );
     quantity<speed_d >  s2( 20 * meter / second );
@@ -181,7 +181,7 @@ CASE("quantity: Can multiply" " [arithmetic]")
     EXPECT( s(  5 * s1  ) ==  "80.000000 m s-1"   );
 }
 
-CASE("quantity: Can divide" " [arithmetic]")
+CASE("quantity: Divides" " [arithmetic]")
 {
     quantity<speed_d        > s2( 20 * meter / second );
     quantity<time_interval_d>  t(  5 * second );
@@ -200,40 +200,40 @@ CASE("quantity: Can divide" " [arithmetic]")
 
 constexpr quantity<length_d> meter2 = 2 * meter;
 
-CASE("quantity: Can compare equal" " [comparison]")
+CASE("quantity: Compares equal" " [comparison]")
 {
     EXPECT( meter == meter );
 }
 
-CASE("quantity: Can compare unequal" " [comparison]")
+CASE("quantity: Compares unequal" " [comparison]")
 {
     EXPECT( meter  != meter2 );
     EXPECT( meter2 != meter  );
 }
 
-CASE("quantity: Can compare less-than" " [comparison]")
+CASE("quantity: Compares less-than" " [comparison]")
 {
     EXPECT( meter < meter2 );
 }
 
-CASE("quantity: Can compare less-equal" " [comparison]")
+CASE("quantity: Compares less-equal" " [comparison]")
 {
     EXPECT( meter <= meter  );
     EXPECT( meter <= meter2 );
 }
 
-CASE("quantity: Can compare greater-than" " [comparison]")
+CASE("quantity: Compares greater-than" " [comparison]")
 {
     EXPECT( meter2 > meter );
 }
 
-CASE("quantity: Can compare greater-equal" " [comparison]")
+CASE("quantity: Compares greater-equal" " [comparison]")
 {
     EXPECT( meter  >= meter );
     EXPECT( meter2 >= meter );
 }
 
-CASE("quantity: Can compare correctly (extensive)" " [comparison]")
+CASE("quantity: Compares, more extensive" " [comparison]")
 {
     constexpr quantity<power_d> neg2( -2 * watt );
     constexpr quantity<power_d> neg1( -1 * watt );
