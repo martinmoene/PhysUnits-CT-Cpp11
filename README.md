@@ -23,6 +23,7 @@ This library is based on the quantity compile-time library by Michael S. Kennist
 - [Reported to work with](#reported-to-work-with)
 - [Performance](#performance)
 - [Ideas for improvement](#ideas-for-improvement)
+- [Mentions of library](#mentions-of-library)
 - [C++ standardization](#c-standardization)
 - [Other libraries](#other-libraries)
 - [References](#references)
@@ -291,6 +292,10 @@ Measured on a AMD Athlon 64 X2 Dual Core Processor 5600+, 64kB L1 Data, 64kB L1 
 ## Ideas for improvement
 
 Allow to specify a conversion offset between two units, e.g. to make conversion between 'C and K possible (see Boost.Units).
+
+## Mentions of library
+
+- [Let the Compiler Check Your Units](https://accu.org/journals/overload/34/192/wu/). Wu Yongwei. Overload, 34(192):10-15, April 2026.
 
 ## C++ standardization
 
